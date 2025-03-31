@@ -4,7 +4,7 @@
     "require": {
         "drupal/calendar": "^1.0@beta"
     },
-    "suggest: {
+    "suggest": {
         "drupal/mailing_list": "^1.3"
     }
 }
