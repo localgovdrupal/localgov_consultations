@@ -1,5 +1,0 @@
-services:
-  localgov_consultations.commands:
-    class: \Drupal\localgov_consultations\Commands\consultationEmail
-    tags:
-      - { name: drush.command }

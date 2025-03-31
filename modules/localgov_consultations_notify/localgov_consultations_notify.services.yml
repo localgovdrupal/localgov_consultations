@@ -1,4 +1,8 @@
 services:
+  localgov_consultations.commands:
+    class: \Drupal\localgov_consultations_notify\Commands\consultationEmail
+    tags:
+      - { name: drush.command }
   localgov_consultations_notify.notifier:
     class: Drupal\localgov_consultations_notify\Notifier
     arguments: ['@queue']
