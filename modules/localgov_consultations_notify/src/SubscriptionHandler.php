@@ -20,7 +20,7 @@ class SubscriptionHandler
       'token' => $subscription->getAccessHash(),
     ], ['absolute' => TRUE]);
 
-    $consultation = $subscription->hasField('field_node') ? $subscription->field_node->getEntity() : NULL;
+    $consultation = $subscription->hasField('field_node') ? $subscription->field_node->entity : NULL;
 
     $params = [
       'email_address' => $subscription->getEmail(),

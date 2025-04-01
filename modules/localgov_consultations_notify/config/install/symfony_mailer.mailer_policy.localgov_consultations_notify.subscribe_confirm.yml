@@ -10,4 +10,4 @@ configuration:
       value: "<p>Your email address has been registered to receive updates about this consultation: {{ consultation_name }}</p>\r\n\r\n<p>We issue an email when a consultation opens, is about to close, or if its planned dates change.</p>\r\n\r\n<p>Didn’t subscribe or no longer need updates on this consultation? <a href=\"{{ unsubscribe_url }}\">Unsubscribe here.</a></p>\r\n\r\n<p>Thanks for your interest.</p>\r\n<p>{{ site_name }}</p>"
       format: email_html
   email_subject:
-    value: 'You have subscribed to a consultation {{ consultation }}'
+    value: 'You have subscribed to a consultation {{ consultation_name }}'
