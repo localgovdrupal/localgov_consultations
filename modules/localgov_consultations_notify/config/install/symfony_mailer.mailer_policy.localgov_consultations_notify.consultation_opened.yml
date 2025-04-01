@@ -7,7 +7,7 @@ id: localgov_consultations_notify.consultation_opened
 configuration:
   email_body:
     content:
-      value: "<p>You previously registered to receive updates about this consultation: {{ consultation_name }}</p>\r\n\r\n<p>The consultation opened today, and responses are welcome. It will close on {{ consultation_close_date }}</p>\r\n\r\n<p>Visit the consultation page to see the full details: {{ consultation_url }}</p>\r\n\r\n\r\n<p>Didn’t subscribe or no longer need updates on this consultation? <a href=\"{{ unsubscribe_url }}\">Unsubscribe here.</a></p>\r\n\r\n<p>Thanks for your interest.</p>"
+      value: "<p>You previously registered to receive updates about this consultation: {{ consultation_name }}</p>\r\n\r\n<p>The consultation opened today, and responses are welcome. It will close on {{ consultation_close_date }}</p>\r\n\r\n<p>Visit the consultation page to see the full details: <a href=\"{{ consultation_url }}\">Consultation details</a></p>\r\n\r\n\r\n<p>Didn’t subscribe or no longer need updates on this consultation? <a href=\"{{ unsubscribe_url }}\">Unsubscribe here.</a></p>\r\n\r\n<p>Thanks for your interest.</p>"
       format: email_html
   email_subject:
     value: 'Consultation {{ consultation_name }} has opened'
