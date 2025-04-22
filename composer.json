@@ -1,9 +1,6 @@
 {
     "name": "webcurl/localgov_consultations",
     "type": "drupal-module",
-    "require": {
-        "drupal/calendar": "^1.0@beta"
-    },
     "suggest": {
         "drupal/mailing_list": "^1.3"
     }

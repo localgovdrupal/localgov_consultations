@@ -3,8 +3,6 @@ type: module
 description: Custom functionality for Consultations Emails
 package: Custom
 core_version_requirement: ^9 || ^10
-dependencies:
-  - calendar:calendar
 
 config_devel:
   - core.date_format.localgov_consultations_date
