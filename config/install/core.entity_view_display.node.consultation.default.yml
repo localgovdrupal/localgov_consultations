@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.consultation.localgov_consultation_phase
     - field.field.node.consultation.localgov_consultation_purpose
     - field.field.node.consultation.localgov_consultation_result
+    - field.field.node.consultation.localgov_consultation_teaser_img
     - node.type.consultation
   module:
     - link
@@ -68,6 +69,15 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 7
+    region: content
+  localgov_consultation_teaser_img:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 9
     region: content
 hidden:
   addtoany: true

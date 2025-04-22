@@ -20,6 +20,7 @@ config_devel:
   - field.field.node.consultation.localgov_consultation_purpose
   - field.field.node.consultation.localgov_consultation_categories
   - field.field.node.consultation.localgov_consultation_link
+  - field.field.node.consultation.localgov_consultation_teaser_img
   - field.storage.node.localgov_consultation_result
   - field.storage.node.field_contact_name
   - field.storage.node.field_department
@@ -28,6 +29,7 @@ config_devel:
   - field.storage.node.localgov_consultation_categories
   - field.storage.node.localgov_consultation_date
   - field.storage.node.localgov_consultation_link
+  - field.storage.node.localgov_consultation_teaser_img
   - node.type.consultation
   - pathauto.pattern.consultations
   - taxonomy.vocabulary.consultations

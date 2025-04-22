@@ -405,11 +405,13 @@ display:
               3: {  }
           reduce_duplicates: false
       style:
-        type: default
+        type: grid_responsive
         options:
-          row_class: ''
-          default_row_class: true
           uses_fields: false
+          columns: 3
+          cell_min_width: 100
+          grid_gutter: 10
+          alignment: horizontal
       row:
         type: 'entity:node'
         options:

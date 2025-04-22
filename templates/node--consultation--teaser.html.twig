@@ -1,7 +1,7 @@
 {#
 /**
 * @file
-* Theme override to display a LocalGov Consultation node.
+* Consultation teaser node template.
 *
 * Available variables:
 * - node: The node entity with limited access to object properties and methods.
@@ -69,19 +69,19 @@
 */
 #}
 
-<article class="consultation teaser">
-  <div class="consultation-closing-date">
-    <b>Closes</b>
-    <div class="h1"> {{ node.localgov_consultation_end_date.0.value | date('d') }} </div>
-    <p>{{ node.localgov_consultation_end_date.0.value | date('F Y') }}</p>
+
+<div class="consultation-card">
+  <a href="{{ url }}">
+  <div class="card-img">
+    {{ content.localgov_event_image }}
   </div>
-  <div{{ attributes.addClass('consultation-teaser-content') }}>
-    <h3>
-      <a href="{{ url }}">{{ label }}</a>
-    </h3>
-    <div class="consultation-content consultations-summary"><div class="consultation-label">Summary:</div> {{ content.body }}</div>
-    <div class="consultation-content consultations-period"><div class="consultation-label">Period:</div> {{ content.localgov_consultation_date }}</div>
-    <div class="consultation-content consultations-category"><div class="consultation-label">Category:</div> {{ content.localgov_consultation_categories }}</div>
-    <div class="consultation-content consultations-status"><div class="consultation-label">Status:</div> {{ node.localgov_consultation_end_date.0.value|date('U') > 'now'|date('U') ? 'Open' : 'Closed' }}</div>
+  <div class="card-body">
+    <div{{ attributes.addClass('link-block position-relative consultation-teaser-content') }}>
+      <div class="card-title">
+        <h3 class="pl-2">{{ label }}</h3>
+      </div>
+      {{ content }}
+    </div>
   </div>
-</article>
+  </a>
+</div>
