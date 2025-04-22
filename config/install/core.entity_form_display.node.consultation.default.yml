@@ -6,11 +6,10 @@ dependencies:
     - field.field.node.consultation.field_contact_name
     - field.field.node.consultation.field_department
     - field.field.node.consultation.localgov_consultation_categories
-    - field.field.node.consultation.localgov_consultation_end_date
+    - field.field.node.consultation.localgov_consultation_date
     - field.field.node.consultation.localgov_consultation_link
     - field.field.node.consultation.localgov_consultation_purpose
     - field.field.node.consultation.localgov_consultation_result
-    - field.field.node.consultation.localgov_consultation_start_date
     - node.type.consultation
   module:
     - datetime
@@ -55,8 +54,7 @@ third_party_settings:
         required_fields: true
     group_date:
       children:
-        - localgov_consultation_start_date
-        - localgov_consultation_end_date
+        - localgov_consultation_date
       label: Date
       region: content
       parent_name: group_tags
@@ -176,9 +174,9 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  localgov_consultation_end_date:
+  localgov_consultation_date:
     type: datetime_default
-    weight: 28
+    weight: 27
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -205,12 +203,6 @@ content:
     settings:
       rows: 5
       placeholder: ''
-    third_party_settings: {  }
-  localgov_consultation_start_date:
-    type: datetime_default
-    weight: 27
-    region: content
-    settings: {  }
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default

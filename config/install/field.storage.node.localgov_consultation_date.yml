@@ -2,15 +2,15 @@ langcode: en
 status: true
 dependencies:
   module:
-    - datetime
+    - datetime_range
     - node
-id: node.localgov_consultation_start_date
-field_name: localgov_consultation_start_date
+id: node.localgov_consultation_date
+field_name: localgov_consultation_date
 entity_type: node
-type: datetime
+type: daterange
 settings:
-  datetime_type: datetime
-module: datetime
+  datetime_type: date
+module: datetime_range
 locked: false
 cardinality: 1
 translatable: true

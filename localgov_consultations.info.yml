@@ -3,30 +3,28 @@ type: module
 description: Custom functionality for Consultations Emails
 package: Custom
 core_version_requirement: ^9 || ^10
+dependencies:
+  - drupal:datetime_range
 
 config_devel:
   - core.date_format.localgov_consultations_date
   - core.entity_form_display.node.consultation.default
   - core.entity_view_display.node.consultation.default
-  - core.entity_view_display.node.consultation.search_index
-  - core.entity_view_display.node.consultation.search_result
   - core.entity_view_display.node.consultation.teaser
   - field.field.node.consultation.body
   - field.field.node.consultation.localgov_consultation_result
   - field.field.node.consultation.field_contact_name
   - field.field.node.consultation.field_department
-  - field.field.node.consultation.localgov_consultation_end_date
+  - field.field.node.consultation.localgov_consultation_date
   - field.field.node.consultation.localgov_consultation_purpose
-  - field.field.node.consultation.localgov_consultation_start_date
   - field.field.node.consultation.localgov_consultation_categories
   - field.field.node.consultation.localgov_consultation_link
   - field.storage.node.localgov_consultation_result
   - field.storage.node.field_contact_name
   - field.storage.node.field_department
-  - field.storage.node.localgov_consultation_end_date
   - field.storage.node.localgov_consultation_purpose
-  - field.storage.node.localgov_consultation_start_date
   - field.storage.node.localgov_consultation_categories
+  - field.storage.node.localgov_consultation_date
   - field.storage.node.localgov_consultation_link
   - node.type.consultation
   - pathauto.pattern.consultations

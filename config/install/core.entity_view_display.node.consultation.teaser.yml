@@ -7,14 +7,12 @@ dependencies:
     - field.field.node.consultation.field_contact_name
     - field.field.node.consultation.field_department
     - field.field.node.consultation.localgov_consultation_categories
-    - field.field.node.consultation.localgov_consultation_end_date
+    - field.field.node.consultation.localgov_consultation_date
     - field.field.node.consultation.localgov_consultation_link
     - field.field.node.consultation.localgov_consultation_purpose
     - field.field.node.consultation.localgov_consultation_result
-    - field.field.node.consultation.localgov_consultation_start_date
     - node.type.consultation
   module:
-    - datetime
     - text
     - user
 id: node.consultation.teaser
@@ -52,19 +50,11 @@ content:
     third_party_settings: {  }
     weight: 4
     region: content
-  localgov_consultation_start_date:
-    type: datetime_default
-    label: hidden
-    settings:
-      timezone_override: ''
-      format_type: localgov_consultations_date
-    third_party_settings: {  }
-    weight: 3
-    region: content
 hidden:
   field_contact_name: true
   field_department: true
   links: true
+  localgov_consultation_date: true
   localgov_consultation_link: true
   localgov_consultation_purpose: true
   localgov_consultation_result: true

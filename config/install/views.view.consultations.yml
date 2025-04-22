@@ -8,8 +8,6 @@ dependencies:
     - taxonomy.vocabulary.consultations
     - taxonomy.vocabulary.consultations_department
   module:
-    - calendar
-    - datetime
     - node
     - taxonomy
     - text
@@ -210,59 +208,8 @@ display:
             value: "<p>We didn't find any consultations</p>"
             format: wysiwyg
           tokenize: false
-      sorts:
-        localgov_consultation_end_date_value:
-          id: localgov_consultation_end_date_value
-          table: node__localgov_consultation_end_date
-          field: localgov_consultation_end_date_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: datetime
-          order: DESC
-          expose:
-            label: ''
-            field_identifier: ''
-          exposed: false
-          granularity: day
-      arguments:
-        field_date_value_year_month:
-          id: field_date_value_year_month
-          table: node__field_date
-          field: field_date_value_year_month
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: datetime_year_month
-          default_action: default
-          exception:
-            value: all
-            title_enable: false
-            title: All
-          title_enable: false
-          title: ''
-          default_argument_type: date
-          default_argument_options: {  }
-          summary_options:
-            base_path: ''
-            count: true
-            override: false
-            items_per_page: 25
-          summary:
-            sort_order: asc
-            number_of_records: 0
-            format: default_summary
-          specify_validation: true
-          validate:
-            type: calendar
-            fail: 'not found'
-          validate_options:
-            replacement_format: 'F Y'
-        field_date_end_value_year_month:
-          id: field_date_end_value_year_month
-          table: node__field_date
-          field: field_date_end_value_year_month
-          plugin_id: datetime_year_month
+      sorts: {  }
+      arguments: {  }
       filters:
         status:
           id: status
@@ -947,96 +894,6 @@ display:
           hierarchy: false
           limit: true
           error_message: true
-        localgov_consultation_end_date_value:
-          id: localgov_consultation_end_date_value
-          table: node__localgov_consultation_end_date
-          field: localgov_consultation_end_date_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: datetime
-          operator: '>='
-          value:
-            min: ''
-            max: ''
-            value: now
-            type: date
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            min_placeholder: ''
-            max_placeholder: ''
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-        localgov_consultation_start_date_value:
-          id: localgov_consultation_start_date_value
-          table: node__localgov_consultation_start_date
-          field: localgov_consultation_start_date_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: datetime
-          operator: '<='
-          value:
-            min: ''
-            max: ''
-            value: now
-            type: offset
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            min_placeholder: ''
-            max_placeholder: ''
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
       filter_groups:
         operator: AND
         groups:

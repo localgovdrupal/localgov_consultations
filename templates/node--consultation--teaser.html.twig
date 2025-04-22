@@ -80,7 +80,7 @@
       <a href="{{ url }}">{{ label }}</a>
     </h3>
     <div class="consultation-content consultations-summary"><div class="consultation-label">Summary:</div> {{ content.body }}</div>
-    <div class="consultation-content consultations-period"><div class="consultation-label">Period:</div> {{ content.localgov_consultation_start_date }}&nbsp;-&nbsp;{{ content.localgov_consultation_end_date }}</div>
+    <div class="consultation-content consultations-period"><div class="consultation-label">Period:</div> {{ content.localgov_consultation_date }}</div>
     <div class="consultation-content consultations-category"><div class="consultation-label">Category:</div> {{ content.localgov_consultation_categories }}</div>
     <div class="consultation-content consultations-status"><div class="consultation-label">Status:</div> {{ node.localgov_consultation_end_date.0.value|date('U') > 'now'|date('U') ? 'Open' : 'Closed' }}</div>
   </div>
