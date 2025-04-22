@@ -8,11 +8,12 @@ dependencies:
     - field.field.node.consultation.localgov_consultation_categories
     - field.field.node.consultation.localgov_consultation_date
     - field.field.node.consultation.localgov_consultation_link
+    - field.field.node.consultation.localgov_consultation_phase
     - field.field.node.consultation.localgov_consultation_purpose
     - field.field.node.consultation.localgov_consultation_result
     - node.type.consultation
   module:
-    - datetime
+    - datetime_range
     - field_group
     - link
     - path
@@ -54,6 +55,7 @@ third_party_settings:
         required_fields: true
     group_date:
       children:
+        - localgov_consultation_phase
         - localgov_consultation_date
       label: Date
       region: content
@@ -175,10 +177,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   localgov_consultation_date:
-    type: datetime_default
-    weight: 27
+    type: daterange_datelist
+    weight: 29
     region: content
-    settings: {  }
+    settings:
+      increment: 15
+      date_order: YMD
+      time_type: '24'
     third_party_settings: {  }
   localgov_consultation_link:
     type: link_default
@@ -187,6 +192,12 @@ content:
     settings:
       placeholder_url: ''
       placeholder_title: ''
+    third_party_settings: {  }
+  localgov_consultation_phase:
+    type: options_select
+    weight: 28
+    region: content
+    settings: {  }
     third_party_settings: {  }
   localgov_consultation_purpose:
     type: text_textarea

@@ -16,12 +16,14 @@ config_devel:
   - field.field.node.consultation.field_contact_name
   - field.field.node.consultation.field_department
   - field.field.node.consultation.localgov_consultation_date
+  - field.field.node.consultation.localgov_consultation_phase
   - field.field.node.consultation.localgov_consultation_purpose
   - field.field.node.consultation.localgov_consultation_categories
   - field.field.node.consultation.localgov_consultation_link
   - field.storage.node.localgov_consultation_result
   - field.storage.node.field_contact_name
   - field.storage.node.field_department
+  - field.storage.node.localgov_consultation_phase
   - field.storage.node.localgov_consultation_purpose
   - field.storage.node.localgov_consultation_categories
   - field.storage.node.localgov_consultation_date
