@@ -6,9 +6,9 @@ dependencies:
     - field.storage.node.body
     - node.type.consultation
     - taxonomy.vocabulary.consultations
-    - taxonomy.vocabulary.consultations_department
   module:
     - node
+    - options
     - taxonomy
     - text
     - user
@@ -160,7 +160,7 @@ display:
         options:
           offset: 0
           pagination_heading_level: h4
-          items_per_page: 10
+          items_per_page: 12
           total_pages: null
           id: 0
           tags:
@@ -205,25 +205,12 @@ display:
           plugin_id: text
           empty: true
           content:
-            value: "<p>We didn't find any consultations</p>"
+            value: "<p>We didn't find any consultations matching your criteria</p>"
             format: wysiwyg
           tokenize: false
       sorts: {  }
       arguments: {  }
       filters:
-        status:
-          id: status
-          table: node_field_data
-          field: status
-          entity_type: node
-          entity_field: status
-          plugin_id: boolean
-          value: '1'
-          group: 1
-          expose:
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
         type:
           id: type
           table: node_field_data
@@ -368,59 +355,55 @@ display:
           hierarchy: false
           limit: true
           error_message: true
-        field_department_target_id:
-          id: field_department_target_id
-          table: node__field_department
-          field: field_department_target_id
+        localgov_consultation_phase_value:
+          id: localgov_consultation_phase_value
+          table: node__localgov_consultation_phase
+          field: localgov_consultation_phase_value
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: taxonomy_index_tid
+          plugin_id: list_field
           operator: or
           value: {  }
           group: 1
           exposed: true
           expose:
-            operator_id: field_department_target_id_op
-            label: Department
+            operator_id: localgov_consultation_phase_value_op
+            label: 'Consultation Phase'
             description: ''
             use_operator: false
-            operator: field_department_target_id_op
+            operator: localgov_consultation_phase_value_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: field_department_target_id
+            identifier: phase
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
-              emergency_publisher: '0'
               anonymous: '0'
               localgov_editor: '0'
               localgov_author: '0'
               localgov_contributor: '0'
-              localgov_news_editor: '0'
               localgov_user_manager: '0'
-              senior_editor: '0'
+              localgov_admin: '0'
             reduce: false
           is_grouped: false
           group_info:
-            label: ''
-            description: ''
-            identifier: ''
+            label: 'Phase (localgov_consultation_phase)'
+            description: null
+            identifier: localgov_consultation_phase_value
             optional: true
             widget: select
             multiple: false
             remember: false
             default_group: All
             default_group_multiple: {  }
-            group_items: {  }
+            group_items:
+              1: {  }
+              2: {  }
+              3: {  }
           reduce_duplicates: false
-          vid: consultations_department
-          type: select
-          hierarchy: false
-          limit: true
-          error_message: true
       style:
         type: default
         options:
@@ -443,266 +426,9 @@ display:
       relationships: {  }
       css_class: lgd-teaser-list
       use_ajax: false
-      header:
-        display_link_1:
-          id: display_link_1
-          table: views
-          field: display_link
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: display_link
-          label: 'Open Consultations'
-          empty: true
-          display_id: open_consultations
-        display_link:
-          id: display_link
-          table: views
-          field: display_link
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: display_link
-          label: 'Closed Consultations'
-          empty: true
-          display_id: closed_consultations
+      header: {  }
       footer: {  }
       display_extenders: {  }
-    cache_metadata:
-      max-age: 0
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url
-        - url.query_args
-        - 'user.node_grants:view'
-        - user.permissions
-      tags:
-        - 'config:field.storage.node.body'
-  closed_consultations:
-    id: closed_consultations
-    display_title: Closed
-    display_plugin: page
-    position: 2
-    display_options:
-      arguments: {  }
-      filters:
-        status:
-          id: status
-          table: node_field_data
-          field: status
-          entity_type: node
-          entity_field: status
-          plugin_id: boolean
-          value: '1'
-          group: 1
-          expose:
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-        type:
-          id: type
-          table: node_field_data
-          field: type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          entity_field: type
-          plugin_id: bundle
-          operator: in
-          value:
-            consultation: consultation
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-        title:
-          id: title
-          table: node_field_data
-          field: title
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          entity_field: title
-          plugin_id: string
-          operator: word
-          value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: title_op
-            label: Keyword
-            description: ''
-            use_operator: false
-            operator: title_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: title
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              emergency_publisher: '0'
-              anonymous: '0'
-              localgov_editor: '0'
-              localgov_author: '0'
-              localgov_contributor: '0'
-              localgov_news_editor: '0'
-              localgov_user_manager: '0'
-              senior_editor: '0'
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-        localgov_consultation_categories_target_id:
-          id: localgov_consultation_categories_target_id
-          table: node__localgov_consultation_categories
-          field: localgov_consultation_categories_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: taxonomy_index_tid
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: localgov_consultation_categories_target_id_op
-            label: Category
-            description: ''
-            use_operator: false
-            operator: localgov_consultation_categories_target_id_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: Category
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              emergency_publisher: '0'
-              anonymous: '0'
-              localgov_editor: '0'
-              localgov_author: '0'
-              localgov_contributor: '0'
-              localgov_news_editor: '0'
-              localgov_user_manager: '0'
-              senior_editor: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: true
-          vid: consultations
-          type: select
-          hierarchy: false
-          limit: true
-          error_message: true
-        localgov_consultation_end_date_value:
-          id: localgov_consultation_end_date_value
-          table: node__localgov_consultation_end_date
-          field: localgov_consultation_end_date_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: datetime
-          operator: '<='
-          value:
-            min: ''
-            max: ''
-            value: today
-            type: offset
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            min_placeholder: ''
-            max_placeholder: ''
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
-      defaults:
-        arguments: false
-        filters: false
-        filter_groups: false
-        footer: false
-      display_description: 'Closed consultations'
-      footer: {  }
-      exposed_block: true
-      display_extenders: {  }
-      path: consultations/closed
     cache_metadata:
       max-age: -1
       contexts:
@@ -716,196 +442,39 @@ display:
         - 'config:field.storage.node.body'
   open_consultations:
     id: open_consultations
-    display_title: 'Main display (Open consultations)'
+    display_title: Page
     display_plugin: page
     position: 1
     display_options:
       sorts:
-        localgov_consultation_end_date_value:
-          id: localgov_consultation_end_date_value
-          table: node__localgov_consultation_end_date
-          field: localgov_consultation_end_date_value
+        created:
+          id: created
+          table: node_field_data
+          field: created
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: datetime
+          entity_type: node
+          entity_field: created
+          plugin_id: date
           order: ASC
           expose:
             label: ''
             field_identifier: ''
           exposed: false
-          granularity: day
+          granularity: second
       arguments: {  }
-      filters:
-        status:
-          id: status
-          table: node_field_data
-          field: status
-          entity_type: node
-          entity_field: status
-          plugin_id: boolean
-          value: '1'
-          group: 1
-          expose:
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-        type:
-          id: type
-          table: node_field_data
-          field: type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          entity_field: type
-          plugin_id: bundle
-          operator: in
-          value:
-            consultation: consultation
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-        title:
-          id: title
-          table: node_field_data
-          field: title
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          entity_field: title
-          plugin_id: string
-          operator: word
-          value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: title_op
-            label: Keyword
-            description: ''
-            use_operator: false
-            operator: title_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: title
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              emergency_publisher: '0'
-              anonymous: '0'
-              localgov_editor: '0'
-              localgov_author: '0'
-              localgov_contributor: '0'
-              localgov_news_editor: '0'
-              localgov_user_manager: '0'
-              senior_editor: '0'
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-        localgov_consultation_categories_target_id:
-          id: localgov_consultation_categories_target_id
-          table: node__localgov_consultation_categories
-          field: localgov_consultation_categories_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: taxonomy_index_tid
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: localgov_consultation_categories_target_id_op
-            label: Category
-            description: ''
-            use_operator: false
-            operator: localgov_consultation_categories_target_id_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: Category
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              emergency_publisher: '0'
-              anonymous: '0'
-              localgov_editor: '0'
-              localgov_author: '0'
-              localgov_contributor: '0'
-              localgov_news_editor: '0'
-              localgov_user_manager: '0'
-              senior_editor: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: true
-          vid: consultations
-          type: select
-          hierarchy: false
-          limit: true
-          error_message: true
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
       defaults:
         sorts: false
         arguments: false
-        filters: false
-        filter_groups: false
+        filters: true
+        filter_groups: true
       display_description: ''
-      exposed_block: true
-      display_extenders: {  }
+      exposed_block: false
+      display_extenders:
+        localgov_page_header_display_extender:
+          lede: ''
+          tokenize: false
       path: consultations
     cache_metadata:
       max-age: -1
