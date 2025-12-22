@@ -73,14 +73,14 @@
 <div class="consultation-card">
     <a href="{{ url }}">
         <div class="card-img">
-            {{ content.localgov_event_image }}
+            {{ content.localgov_consultation_teaser_img }}
         </div>
         <div class="card-body">
             <div{{ attributes.addClass('link-block position-relative consultation-teaser-content') }}>
                 <div class="card-title">
                     <h3 class="pl-2">{{ label }}</h3>
                 </div>
-                {{ content }}
+                {{ content.localgov_consultation_summary }}
             </div>
         </div>
     </a>
