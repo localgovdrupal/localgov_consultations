@@ -9,9 +9,23 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
  */
 function localgov_consultations_theme($existing, $type, $theme, $path) {
   return [
+    'node__consultation' => [
+      'template' => 'node--consultation',
+      'base hook' => 'node',
+    ],
     'node__consultation__teaser' => [
       'template' => 'node--consultation--teaser',
       'base hook' => 'node',
+    ],
+    'views_view__consultations' => [
+      'template' => 'views-view--consultations',
+      'base hook' => 'views_view',
+      'path' => $path . '/templates',
+    ],
+    'field__node__localgov_consultation_date__consultation' => [
+      'base hook' => 'field',
+      'template' => 'field--node--localgov-consultation-date--consultation',
+      'path' => $path . '/templates/field',
     ],
   ];
 }
@@ -63,5 +77,18 @@ function localgov_consultations_preprocess_views_view(&$vars) {
 
     // Utilise localgov_base styling if available.
     $vars['#attached']['library'][] = 'localgov_base/teaser';
+  }
+}
+
+/**
+ * Implements hook_preprocess_node().
+ * @param $variables
+ * @return void
+ */
+function localgov_consultations_preprocess_node(&$variables) {
+  $node = $variables['node'];
+
+  if ($node->bundle() === 'consultation') {
+    $variables['#attached']['library'][] = 'localgov_consultations/localgov_consultations';
   }
 }
