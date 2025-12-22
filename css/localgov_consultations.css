@@ -1,8 +1,8 @@
-.view-id-consultations .view-header {
+.localgov-consultations-view .view-header {
   display: flex;
 }
 
-.view-id-consultations .view-header .views-display-link {
+.localgov-consultations-view .view-header .views-display-link {
   margin: 0;
   cursor: pointer;
   color: var(--tabs-text-color);
@@ -14,12 +14,12 @@
   padding: 1rem .5rem;
 }
 
-.view-id-consultations .view-header .views-display-link.is-active {
+.localgov-consultations-view .view-header .views-display-link.is-active {
   border-bottom-color: var(--tabs-button-active-color);
   background-color: var(--tabs-button-active-color);
 }
 
-.view-id-consultations .view-header {
+.localgov-consultations-view .view-header {
   margin-bottom: 2rem;
 }
 
@@ -49,6 +49,396 @@
   margin-right: 2rem;
 }
 
+.path-consultations #main-content {
+  background-color: #ededed;
+  padding-top: 3rem;
+}
+
+@media (min-width: 1024px) {
+  .path-consultations, .page-node-type-consultation {
+    .lgd-header .lgd-container,
+    .lgd-footer__pre-footer > .lgd-container,
+    .region-breadcrumb .lgd-container {
+      width: 85%;
+      max-width: 85%;
+    }
+  }
+
+  .page-node-type-consultation {
+    #main-content > .lgd-container {
+      width: 85%;
+      max-width: 85%;
+    }
+  }
+}
+
+.path-consultations, .page-node-type-consultation {
+  --color-focus: #45A90;
+
+  .layout__region--second .block > h2,
+  .layout__region--second .block .field__item > h2 {
+    font-weight: bold;
+    margin-bottom: .5rem;
+  }
+}
+
+.consultation-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.consultation-card > a:not([class*='toolbar']):focus {
+  background-color: #045a90;
+  .card-body * {
+    color: var(--color-white);
+  }
+}
+
+.consultation-card > a {
+  box-shadow: 0 4px 8px 0 rgba(128, 128, 128, 0.2), 0 6px 20px 0 rgba(128, 128, 128, 0.19);
+  height: 100%;
+  border-radius: .25rem;
+  background-color: #fff;
+}
+
+.consultation-card > a:hover {
+  box-shadow: 0 4px 8px 0 rgba(128, 128, 128, 0.6), 0 6px 20px 0 rgba(128, 128, 128, 0.8);
+}
+
+.consultation-card > a:hover .card-title {
+  text-decoration: underline;
+}
+
+.card-img {
+  border-top-left-radius: .25rem;
+  border-top-right-radius: .25rem;
+  overflow: hidden;
+}
+
+.card-img img {
+  height: 12rem;
+  object-fit: cover;
+  object-position: 50% 50%;
+  transition: transform 0.25s ease-in-out;
+  width: 100%;
+}
+
+a:hover .card-img img {
+  transform: scale(1.1);
+}
+
+.card-body {
+  padding: 1.5rem;
+  flex-grow: 1;
+}
+
+.views-view-responsive-grid__item-inner {
+  height: 100%;
+}
+
+.block-views-exposed-filter-blockconsultations-page-2 form button {
+  border-width: 2px;
+}
+
+.path-consultations .region-banner-block .field.field--name-body.field--type-text-with-summary.field--label-hidden.field__item {
+  display: block;
+}
+
+.path-consultations .lgd-region.lgd-region--banner-block.region.region-banner-block {
+  display: block;
+  background: none;
+}
+
+.path-consultations .lgd-footer {
+  margin-top: 0;
+
+  .lgd-footer__pre-footer,
+  .lgd-footer__pre-footer.lgd-row {
+    background-color: #ededed;
+  }
+
+  .lgd-footer__pre-footer > .lgd-container > .lgd-row {
+    justify-content: space-evenly;
+  }
+}
+
+.path-consultations,
+.page-node-type-consultation {
+  .lgd-footer {
+    margin-top: 0;
+
+    .lgd-footer__pre-footer,
+    .lgd-footer__pre-footer.lgd-row {
+      background-color: #ededed;
+    }
+
+    .lgd-footer__pre-footer > .lgd-container > .lgd-row {
+      justify-content: space-evenly;
+    }
+
+    .lgd-region__inner.lgd-region__inner--footer-second {
+      .block-mailing-list-subscription-block {
+        input {
+          height: 45px;
+          border-radius: 5px;
+          align-items: center;
+        }
+
+        .form-wrapper {
+          max-width: 350px;
+        }
+
+        label {
+          display: none;
+        }
+
+        .description {
+          display: none;
+        }
+
+        form {
+          display: flex;
+
+          button {
+            margin-left: 5px;
+            height: 45px;
+            border-radius: 5px;
+            padding-top: 0.75rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+.path-consultations,
+.page-node-type-consultation {
+  .lgd-region__inner.lgd-region__inner--footer-second,
+  .lgd-region__inner.lgd-region__inner--footer-second h2 {
+    color: #1e1b3c;
+  }
+
+  .lgd-region__inner.lgd-region__inner--footer-second h2 {
+    margin-bottom: 0;
+  }
+
+  @media screen and (min-width: 1280px) {
+    .path-consultations, .page-node-type-consultation {
+      .branding__logo img {
+        height: 60px;
+      }
+    }
+  }
+}
+.view-consultations .view-content, .view-consultations .view-empty {
+  margin-top: 3rem;
+}
+
+.page-node-type-consultation .layout {
+  gap: 2rem;
+
+  .layout__region--first {
+    flex-basis: calc(67% - 2rem) !important;
+  }
+}
+
+.page-node-type-consultation {
+  .layout__region--second > .block {
+    border: 1px solid #d4d4d4;
+    padding: 0 1rem .5rem 1rem;
+    box-shadow: rgba(128, 128, 128, 0.2) 0px 4px 8px 0px, rgba(128, 128, 128, 0.19) 0px 6px 20px 0px;
+    border-radius: .25rem;
+  }
+
+  .lgd-region__inner--content article time {
+    font-size: 1.25rem;
+  }
+}
+
+/* consultation view page */
+
+.consultation__content.node__content {
+  .layout__region.layout__region--second .paragraph__contact {
+    margin-top: 8px;
+  }
+
+  .paragraph__contact-column-layout {
+    display: flex;
+  }
+
+  .contact-information-svg-wrapper {
+    padding: 0;
+    flex: 0 0 20%;
+  }
+  .contact-information-svg-wrapper svg {
+    height:100%
+  }
+  .paragraph__contact-column-2-row-layout {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .paragraph__contact--content {
+    padding: 0;
+    display: flex;
+
+    .page-component__contact-container.page-component__contact-container--first,
+    .page-component__contact-container.page-component__contact-container--second {
+      margin-left: 0;
+    }
+  }
+}
+
+.block-field-blocknodeconsultationfield-webform {
+  max-width: 40%;
+}
+
+/* footer links button styling */
+
+.block-field-blocknodeconsultationfield-footer-links .field__items .button-link,
+.block-field-blocknodeconsultationfield-external-links .field__items .button-link{
+  width: 48%;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  text-align: left;
+  color: var(--color-text);
+  font-size: 18px;
+  letter-spacing: 0;
+  line-height: 21px;
+  font-weight: normal !important;
+  border-radius: 0 !important;
+  background-color: white;
+  border: 1px solid #d8d7dc;
+  box-sizing: border-box;
+  border-bottom: 2px solid var(--border-box-bottom-color);
+  box-shadow: 0px 0px 2px #00000029;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: var(--botton-bg-color);
+  }
+
+}
+
+.block-field-blocknodeconsultationfield-footer-links .field__items .button-link svg,
+.block-field-blocknodeconsultationfield-external-links .field__items .button-link svg {
+  display: inline-block;
+  width: 20px;
+  height: 25px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpolygon points='12 2 22 21 2 21 12 2' fill='black'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+  color: black;
+  float: right;
+}
+
+.block-field-blocknodeconsultationfield-footer-links,
+.block-field-blocknodeconsultationfield-external-links {
+  .field__items {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap:5px;
+  }
+}
+
+
+/** Consultation Page **/
+.consultation.node--type-consultation.node--promoted.node--view-mode-full {
+  padding-top: var(--vertical-rhythm-spacing);
+}
+
+.localgov-consultations--banner-block-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 50vh;
+  position: relative;
+  margin-bottom: 4rem;
+}
+
+.localgov-consultations--banner-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.localgov-consultations--banner-image img {
+  width: 100%;
+  max-height: 50vh;
+  overflow: hidden;
+}
+
+.banner-placeholder__image {
+  overflow: hidden;
+  max-height: 50vh;
+}
+
+.banner-placeholder__image img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.localgov-consultations--filter-block {
+  position: absolute;
+  bottom: -4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  width: 90%;
+  max-width: 1200px;
+  border-radius: .25rem;
+  background: var(--color-accent);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.localgov-consultations--filter-block label {
+  color: #fff;
+}
+
+.localgov-consultations--filter-block button {
+  border: 2px solid #fff;
+}
+
+.localgov-consultations--filter-block form {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 2rem;
+}
+
+@media (max-width: 768px) {
+  .localgov-consultations--banner-block-wrapper {
+    height: 40vh;
+    margin-bottom: 12rem;
+  }
+
+  .localgov-consultations--filter-block {
+    width: 95%;
+    bottom: -10rem;
+  }
+
+  .localgov-consultations--filter-block form {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+}
+
+.view-consultations .view-content,
+.view-consultations .view-empty {
+  margin-top: 3rem;
+}
 
 
 
