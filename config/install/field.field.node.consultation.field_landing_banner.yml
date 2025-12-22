@@ -1,0 +1,107 @@
+uuid: 72d7f477-6ea0-46d8-b687-9695124aef6e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_landing_banner
+    - media.type.image
+    - node.type.consultation
+  module:
+    - dynamic_entity_reference
+id: node.consultation.field_landing_banner
+field_name: field_landing_banner
+entity_type: node
+bundle: consultation
+label: Banner
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  media:
+    handler: 'default:media'
+    handler_settings:
+      target_bundles:
+        image: image
+      sort:
+        field: _none
+        direction: ASC
+      auto_create: false
+      auto_create_bundle: ''
+  localgov_alert_banner:
+    handler: 'default:localgov_alert_banner'
+    handler_settings: {  }
+  node:
+    handler: 'default:node'
+    handler_settings: {  }
+  block_content:
+    handler: 'default:block_content'
+    handler_settings: {  }
+  content_moderation_state:
+    handler: 'default:content_moderation_state'
+    handler_settings: {  }
+  crop:
+    handler: 'default:crop'
+    handler_settings: {  }
+  menu_link_content:
+    handler: 'default:menu_link_content'
+    handler_settings: {  }
+  localgov_directories_facets:
+    handler: 'default:localgov_directories_facets'
+    handler_settings: {  }
+  file:
+    handler: 'default:file'
+    handler_settings: {  }
+  geo_entity:
+    handler: 'default:geo_entity'
+    handler_settings: {  }
+  localgov_geo:
+    handler: 'default:localgov_geo'
+    handler_settings: {  }
+  mailing_list_subscription:
+    handler: 'default:mailing_list_subscription'
+    handler_settings: {  }
+  entity_hierarchy_microsite:
+    handler: 'default:entity_hierarchy_microsite'
+    handler_settings: {  }
+  eh_microsite_menu_override:
+    handler: 'default:eh_microsite_menu_override'
+    handler_settings: {  }
+  paragraphs_library_item:
+    handler: 'default:paragraphs_library_item'
+    handler_settings: {  }
+  paragraph:
+    handler: 'default:paragraph'
+    handler_settings: {  }
+  preview_link:
+    handler: 'default:preview_link'
+    handler_settings: {  }
+  redirect:
+    handler: 'default:redirect'
+    handler_settings: {  }
+  review_date:
+    handler: 'default:review_date'
+    handler_settings: {  }
+  search_api_task:
+    handler: 'default:search_api_task'
+    handler_settings: {  }
+  localgov_service_contact:
+    handler: 'default:localgov_service_contact'
+    handler_settings: {  }
+  taxonomy_term:
+    handler: 'default:taxonomy_term'
+    handler_settings: {  }
+  path_alias:
+    handler: 'default:path_alias'
+    handler_settings: {  }
+  user:
+    handler: 'default:user'
+    handler_settings: {  }
+  webform_submission:
+    handler: 'default:webform_submission'
+    handler_settings: {  }
+  scheduled_transition:
+    handler: 'default:scheduled_transition'
+    handler_settings: {  }
+field_type: dynamic_entity_reference

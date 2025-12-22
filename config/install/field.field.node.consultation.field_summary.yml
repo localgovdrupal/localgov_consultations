@@ -1,0 +1,19 @@
+uuid: 3a2947d2-5ddb-4f3b-a522-08601507cc2f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_summary
+    - node.type.consultation
+id: node.consultation.field_summary
+field_name: field_summary
+entity_type: node
+bundle: consultation
+label: 'Teaser Text'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

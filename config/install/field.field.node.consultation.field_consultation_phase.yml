@@ -1,0 +1,23 @@
+uuid: f8b3abb8-2fe0-425d-a5c9-29014c976bca
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_consultation_phase
+    - node.type.consultation
+  module:
+    - options
+id: node.consultation.field_consultation_phase
+field_name: field_consultation_phase
+entity_type: node
+bundle: consultation
+label: 'Consultation Status'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: preview
+default_value_callback: ''
+settings: {  }
+field_type: list_string

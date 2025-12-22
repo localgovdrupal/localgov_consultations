@@ -1,0 +1,30 @@
+uuid: b0acc049-ec3b-432c-a9a9-0f780ef263b3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.localgov_event_location
+    - geo_entity.geo_entity_type.address
+    - node.type.consultation
+_core:
+  default_config_hash: u45UcuanFyp_ws_eI_jJKTii1IOhpAOhTlkoxQAzS6M
+id: node.consultation.localgov_event_location
+field_name: localgov_event_location
+entity_type: node
+bundle: consultation
+label: Location
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:geo_entity'
+  handler_settings:
+    target_bundles:
+      address: address
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
