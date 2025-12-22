@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\localgov_consutlations\Plugin\Block;
+namespace Drupal\localgov_consultations\Plugin\Block;
 
 use Drupal\Core\Block\Annotation\Block;
 use Drupal\Core\Block\BlockBase;
@@ -136,7 +136,7 @@ final class LandingBannerBlock extends BlockBase {
 
     // Add exposed filter block below the image.
     $block_manager = \Drupal::service('plugin.manager.block');
-    $plugin_block = $block_manager->createInstance('views_exposed_filter_block:consultations-page_1', []);
+    $plugin_block = $block_manager->createInstance('views_exposed_filter_block:consultations-open_consultations', []);
 
     if ($plugin_block) {
       $access_result = $plugin_block->access(\Drupal::currentUser(), TRUE);

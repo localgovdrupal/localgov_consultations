@@ -86,13 +86,13 @@ final class PageBannerBlock extends BlockBase implements ContainerFactoryPluginI
 
     // Check if node exists, has the field, and field is not empty.
     if (!$node ||
-      !$node->hasField('field_landing_banner') ||
-      $node->get('field_landing_banner')->isEmpty()) {
+      !$node->hasField('localgov_consultation_banner') ||
+      $node->get('localgov_consultation_banner')->isEmpty()) {
       return $build;
     }
 
     // Load the media entity referenced by the banner media field.
-    $media_entities = $node->get('field_landing_banner')->referencedEntities();
+    $media_entities = $node->get('localgov_consultation_banner')->referencedEntities();
 
     // Check if there are any media entities.
     if (empty($media_entities)) {
