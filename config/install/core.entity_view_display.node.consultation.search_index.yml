@@ -1,9 +1,9 @@
-uuid: 0b5937e4-3d0d-4f72-9a04-2e3675dcfd88
+uuid: 8e58c7cb-37f0-49cb-8bd8-3d47fdc474f0
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
+    - core.entity_view_mode.node.search_index
     - field.field.node.consultation.body
     - field.field.node.consultation.localgov_consultation_banner
     - field.field.node.consultation.localgov_consultation_categories
@@ -26,76 +26,45 @@ dependencies:
     - field.field.node.consultation.localgov_consultation_webform
     - node.type.consultation
   module:
-    - datetime_range
     - field_formatter_class
     - text
     - user
 _core:
-  default_config_hash: aNwPi9i9ZEVi4CGAAj_XqC3RCTIikfwZOxnM7tYC8eo
-id: node.consultation.teaser
+  default_config_hash: 9HRi5UlWt_-BIdCybR3zTdmB5NW1aTq_JX6E6JPeyk4
+id: node.consultation.search_index
 targetEntityType: node
 bundle: consultation
-mode: teaser
+mode: search_index
 content:
   body:
-    type: text_summary_or_trimmed
+    type: text_default
     label: hidden
-    settings:
-      trim_length: 250
-    third_party_settings:
-      field_formatter_class:
-        class: ''
-    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
     region: content
   content_moderation_control:
     settings: {  }
     third_party_settings: {  }
     weight: -20
     region: content
-  localgov_consultation_categories:
-    type: entity_reference_label
-    label: hidden
-    settings:
-      link: false
-    third_party_settings:
-      field_formatter_class:
-        class: ''
-    weight: 3
-    region: content
-  localgov_consultation_date:
-    type: daterange_default
-    label: hidden
-    settings:
-      timezone_override: ''
-      format_type: medium
-      from_to: both
-      separator: '-'
-    third_party_settings:
-      field_formatter_class:
-        class: ''
-    weight: 4
-    region: content
-  localgov_consultation_summary:
-    type: basic_string
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: 2
-    region: content
-  localgov_consultation_teaser_img:
+  localgov_consultation_banner:
     type: entity_reference_entity_view
     label: hidden
     settings:
-      view_mode: default
+      view_mode: responsive_banner
       link: false
-    third_party_settings: {  }
-    weight: 0
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+    weight: 10
     region: content
 hidden:
   langcode: true
   links: true
-  localgov_consultation_banner: true
+  localgov_consultation_categories: true
   localgov_consultation_contact: true
+  localgov_consultation_date: true
   localgov_consultation_dept: true
   localgov_consultation_documents: true
   localgov_consultation_ext_links: true
@@ -107,6 +76,8 @@ hidden:
   localgov_consultation_result: true
   localgov_consultation_results: true
   localgov_consultation_status: true
+  localgov_consultation_summary: true
+  localgov_consultation_teaser_img: true
   localgov_consultation_timeline: true
   localgov_consultation_webform: true
   search_api_excerpt: true

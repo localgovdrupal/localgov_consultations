@@ -1,39 +1,424 @@
+uuid: 800cb592-de30-4b09-908c-5d140fb5f23d
 langcode: en
 status: true
 dependencies:
   config:
     - field.field.node.consultation.body
-    - field.field.node.consultation.field_contact_name
-    - field.field.node.consultation.field_department
+    - field.field.node.consultation.localgov_consultation_banner
     - field.field.node.consultation.localgov_consultation_categories
+    - field.field.node.consultation.localgov_consultation_contact
     - field.field.node.consultation.localgov_consultation_date
+    - field.field.node.consultation.localgov_consultation_dept
+    - field.field.node.consultation.localgov_consultation_documents
+    - field.field.node.consultation.localgov_consultation_ext_links
+    - field.field.node.consultation.localgov_consultation_footer
     - field.field.node.consultation.localgov_consultation_link
+    - field.field.node.consultation.localgov_consultation_location
     - field.field.node.consultation.localgov_consultation_phase
     - field.field.node.consultation.localgov_consultation_purpose
     - field.field.node.consultation.localgov_consultation_result
+    - field.field.node.consultation.localgov_consultation_results
+    - field.field.node.consultation.localgov_consultation_status
+    - field.field.node.consultation.localgov_consultation_summary
     - field.field.node.consultation.localgov_consultation_teaser_img
+    - field.field.node.consultation.localgov_consultation_timeline
+    - field.field.node.consultation.localgov_consultation_webform
     - node.type.consultation
   module:
+    - datetime_range
+    - field_formatter_class
+    - layout_builder
+    - layout_discovery
     - link
     - options
     - text
     - user
+    - webform
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: layout_twocol_section
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+          column_widths: 67-33
+        components:
+          12795d8a-97d0-4ad4-a8b0-f769bfd88f75:
+            uuid: 12795d8a-97d0-4ad4-a8b0-f769bfd88f75
+            region: second
+            configuration:
+              id: 'field_block:node:consultation:localgov_consultation_documents'
+              label: Documents
+              label_display: visible
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: hidden
+                settings:
+                  view_mode: default
+                third_party_settings:
+                  field_formatter_class:
+                    class: ''
+            weight: 6
+            additional: {  }
+          733f20c4-8b71-4c44-b5a2-3590ecea8b46:
+            uuid: 733f20c4-8b71-4c44-b5a2-3590ecea8b46
+            region: first
+            configuration:
+              id: 'field_block:node:consultation:localgov_consultation_location'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_entity_view
+                label: hidden
+                settings:
+                  view_mode: embed
+                  link: false
+                third_party_settings: {  }
+            weight: 6
+            additional: {  }
+          be377081-2b81-4940-9e22-6fe198517de2:
+            uuid: be377081-2b81-4940-9e22-6fe198517de2
+            region: first
+            configuration:
+              id: 'field_block:node:consultation:body'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 7
+            additional: {  }
+          f31e2d3e-a189-41c8-842b-dc5c0ddfb232:
+            uuid: f31e2d3e-a189-41c8-842b-dc5c0ddfb232
+            region: first
+            configuration:
+              id: 'field_block:node:consultation:localgov_consultation_link'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: link
+                label: hidden
+                settings:
+                  trim_length: null
+                  url_only: false
+                  url_plain: false
+                  rel: '0'
+                  target: '0'
+                third_party_settings: {  }
+            weight: 8
+            additional: {  }
+          8132b5e7-5871-4e67-b084-2cff9565c86a:
+            uuid: 8132b5e7-5871-4e67-b084-2cff9565c86a
+            region: first
+            configuration:
+              id: 'field_block:node:consultation:localgov_consultation_webform'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: hidden
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 9
+            additional: {  }
+          b5dce75a-7d17-445c-a165-9d293fe73d80:
+            uuid: b5dce75a-7d17-445c-a165-9d293fe73d80
+            region: second
+            configuration:
+              id: 'field_block:node:consultation:localgov_consultation_timeline'
+              label: Timeline
+              label_display: visible
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_revisions_entity_view
+                label: hidden
+                settings:
+                  view_mode: default
+                third_party_settings:
+                  field_formatter_class:
+                    class: ''
+            weight: 5
+            additional: {  }
+          8fed75db-53c2-4a8d-a072-19bbbd6fc027:
+            uuid: 8fed75db-53c2-4a8d-a072-19bbbd6fc027
+            region: second
+            configuration:
+              id: 'field_block:node:consultation:localgov_consultation_results'
+              label: 'Consultation Results'
+              label_display: visible
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: link
+                label: hidden
+                settings:
+                  trim_length: 80
+                  url_only: false
+                  url_plain: false
+                  rel: '0'
+                  target: '0'
+                third_party_settings:
+                  field_formatter_class:
+                    class: ''
+            weight: 9
+            additional: {  }
+          ac953357-2fbf-4872-85ad-46697cb6cafb:
+            uuid: ac953357-2fbf-4872-85ad-46697cb6cafb
+            region: second
+            configuration:
+              id: 'field_block:node:consultation:localgov_consultation_categories'
+              label: Categories
+              label_display: visible
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: hidden
+                settings:
+                  link: false
+                third_party_settings:
+                  field_formatter_class:
+                    class: ''
+            weight: 4
+            additional: {  }
+          75b55539-2693-400b-8abd-39235afe052e:
+            uuid: 75b55539-2693-400b-8abd-39235afe052e
+            region: second
+            configuration:
+              id: 'field_block:node:consultation:localgov_consultation_status'
+              label: 'Consultation Status'
+              label_display: visible
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: list_default
+                label: hidden
+                settings: {  }
+                third_party_settings:
+                  field_formatter_class:
+                    class: ''
+            weight: 0
+            additional: {  }
+          4ee013f8-25d8-49d8-8b65-0a0f68e55feb:
+            uuid: 4ee013f8-25d8-49d8-8b65-0a0f68e55feb
+            region: second
+            configuration:
+              id: 'field_block:node:consultation:localgov_consultation_dept'
+              label: Department
+              label_display: visible
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: hidden
+                settings:
+                  link: true
+                third_party_settings:
+                  field_formatter_class:
+                    class: ''
+            weight: 8
+            additional: {  }
+          41c19d8c-d3f5-4356-bc98-8b659ea0a72a:
+            uuid: 41c19d8c-d3f5-4356-bc98-8b659ea0a72a
+            region: second
+            configuration:
+              id: 'field_block:node:consultation:localgov_consultation_contact'
+              label: 'Contact Name'
+              label_display: visible
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: hidden
+                settings:
+                  link: true
+                third_party_settings:
+                  field_formatter_class:
+                    class: ''
+            weight: 7
+            additional: {  }
+          bfe9c5c0-0c31-4803-b7da-b2fe857fd5d1:
+            uuid: bfe9c5c0-0c31-4803-b7da-b2fe857fd5d1
+            region: second
+            configuration:
+              id: 'field_block:node:consultation:localgov_consultation_footer'
+              label: 'Footer Links'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: link
+                label: above
+                settings:
+                  trim_length: 80
+                  url_only: false
+                  url_plain: false
+                  rel: '0'
+                  target: '0'
+                third_party_settings:
+                  field_formatter_class:
+                    class: ''
+            weight: 10
+            additional: {  }
+          344b8172-eaa1-4356-9b76-12d0e4a3d235:
+            uuid: 344b8172-eaa1-4356-9b76-12d0e4a3d235
+            region: second
+            configuration:
+              id: 'field_block:node:consultation:localgov_consultation_date'
+              label: 'Consultation Date'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: daterange_default
+                label: hidden
+                settings:
+                  timezone_override: ''
+                  format_type: medium
+                  from_to: both
+                  separator: '-'
+                third_party_settings:
+                  field_formatter_class:
+                    class: ''
+            weight: 1
+            additional: {  }
+          cb4e7e6e-b2ad-48ae-a1db-a15c7ead714c:
+            uuid: cb4e7e6e-b2ad-48ae-a1db-a15c7ead714c
+            region: second
+            configuration:
+              id: 'field_block:node:consultation:localgov_consultation_ext_links'
+              label: 'External Links'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: link
+                label: above
+                settings:
+                  trim_length: 80
+                  url_only: false
+                  url_plain: false
+                  rel: '0'
+                  target: '0'
+                third_party_settings:
+                  field_formatter_class:
+                    class: ''
+            weight: 11
+            additional: {  }
+          f0d9c4f5-2295-439f-a800-cfdb8673132b:
+            uuid: f0d9c4f5-2295-439f-a800-cfdb8673132b
+            region: content
+            configuration:
+              id: 'field_block:node:consultation:localgov_consultation_banner'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_entity_view
+                label: hidden
+                settings:
+                  view_mode: responsive_banner
+                  link: false
+                third_party_settings:
+                  field_formatter_class:
+                    class: ''
+            weight: 1
+            additional: {  }
+        third_party_settings: {  }
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components: {  }
+        third_party_settings: {  }
+_core:
+  default_config_hash: mxrNjx0JjCe2hRBKkm1x_yIcY2SakeNk9rHjE6bMpMw
 id: node.consultation.default
 targetEntityType: node
 bundle: consultation
 mode: default
 content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 9
+    region: content
   content_moderation_control:
     settings: {  }
     third_party_settings: {  }
     weight: -20
     region: content
-  field_contact_name:
+  localgov_consultation_banner:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: responsive_banner
+      link: false
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+    weight: 2
+    region: content
+  localgov_consultation_categories:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  localgov_consultation_date:
+    type: daterange_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+      from_to: both
+      separator: '-'
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  localgov_consultation_documents:
     type: entity_reference_entity_view
     label: hidden
     settings:
       view_mode: default
-      link: true
+      link: false
     third_party_settings: {  }
     weight: 5
     region: content
@@ -47,43 +432,39 @@ content:
       rel: '0'
       target: '0'
     third_party_settings: {  }
-    weight: 1
+    weight: 10
     region: content
-  localgov_consultation_phase:
-    type: list_default
+  localgov_consultation_location:
+    type: entity_reference_entity_view
     label: hidden
-    settings: {  }
+    settings:
+      view_mode: embed
+      link: false
     third_party_settings: {  }
     weight: 8
     region: content
-  localgov_consultation_purpose:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 6
-    region: content
-  localgov_consultation_result:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 7
-    region: content
-  localgov_consultation_teaser_img:
-    type: entity_reference_entity_view
-    label: above
+  localgov_consultation_webform:
+    type: entity_reference_label
+    label: hidden
     settings:
-      view_mode: default
-      link: false
+      link: true
     third_party_settings: {  }
-    weight: 9
+    weight: 12
     region: content
 hidden:
-  addtoany: true
-  body: true
-  field_department: true
+  langcode: true
+  layout_builder__layout: true
   links: true
-  localgov_consultation_categories: true
-  localgov_consultation_date: true
+  localgov_consultation_contact: true
+  localgov_consultation_dept: true
+  localgov_consultation_ext_links: true
+  localgov_consultation_footer: true
+  localgov_consultation_phase: true
+  localgov_consultation_purpose: true
+  localgov_consultation_result: true
+  localgov_consultation_results: true
+  localgov_consultation_status: true
+  localgov_consultation_summary: true
+  localgov_consultation_teaser_img: true
+  localgov_consultation_timeline: true
   search_api_excerpt: true
