@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\block\Entity\Block;
+
 /**
  * Implements hook_update_N();
  *
@@ -17,5 +19,43 @@ function localgov_consultations_install() {
     ->set('opened', '')
     ->set('closed', '')
     ->save();
-}
 
+  // Add blocks on the banner region
+  $theme = \Drupal::config('system.theme')->get('default');
+
+  // Landing Banner: only on '/consultations'
+  $landing_banner = Block::load('localgov_consultations_landing_banner') ?: Block::create([
+    'id' => 'localgov_consultations_landing_banner',
+    'plugin' => 'localgov_consultations_landing_banner',
+    'settings' => [
+      'label_display' => FALSE,
+    ]
+  ]);
+  $landing_banner->set('theme', $theme);
+  $landing_banner->set('region', 'banner');
+  $landing_banner->set('weight', -20);
+  $landing_banner->setVisibilityConfig('request_path', [
+    'id' => 'request_path',
+    'negate' => FALSE,
+    'pages' => '/consultations',
+  ]);
+  $landing_banner->save();
+
+  // Page Banner: on '/consultations/*'
+  $page_banner = Block::load('localgov_consultations_page_banner') ?: Block::create([
+    'id' => 'localgov_consultations_page_banner',
+    'plugin' => 'localgov_consultations_page_banner',
+    'settings' => [
+      'label_display' => FALSE,
+    ]
+  ]);
+  $page_banner->set('theme', $theme);
+  $page_banner->set('region', 'banner');
+  $page_banner->set('weight', -10);
+  $page_banner->setVisibilityConfig('request_path', [
+    'id' => 'request_path',
+    'negate' => FALSE,
+    'pages' => '/consultations/*',
+  ]);
+  $page_banner->save();
+}
