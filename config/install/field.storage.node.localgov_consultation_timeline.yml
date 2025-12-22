@@ -6,8 +6,8 @@ dependencies:
     - entity_reference_revisions
     - node
     - paragraphs
-id: node.field_timeline
-field_name: field_timeline
+id: node.localgov_consultation_timeline
+field_name: localgov_consultation_timeline
 entity_type: node
 type: entity_reference_revisions
 settings:

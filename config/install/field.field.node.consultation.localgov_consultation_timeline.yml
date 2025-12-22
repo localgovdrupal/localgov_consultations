@@ -3,13 +3,13 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_timeline
+    - field.storage.node.localgov_consultation_timeline
     - node.type.consultation
     - paragraphs.paragraphs_type.step_by_step
   module:
     - entity_reference_revisions
-id: node.consultation.field_timeline
-field_name: field_timeline
+id: node.consultation.localgov_consultation_timeline
+field_name: localgov_consultation_timeline
 entity_type: node
 bundle: consultation
 label: Timeline

@@ -3,13 +3,13 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.localgov_event_location
+    - field.storage.node.localgov_consultation_location
     - geo_entity.geo_entity_type.address
     - node.type.consultation
 _core:
   default_config_hash: u45UcuanFyp_ws_eI_jJKTii1IOhpAOhTlkoxQAzS6M
-id: node.consultation.localgov_event_location
-field_name: localgov_event_location
+id: node.consultation.localgov_consultation_location
+field_name: localgov_consultation_location
 entity_type: node
 bundle: consultation
 label: Location

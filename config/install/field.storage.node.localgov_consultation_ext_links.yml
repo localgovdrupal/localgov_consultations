@@ -1,12 +1,12 @@
-uuid: d6ba9982-05fd-4083-937f-be703024ee79
+uuid: 162b2cf4-1f5a-4749-aa45-f30a2938325d
 langcode: en
 status: true
 dependencies:
   module:
     - link
     - node
-id: node.field_footer_links
-field_name: field_footer_links
+id: node.localgov_consultation_ext_links
+field_name: localgov_consultation_ext_links
 entity_type: node
 type: link
 settings: {  }

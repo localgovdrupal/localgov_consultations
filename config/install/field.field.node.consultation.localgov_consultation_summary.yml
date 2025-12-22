@@ -3,10 +3,10 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_summary
+    - field.storage.node.localgov_consultation_summary
     - node.type.consultation
-id: node.consultation.field_summary
-field_name: field_summary
+id: node.consultation.localgov_consultation_summary
+field_name: localgov_consultation_summary
 entity_type: node
 bundle: consultation
 label: 'Teaser Text'

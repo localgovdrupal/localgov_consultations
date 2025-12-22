@@ -3,13 +3,13 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_landing_banner
+    - field.storage.node.localgov_consultation_banner
     - media.type.image
     - node.type.consultation
   module:
     - dynamic_entity_reference
-id: node.consultation.field_landing_banner
-field_name: field_landing_banner
+id: node.consultation.localgov_consultation_banner
+field_name: localgov_consultation_banner
 entity_type: node
 bundle: consultation
 label: Banner

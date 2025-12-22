@@ -1,16 +1,16 @@
-uuid: e88b808c-3b5a-412d-bc5d-b79d96e0be11
 langcode: en
 status: true
 dependencies:
   module:
-    - link
     - node
-id: node.field_consultation_results
-field_name: field_consultation_results
+    - taxonomy
+id: node.localgov_consultation_dept
+field_name: localgov_consultation_dept
 entity_type: node
-type: link
-settings: {  }
-module: link
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
 locked: false
 cardinality: 1
 translatable: true

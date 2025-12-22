@@ -3,12 +3,12 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_footer_links
+    - field.storage.node.localgov_consultation_footer
     - node.type.consultation
   module:
     - link
-id: node.consultation.field_footer_links
-field_name: field_footer_links
+id: node.consultation.localgov_consultation_footer
+field_name: localgov_consultation_footer
 entity_type: node
 bundle: consultation
 label: 'Footer Links'

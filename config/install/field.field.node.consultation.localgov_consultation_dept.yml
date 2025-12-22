@@ -2,14 +2,14 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_contact_name
+    - field.storage.node.localgov_consultation_dept
     - node.type.consultation
-    - taxonomy.vocabulary.consultations_contact_name
-id: node.consultation.field_contact_name
-field_name: field_contact_name
+    - taxonomy.vocabulary.consultations_department
+id: node.consultation.localgov_consultation_dept
+field_name: localgov_consultation_dept
 entity_type: node
 bundle: consultation
-label: 'Contact Name'
+label: Department
 description: ''
 required: false
 translatable: false
@@ -19,7 +19,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      consultations_contact_name: consultations_contact_name
+      consultations_department: consultations_department
     sort:
       field: name
       direction: asc

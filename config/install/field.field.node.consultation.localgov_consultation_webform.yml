@@ -3,12 +3,12 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_webform
+    - field.storage.node.localgov_consultation_webform
     - node.type.consultation
   module:
     - webform
-id: node.consultation.field_webform
-field_name: field_webform
+id: node.consultation.localgov_consultation_webform
+field_name: localgov_consultation_webform
 entity_type: node
 bundle: consultation
 label: Webform

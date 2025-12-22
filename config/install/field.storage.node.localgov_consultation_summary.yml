@@ -1,17 +1,16 @@
-uuid: 1f412031-334e-438b-af82-2121862c4faf
+uuid: 4196c099-869a-483b-ab86-c0c513bf6071
 langcode: en
 status: true
 dependencies:
   module:
     - node
-    - webform
-id: node.field_webform
-field_name: field_webform
+id: node.localgov_consultation_summary
+field_name: localgov_consultation_summary
 entity_type: node
-type: webform
+type: string_long
 settings:
-  target_type: webform
-module: webform
+  case_sensitive: false
+module: core
 locked: false
 cardinality: 1
 translatable: true

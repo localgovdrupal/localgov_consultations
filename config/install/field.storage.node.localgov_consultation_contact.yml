@@ -4,8 +4,8 @@ dependencies:
   module:
     - node
     - taxonomy
-id: node.field_contact_name
-field_name: field_contact_name
+id: node.localgov_consultation_contact
+field_name: localgov_consultation_contact
 entity_type: node
 type: entity_reference
 settings:

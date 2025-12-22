@@ -1,15 +1,16 @@
+uuid: a765284a-911b-4148-8d54-edcb643cac8c
 langcode: en
 status: true
 dependencies:
   module:
+    - media
     - node
-    - taxonomy
-id: node.field_department
-field_name: field_department
+id: node.localgov_consultation_banner
+field_name: localgov_consultation_banner
 entity_type: node
 type: entity_reference
 settings:
-  target_type: taxonomy_term
+  target_type: media
 module: core
 locked: false
 cardinality: 1
