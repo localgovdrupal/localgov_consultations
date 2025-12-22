@@ -97,7 +97,6 @@ function localgov_consultations_notify_mailing_list_subscription_insert(Drupal\C
   $subscription_handler->onSubscribe($entity);
 }
 
-
 /**
  * Implements hook_ENTITY_TYPE_update().
  */
@@ -105,19 +104,32 @@ function localgov_consultations_notify_node_update(\Drupal\node\NodeInterface $e
   if ($entity->bundle() == 'consultation') {
     // If the dates haven't changed, then we don't need to do anything.
     // These properties should have been set in our presave hook above.
-    if ($entity->localgov_consultation_start_date->equals($entity->original->localgov_consultation_start_date)
-      && $entity->localgov_consultation_end_date->equals($entity->original->localgov_consultation_end_date)) {
+    $current_field = $entity->get('localgov_consultation_date');
+    $original_field = $entity->original->get('localgov_consultation_date');
+
+    if ($current_field->isEmpty() || $original_field->isEmpty()) {
       return;
     }
 
-    /** @var \Drupal\localgov_consultations_notify\Notifier $notifier */
-    $notifier = \Drupal::service('localgov_consultations_notify.notifier');
-    $notifier->notifySubscribers($entity, NotificationReason::ConsultationDatesChanged);
+    $current_values = $current_field->getValue();
+    $original_values = $original_field->getValue();
 
-    \Drupal::messenger()->addMessage('An email has been scheduled to inform subscribers about the date change');
+    $current_start = $current_values[0]['value'] ?? NULL;
+    $current_end = $current_values[0]['end_value'] ?? NULL;
+    $original_start = $original_values[0]['value'] ?? NULL;
+    $original_end = $original_values[0]['end_value'] ?? NULL;
+
+    /** @var \Drupal\localgov_consultations_notify\Notifier $notifier */
+
+    if ($current_start !== $original_start || $current_end !== $original_end) {
+      $notifier = \Drupal::service('localgov_consultations_notify.notifier');
+      $notifier->notifySubscribers($entity, NotificationReason::ConsultationDatesChanged);
+
+      \Drupal::messenger()
+        ->addMessage('An email has been scheduled to inform subscribers about the date change');
+    }
   }
 }
-
 
 /**
  * Implements hook_cron().
