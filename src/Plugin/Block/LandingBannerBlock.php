@@ -13,7 +13,7 @@ use Drupal\file\Entity\File;
  * Provides a consultations banner image block.
  *
  * @Block(
- *   id = "localgov_consutlations_landing_banner",
+ *   id = "localgov_consultations_landing_banner",
  *   admin_label = @Translation("LocalGov Consultations Landing Banner"),
  *   category = @Translation("LocalGov Consultations"),
  * )
