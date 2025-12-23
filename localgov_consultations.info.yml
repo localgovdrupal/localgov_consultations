@@ -9,10 +9,12 @@ dependencies:
 config_devel:
   - core.date_format.localgov_consultations_date
   - core.entity_form_display.node.consultation.default
+  - core.entity_form_display.paragraph.step_by_step.default
   - core.entity_view_display.node.consultation.default
   - core.entity_view_display.node.consultation.search_index
   - core.entity_view_display.node.consultation.search_result
   - core.entity_view_display.node.consultation.teaser
+  - core.entity_view_display.paragraph.step_by_step.default
   - field.field.node.consultation.body
   - field.field.node.consultation.localgov_consultation_banner
   - field.field.node.consultation.localgov_consultation_categories
@@ -33,6 +35,9 @@ config_devel:
   - field.field.node.consultation.localgov_consultation_teaser_img
   - field.field.node.consultation.localgov_consultation_timeline
   - field.field.node.consultation.localgov_consultation_webform
+  - field.field.paragraph.step_by_step.localgov_consultation_date
+  - field.field.paragraph.step_by_step.localgov_consultation_summary
+  - field.field.paragraph.step_by_step.localgov_consultation_title
   - field.storage.node.localgov_consultation_banner
   - field.storage.node.localgov_consultation_categories
   - field.storage.node.localgov_consultation_contact
@@ -52,6 +57,9 @@ config_devel:
   - field.storage.node.localgov_consultation_teaser_img
   - field.storage.node.localgov_consultation_timeline
   - field.storage.node.localgov_consultation_webform
+  - field.storage.paragraph.localgov_consultation_date
+  - field.storage.paragraph.localgov_consultation_summary
+  - field.storage.paragraph.localgov_consultation_title
   - node.type.consultation
   - pathauto.pattern.consultations
   - taxonomy.vocabulary.consultations
