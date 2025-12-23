@@ -1,0 +1,19 @@
+uuid: da70ac0e-a04b-4299-b9f9-02d4c7e4e9fe
+langcode: en-gb
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.localgov_consultation_summary
+field_name: localgov_consultation_summary
+entity_type: paragraph
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,20 @@
+uuid: 0211a843-841e-4996-8230-0a3d2208a90b
+langcode: en-gb
+status: true
+dependencies:
+  module:
+    - datetime
+    - paragraphs
+id: paragraph.localgov_consultation_date
+field_name: localgov_consultation_date
+entity_type: paragraph
+type: datetime
+settings:
+  datetime_type: date
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

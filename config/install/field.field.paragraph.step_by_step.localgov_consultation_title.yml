@@ -1,0 +1,19 @@
+uuid: eb5ee18e-0d24-4f57-96b5-52247018e23b
+langcode: en-gb
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.localgov_consultation_title
+    - paragraphs.paragraphs_type.step_by_step
+id: paragraph.step_by_step.localgov_consultation_title
+field_name: localgov_consultation_title
+entity_type: paragraph
+bundle: step_by_step
+label: Title
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

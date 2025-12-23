@@ -1,0 +1,21 @@
+uuid: 81dda04a-f54e-4977-b672-75a7c9859785
+langcode: en-gb
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.localgov_consultation_date
+    - paragraphs.paragraphs_type.step_by_step
+  module:
+    - datetime
+id: paragraph.step_by_step.localgov_consultation_date
+field_name: localgov_consultation_date
+entity_type: paragraph
+bundle: step_by_step
+label: Date
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime
