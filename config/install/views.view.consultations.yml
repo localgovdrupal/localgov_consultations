@@ -1,3 +1,4 @@
+uuid: e6b8e879-bd26-45dc-9176-0753d3b6c211
 langcode: en
 status: true
 dependencies:
@@ -6,6 +7,7 @@ dependencies:
     - field.storage.node.body
     - node.type.consultation
     - taxonomy.vocabulary.consultations
+    - taxonomy.vocabulary.consultations_department
   module:
     - node
     - options
@@ -525,7 +527,7 @@ display:
         filters: true
         filter_groups: true
       display_description: ''
-      exposed_block: false
+      exposed_block: true
       display_extenders:
         localgov_page_header_display_extender:
           lede: ''
