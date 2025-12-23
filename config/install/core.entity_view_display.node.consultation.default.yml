@@ -22,7 +22,6 @@ dependencies:
     - field.field.node.consultation.localgov_consultation_summary
     - field.field.node.consultation.localgov_consultation_teaser_img
     - field.field.node.consultation.localgov_consultation_timeline
-    - field.field.node.consultation.localgov_consultation_webform
     - node.type.consultation
   module:
     - datetime_range
@@ -115,22 +114,6 @@ third_party_settings:
                   target: '0'
                 third_party_settings: {  }
             weight: 8
-            additional: {  }
-          8132b5e7-5871-4e67-b084-2cff9565c86a:
-            uuid: 8132b5e7-5871-4e67-b084-2cff9565c86a
-            region: first
-            configuration:
-              id: 'field_block:node:consultation:localgov_consultation_webform'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: entity_reference_label
-                label: hidden
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 9
             additional: {  }
           b5dce75a-7d17-445c-a165-9d293fe73d80:
             uuid: b5dce75a-7d17-445c-a165-9d293fe73d80
@@ -506,14 +489,6 @@ content:
       link: false
     third_party_settings: {  }
     weight: 8
-    region: content
-  localgov_consultation_webform:
-    type: entity_reference_label
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 12
     region: content
 hidden:
   langcode: true

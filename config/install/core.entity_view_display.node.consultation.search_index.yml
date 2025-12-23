@@ -23,7 +23,6 @@ dependencies:
     - field.field.node.consultation.localgov_consultation_summary
     - field.field.node.consultation.localgov_consultation_teaser_img
     - field.field.node.consultation.localgov_consultation_timeline
-    - field.field.node.consultation.localgov_consultation_webform
     - node.type.consultation
   module:
     - text
@@ -76,5 +75,4 @@ hidden:
   localgov_consultation_summary: true
   localgov_consultation_teaser_img: true
   localgov_consultation_timeline: true
-  localgov_consultation_webform: true
   search_api_excerpt: true

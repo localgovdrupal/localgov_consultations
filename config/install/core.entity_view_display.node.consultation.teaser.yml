@@ -23,7 +23,6 @@ dependencies:
     - field.field.node.consultation.localgov_consultation_summary
     - field.field.node.consultation.localgov_consultation_teaser_img
     - field.field.node.consultation.localgov_consultation_timeline
-    - field.field.node.consultation.localgov_consultation_webform
     - node.type.consultation
   module:
     - datetime_range
@@ -101,5 +100,4 @@ hidden:
   localgov_consultation_results: true
   localgov_consultation_status: true
   localgov_consultation_timeline: true
-  localgov_consultation_webform: true
   search_api_excerpt: true
