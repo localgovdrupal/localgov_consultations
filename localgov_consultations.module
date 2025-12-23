@@ -27,6 +27,16 @@ function localgov_consultations_theme($existing, $type, $theme, $path) {
       'template' => 'field--node--localgov-consultation-date--consultation',
       'path' => $path . '/templates/field',
     ],
+        'field__node__localgov_consultation_timeline__consultation' => [
+      'base hook' => 'field',
+      'template' => 'field--node--localgov-consultation-timeline--consultation',
+      'path' => $path . '/templates/field',
+    ],
+    'paragraph__step_by_step' => [
+      'template' => 'paragraph--step-by-step',
+      'base hook' => 'paragraph',
+      'path' => $path . '/templates/paragraphs',
+    ],
   ];
 }
 
@@ -92,3 +102,29 @@ function localgov_consultations_preprocess_node(&$variables) {
     $variables['#attached']['library'][] = 'localgov_consultations/localgov_consultations';
   }
 }
+
+/**
+ * Implements hook_preprocess_paragraphs().
+ */
+function localgov_consultations_preprocess_paragraph(&$variables) {
+  $paragraph = $variables['paragraph'];
+
+  if ($paragraph->bundle() === 'step_by_step') {
+    $date_is_past_or_today = FALSE;
+
+    if ($paragraph->hasField('localgov_consultation_date') && !$paragraph->get('localgov_consultation_date')->isEmpty()) {
+      $date_value = $paragraph->get('localgov_consultation_date')->value;
+
+      if ($date_value) {
+        $today = date("Y-m-d");
+
+        if ($date_value <= $today) {
+          $date_is_past_or_today = TRUE;
+        }
+      }
+    }
+
+    $variables['date_is_past_or_today'] = $date_is_past_or_today;
+  }
+}
+
