@@ -26,7 +26,6 @@ dependencies:
     - field.field.node.consultation.localgov_consultation_webform
     - node.type.consultation
   module:
-    - field_formatter_class
     - text
     - user
 _core:
@@ -54,9 +53,7 @@ content:
     settings:
       view_mode: responsive_banner
       link: false
-    third_party_settings:
-      field_formatter_class:
-        class: ''
+    third_party_settings: {  }
     weight: 10
     region: content
 hidden:

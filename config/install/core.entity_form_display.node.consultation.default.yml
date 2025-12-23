@@ -27,10 +27,12 @@ dependencies:
   module:
     - datetime_range
     - field_group
+    - inline_entity_form
     - link
     - media_library
     - path
     - text
+    - webform
 third_party_settings:
   field_group:
     group_tags:
@@ -44,6 +46,7 @@ third_party_settings:
         - group_documents
         - group_status
         - group_results
+        - group_location
       label: tabs
       region: content
       parent_name: ''
@@ -189,7 +192,6 @@ third_party_settings:
     group_facets:
       children:
         - localgov_consultation_categories
-        - localgov_consultation_location
       label: Categories
       region: content
       parent_name: group_tags
@@ -255,6 +257,22 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
+    group_location:
+      children:
+        - localgov_consultation_location
+      label: Location
+      region: hidden
+      parent_name: group_tags
+      weight: 13
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
 _core:
   default_config_hash: qlZbz8lrFfTOS8K6U5mTNIVg6Y98hpqu5OrJp4IS2Is
 id: node.consultation.default
@@ -274,13 +292,13 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 4
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 3
+    weight: 2
     region: content
     settings:
       include_locked: true
@@ -303,14 +321,22 @@ content:
       placeholder: ''
     third_party_settings: {  }
   localgov_consultation_contact:
-    type: entity_reference_autocomplete
+    type: inline_entity_form_complex
     weight: 10
     region: content
     settings:
+      form_mode: default
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: false
       match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      allow_duplicate: false
+      collapsible: false
+      collapsed: false
+      revision: false
+      removed_reference: optional
     third_party_settings: {  }
   localgov_consultation_date:
     type: daterange_default
@@ -319,14 +345,22 @@ content:
     settings: {  }
     third_party_settings: {  }
   localgov_consultation_dept:
-    type: entity_reference_autocomplete
+    type: inline_entity_form_complex
     weight: 9
     region: content
     settings:
+      form_mode: default
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: false
       match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      allow_duplicate: false
+      collapsible: false
+      collapsed: false
+      revision: false
+      removed_reference: optional
     third_party_settings: {  }
   localgov_consultation_documents:
     type: media_library_widget
@@ -360,14 +394,22 @@ content:
       placeholder_title: ''
     third_party_settings: {  }
   localgov_consultation_location:
-    type: entity_reference_autocomplete
-    weight: 11
+    type: inline_entity_form_complex
+    weight: 8
     region: content
     settings:
+      form_mode: default
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: false
       match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      allow_duplicate: false
+      collapsible: false
+      collapsed: false
+      revision: false
+      removed_reference: optional
     third_party_settings: {  }
   localgov_consultation_phase:
     type: options_select
@@ -421,22 +463,30 @@ content:
       media_types: {  }
     third_party_settings: {  }
   localgov_consultation_timeline:
-    type: entity_reference_revisions_entity_view
+    type: inline_entity_form_complex
     weight: 30
     region: content
     settings:
-      view_mode: default
-      link: ''
+      form_mode: default
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: false
+      match_operator: CONTAINS
+      allow_duplicate: false
+      collapsible: false
+      collapsed: false
+      revision: false
+      removed_reference: optional
     third_party_settings: {  }
   localgov_consultation_webform:
-    type: entity_reference_autocomplete
-    weight: 8
+    type: webform_entity_reference_select
+    weight: 9
     region: content
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      default_data: true
+      webforms: {  }
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
@@ -486,7 +536,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 2
+    weight: 1
     region: content
     settings:
       match_operator: CONTAINS

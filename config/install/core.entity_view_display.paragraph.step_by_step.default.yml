@@ -9,7 +9,6 @@ dependencies:
     - paragraphs.paragraphs_type.step_by_step
   module:
     - datetime
-    - field_formatter_class
 id: paragraph.step_by_step.default
 targetEntityType: paragraph
 bundle: step_by_step
@@ -21,9 +20,7 @@ content:
     settings:
       timezone_override: ''
       format_type: localgov_consultations_date
-    third_party_settings:
-      field_formatter_class:
-        class: ''
+    third_party_settings: {  }
     weight: 1
     region: content
   localgov_consultation_summary:

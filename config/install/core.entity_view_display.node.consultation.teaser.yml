@@ -27,7 +27,6 @@ dependencies:
     - node.type.consultation
   module:
     - datetime_range
-    - field_formatter_class
     - text
     - user
 _core:
@@ -42,9 +41,7 @@ content:
     label: hidden
     settings:
       trim_length: 250
-    third_party_settings:
-      field_formatter_class:
-        class: ''
+    third_party_settings: {  }
     weight: 1
     region: content
   content_moderation_control:
@@ -57,9 +54,7 @@ content:
     label: hidden
     settings:
       link: false
-    third_party_settings:
-      field_formatter_class:
-        class: ''
+    third_party_settings: {  }
     weight: 3
     region: content
   localgov_consultation_date:
@@ -70,9 +65,7 @@ content:
       format_type: medium
       from_to: both
       separator: '-'
-    third_party_settings:
-      field_formatter_class:
-        class: ''
+    third_party_settings: {  }
     weight: 4
     region: content
   localgov_consultation_summary:
