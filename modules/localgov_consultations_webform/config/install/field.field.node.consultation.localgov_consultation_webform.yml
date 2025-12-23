@@ -1,0 +1,26 @@
+uuid: 34b2438e-b83a-48ba-bd8e-6b950e838825
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.localgov_consultation_webform
+    - node.type.consultation
+  module:
+    - webform
+id: node.consultation.localgov_consultation_webform
+field_name: localgov_consultation_webform
+entity_type: node
+bundle: consultation
+label: Webform
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  target_type: webform
+  handler: 'default:webform'
+  handler_settings:
+    target_bundles: { }
+    auto_create: false
+field_type: webform

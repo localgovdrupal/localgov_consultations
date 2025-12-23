@@ -1,0 +1,11 @@
+name: Localgov Consultations Webform
+type: module
+description: Custom functionality for Consultations node to add webform
+package: Custom
+core_version_requirement: ^9 || ^10
+dependencies:
+  - drupal:webform
+
+config_devel:
+  - field.field.node.consultation.localgov_consultation_webform
+  - field.storage.node.localgov_consultation_webform
