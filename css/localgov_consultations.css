@@ -49,39 +49,6 @@
   margin-right: 2rem;
 }
 
-.path-consultations #main-content {
-  background-color: #ededed;
-  padding-top: 3rem;
-}
-
-@media (min-width: 1024px) {
-  .path-consultations, .page-node-type-consultation {
-    .lgd-header .lgd-container,
-    .lgd-footer__pre-footer > .lgd-container,
-    .region-breadcrumb .lgd-container {
-      width: 85%;
-      max-width: 85%;
-    }
-  }
-
-  .page-node-type-consultation {
-    #main-content > .lgd-container {
-      width: 85%;
-      max-width: 85%;
-    }
-  }
-}
-
-.path-consultations, .page-node-type-consultation {
-  --color-focus: #45A90;
-
-  .layout__region--second .block > h2,
-  .layout__region--second .block .field__item > h2 {
-    font-weight: bold;
-    margin-bottom: .5rem;
-  }
-}
-
 .consultation-card {
   height: 100%;
   display: flex;
@@ -409,12 +376,20 @@ a:hover .card-img img {
 }
 
 .localgov-consultations--filter-block form {
-  display: grid;
-  grid-template-columns: 1fr 1.5fr 1fr auto;
+  display: flex;
   gap: 1rem;
   align-items: center;
   justify-content: center;
   padding: 1.5rem 2rem;
+}
+
+.localgov-consultations--filter-block form .js-form-item {
+  width: 100%;
+}
+
+.localgov-consultations--filter-block form .js-form-item input,
+.localgov-consultations--filter-block form .js-form-item select {
+  border-radius: 0.25rem;
 }
 
 @media (max-width: 768px) {
@@ -439,6 +414,7 @@ a:hover .card-img img {
 .view-consultations .view-empty {
   margin-top: 3rem;
 }
+
 
 /* Timeline field wrapper - only padding */
 .localgov-consultation--timeline-field {
@@ -520,4 +496,3 @@ a:hover .card-img img {
     left: -1.95rem;
   }
 }
-
