@@ -4,6 +4,7 @@ description: Custom functionality for Consultations node to add webform
 package: Custom
 core_version_requirement: ^9 || ^10
 dependencies:
+  - localgov_consultations:localgov_consultations
   - drupal:webform
 
 config_devel:
