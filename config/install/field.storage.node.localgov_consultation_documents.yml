@@ -5,9 +5,6 @@ dependencies:
   module:
     - media
     - node
-  enforced:
-    module:
-      - localgov_publications
 _core:
   default_config_hash: RKVIiztkB8GFfRdoSzZpdyARi0HxgXTc6_RQsxEZcNk
 id: node.localgov_consultation_documents
