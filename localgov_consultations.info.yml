@@ -5,6 +5,12 @@ package: Custom
 core_version_requirement: ^9 || ^10
 dependencies:
   - drupal:datetime_range
+  - drupal:webform
+  - drupal:paragraphs
+  - drupal:geo_entity
+  - drupal:field_formatter_class
+  - drupal:layout_builder
+  - drupal:layout_discovery
 
 config_devel:
   - core.date_format.localgov_consultations_date
