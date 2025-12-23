@@ -5,7 +5,6 @@ package: Custom
 core_version_requirement: ^9 || ^10
 dependencies:
   - drupal:datetime_range
-  - drupal:webform
   - drupal:paragraphs
   - drupal:geo_entity
   - drupal:geo_entity_address
@@ -41,7 +40,6 @@ config_devel:
   - field.field.node.consultation.localgov_consultation_summary
   - field.field.node.consultation.localgov_consultation_teaser_img
   - field.field.node.consultation.localgov_consultation_timeline
-  - field.field.node.consultation.localgov_consultation_webform
   - field.field.paragraph.step_by_step.localgov_consultation_date
   - field.field.paragraph.step_by_step.localgov_consultation_summary
   - field.field.paragraph.step_by_step.localgov_consultation_title
@@ -63,7 +61,6 @@ config_devel:
   - field.storage.node.localgov_consultation_summary
   - field.storage.node.localgov_consultation_teaser_img
   - field.storage.node.localgov_consultation_timeline
-  - field.storage.node.localgov_consultation_webform
   - field.storage.paragraph.localgov_consultation_date
   - field.storage.paragraph.localgov_consultation_summary
   - field.storage.paragraph.localgov_consultation_title
