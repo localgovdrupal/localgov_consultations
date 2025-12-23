@@ -8,6 +8,7 @@ dependencies:
   - drupal:webform
   - drupal:paragraphs
   - drupal:geo_entity
+  - drupal:geo_entity_address
   - drupal:field_formatter_class
   - drupal:layout_builder
   - drupal:layout_discovery
