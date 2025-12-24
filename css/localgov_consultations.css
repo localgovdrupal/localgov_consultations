@@ -205,7 +205,10 @@ a:hover .card-img img {
 .page-node-type-consultation .layout {
   gap: 2rem;
 
-  .layout__region--first {
+}
+
+@media screen and (min-width: 768px) {
+  .page-node-type-consultation .layout .layout__region--first {
     flex-basis: calc(67% - 2rem) !important;
   }
 }
@@ -404,7 +407,7 @@ a:hover .card-img img {
   }
 
   .localgov-consultations--filter-block form {
-    grid-template-columns: 1fr;
+    flex-direction: column;
     gap: 0.75rem;
     padding: 1rem;
   }
