@@ -324,6 +324,7 @@ a:hover .card-img img {
   flex-direction: column;
   align-items: center;
   height: 50vh;
+  min-height: 400px;
   position: relative;
   margin-bottom: 4rem;
 }
@@ -343,18 +344,23 @@ a:hover .card-img img {
 
 .localgov-consultations--banner-image img {
   width: 100%;
+  height: 100%;
   max-height: 50vh;
-  overflow: hidden;
+  object-fit: cover;
+  object-position: center;
 }
 
 .banner-placeholder__image {
   overflow: hidden;
   max-height: 50vh;
+  min-height: 400px;
 }
 
 .banner-placeholder__image img {
   width: 100%;
+  height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
 .localgov-consultations--filter-block {
@@ -393,23 +399,108 @@ a:hover .card-img img {
 .localgov-consultations--filter-block form .js-form-item input,
 .localgov-consultations--filter-block form .js-form-item select {
   border-radius: 0.25rem;
+  width: 100%;
+  padding: 0.5rem;
 }
 
-@media (max-width: 768px) {
+.localgov-consultations--filter-block form .js-form-item input:focus,
+.localgov-consultations--filter-block form .js-form-item select:focus {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* Tablet landscape styles */
+@media (max-width: 1024px) and (min-width: 769px) {
   .localgov-consultations--banner-block-wrapper {
-    height: 40vh;
-    margin-bottom: 12rem;
+    height: 300px;
+    min-height: 300px;
+    margin-bottom: 6rem;
+  }
+
+  .localgov-consultations--banner-image img {
+    max-height: 300px;
+  }
+
+  .banner-placeholder__image {
+    min-height: 300px;
+  }
+
+  .localgov-consultations--filter-block {
+    width: 92%;
+    bottom: -4rem;
+  }
+
+  .localgov-consultations--filter-block form {
+    padding: 1.25rem 1.5rem;
+  }
+}
+
+/* Tablet portrait styles */
+@media (max-width: 768px) and (min-width: 481px) {
+  .localgov-consultations--banner-block-wrapper {
+    height: 280px;
+    min-height: 280px;
+    margin-bottom: 20rem;
+  }
+
+  .localgov-consultations--banner-image img {
+    max-height: 280px;
+  }
+
+  .banner-placeholder__image {
+    min-height: 280px;
+  }
+
+  .localgov-consultations--filter-block {
+    width: 94%;
+    bottom: -18rem;
+  }
+
+  .localgov-consultations--filter-block form {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.25rem;
+  }
+
+  .localgov-consultations--filter-block button {
+    width: 100%;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 480px) {
+  .localgov-consultations--banner-block-wrapper {
+    height: 220px;
+    min-height: 220px;
+    margin-bottom: 22rem;
+  }
+
+  .localgov-consultations--banner-image img {
+    max-height: 220px;
+  }
+
+  .banner-placeholder__image {
+    min-height: 220px;
   }
 
   .localgov-consultations--filter-block {
     width: 95%;
-    bottom: -10rem;
+    bottom: -20rem;
   }
 
   .localgov-consultations--filter-block form {
     flex-direction: column;
     gap: 0.75rem;
     padding: 1rem;
+  }
+
+  .localgov-consultations--filter-block button {
+    width: 100%;
+  }
+
+  .localgov-consultations--filter-block form .js-form-item input,
+  .localgov-consultations--filter-block form .js-form-item select {
+    font-size: 16px;
   }
 }
 
