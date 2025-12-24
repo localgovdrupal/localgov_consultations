@@ -1,4 +1,3 @@
-uuid: 800cb592-de30-4b09-908c-5d140fb5f23d
 langcode: en
 status: true
 dependencies:
@@ -413,8 +412,6 @@ third_party_settings:
           label: ''
         components: {  }
         third_party_settings: {  }
-_core:
-  default_config_hash: mxrNjx0JjCe2hRBKkm1x_yIcY2SakeNk9rHjE6bMpMw
 id: node.consultation.default
 targetEntityType: node
 bundle: consultation

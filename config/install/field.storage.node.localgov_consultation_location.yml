@@ -1,12 +1,9 @@
-uuid: 0a5695ff-0ad6-4081-b00e-5a3cb0e0986e
 langcode: en
 status: true
 dependencies:
   module:
     - geo_entity
     - node
-_core:
-  default_config_hash: zG_PsW2sz8I94X2roaDmVTeRACIqe9mVCspKaPKzTYc
 id: node.localgov_consultation_location
 field_name: localgov_consultation_location
 entity_type: node

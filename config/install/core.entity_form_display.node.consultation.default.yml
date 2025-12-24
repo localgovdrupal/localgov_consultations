@@ -1,4 +1,3 @@
-uuid: c329272b-48b3-45ac-963e-54364e91a684
 langcode: en
 status: true
 dependencies:
@@ -271,8 +270,6 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
-_core:
-  default_config_hash: qlZbz8lrFfTOS8K6U5mTNIVg6Y98hpqu5OrJp4IS2Is
 id: node.consultation.default
 targetEntityType: node
 bundle: consultation

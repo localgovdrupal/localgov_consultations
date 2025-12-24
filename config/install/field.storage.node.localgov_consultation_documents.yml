@@ -1,12 +1,9 @@
-uuid: c4fadcbf-fc53-47c3-b7a2-e47b7edc7c79
 langcode: en
 status: true
 dependencies:
   module:
     - media
     - node
-_core:
-  default_config_hash: RKVIiztkB8GFfRdoSzZpdyARi0HxgXTc6_RQsxEZcNk
 id: node.localgov_consultation_documents
 field_name: localgov_consultation_documents
 entity_type: node
