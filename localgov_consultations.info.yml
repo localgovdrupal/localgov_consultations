@@ -8,8 +8,6 @@ dependencies:
   - drupal:paragraphs
   - drupal:geo_entity
   - drupal:geo_entity_address
-  - drupal:layout_builder
-  - drupal:layout_discovery
   - drupal:inline_entity_form
 
 config_devel:
