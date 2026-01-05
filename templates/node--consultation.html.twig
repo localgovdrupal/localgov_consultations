@@ -1,7 +1,11 @@
 {#
 /**
  * @file
- * Theme override to display a node.
+ * Theme override to display a consultation node.
+ *
+ * Two-column responsive layout:
+ * - Left column (2/3): Title, Body, Location, Webform
+ * - Right column (1/3): All other consultation fields
  *
  * Available variables:
  * - node: The node entity with limited access to object properties and methods.
@@ -64,54 +68,23 @@
  *   is an administrator.
  *
  * @see template_preprocess_node()
- *
- * @todo Remove the id attribute (or make it a class), because if that gets
- *   rendered twice on a page this is invalid CSS for example: two lists
- *   in different view modes.
  */
 #}
 
-{#
-Restrict width of the content area to two-thirds of the screen for
-some content types. This is helpful to reduce the line-length for
-better readability.
-#}
-{% set restricted_width_content_types = [
-  'localgov_services_page',
-  'localgov_event',
-  'localgov_step_by_step_overview',
-  'localgov_services_status'
-]
-%}
-
 {% set content_type = node.bundle %}
 
+{# Attach consultation-specific library #}
 {% if not localgov_base_remove_css %}
   {{ attach_library('localgov_base/full') }}
-  {% if content_type == 'localgov_directories_venue'
-    or content_type == 'localgov_directories_page'
-    or content_type == 'localgov_directory' %}
-    {{ attach_library('localgov_base/directories') }}
-  {% endif %}
-
-  {% if content_type == 'localgov_event' %}
-    {{ attach_library('localgov_base/events') }}
-  {% endif %}
-
-  {% if content_type == 'localgov_step_by_step_overview'
-    or content_type == 'localgov_step_by_step_page' %}
-    {{ attach_library('localgov_base/step-by-step') }}
-  {% endif %}
 {% endif %}
 
 {%
   set classes = [
   'lgd-container',
   'padding-horizontal',
-  content_type|clean_class,
+  'consultation',
   'node',
   'node--type-' ~ node.bundle|clean_class,
-  content_type in restricted_width_content_types ? 'node--with-restricted-width',
   node.isPromoted() ? 'node--promoted',
   node.isSticky() ? 'node--sticky',
   not node.isPublished() ? 'node--unpublished',
@@ -130,29 +103,144 @@ better readability.
   {% if label and page %}
     <h1{{ title_attributes }}>{{ label }}</h1>
   {% endif %}
-
   {{ title_suffix }}
 
-  {% if display_submitted %}
-    <footer class="node__meta">
-      {{ author_picture }}
-      <div{{ author_attributes.addClass('node__submitted') }}>
-        {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
-        {{ metadata }}
+  {# Two-column responsive layout #}
+  <div class="consultation__content">
+    <div class="consultation__grid">
+      <div class="consultation__row">
+
+        {# Left column: Main content (2/3 width) #}
+        <div class="consultation__col consultation__col-main">
+
+          {# Body content #}
+          {% if content.body['#items'] %}
+            <div class="consultation__body">
+              {{ content.body }}
+            </div>
+          {% endif %}
+
+          {# Location #}
+          {% if content.localgov_consultation_location['#items'] %}
+            <div class="consultation__location">
+              {{ content.localgov_consultation_location }}
+            </div>
+          {% endif %}
+
+          {# Link field #}
+          {% if content.localgov_consultation_link['#items'] %}
+            <div class="consultation__link">
+              {{ content.localgov_consultation_link }}
+            </div>
+          {% endif %}
+
+          {# Webform (from localgov_consultations_webform submodule) #}
+          {% if content.localgov_consultation_webform['#items'] %}
+            <div class="consultation__webform">
+              {{ content.localgov_consultation_webform }}
+            </div>
+          {% endif %}
+
+        </div>
+
+        {# Right column: Metadata sidebar (1/3 width) #}
+        <div class="consultation__col consultation__col-sidebar">
+
+          {# Consultation Date #}
+          {% if content.localgov_consultation_date['#items'] %}
+            <div class="consultation__sidebar-item consultation__date">
+              {{ content.localgov_consultation_date }}
+            </div>
+          {% endif %}
+
+          {# Status #}
+          {% if content.localgov_consultation_status['#items'] %}
+            <div class="consultation__sidebar-item consultation__status">
+              {{ content.localgov_consultation_status }}
+            </div>
+          {% endif %}
+
+          {# Categories #}
+          {% if content.localgov_consultation_categories['#items'] %}
+            <div class="consultation__sidebar-item consultation__categories">
+              {{ content.localgov_consultation_categories }}
+            </div>
+          {% endif %}
+
+          {# Documents #}
+          {% if content.localgov_consultation_documents['#items'] %}
+            <div class="consultation__sidebar-item consultation__documents">
+              {{ content.localgov_consultation_documents }}
+            </div>
+          {% endif %}
+
+          {# Timeline #}
+          {% if content.localgov_consultation_timeline['#items'] %}
+            <div class="consultation__sidebar-item consultation__timeline">
+              {{ content.localgov_consultation_timeline }}
+            </div>
+          {% endif %}
+
+          {# Contact #}
+          {% if content.localgov_consultation_contact['#items'] %}
+            <div class="consultation__sidebar-item consultation__contact">
+              {{ content.localgov_consultation_contact }}
+            </div>
+          {% endif %}
+
+          {# Department #}
+          {% if content.localgov_consultation_dept['#items'] %}
+            <div class="consultation__sidebar-item consultation__dept">
+              {{ content.localgov_consultation_dept }}
+            </div>
+          {% endif %}
+
+          {# Footer Links #}
+          {% if content.localgov_consultation_footer['#items'] %}
+            <div class="consultation__sidebar-item consultation__footer-links">
+              {{ content.localgov_consultation_footer }}
+            </div>
+          {% endif %}
+
+          {# External Links #}
+          {% if content.localgov_consultation_ext_links['#items'] %}
+            <div class="consultation__sidebar-item consultation__external-links">
+              {{ content.localgov_consultation_ext_links }}
+            </div>
+          {% endif %}
+
+          {# Purpose #}
+          {% if content.localgov_consultation_purpose['#items'] %}
+            <div class="consultation__sidebar-item consultation__purpose">
+              {{ content.localgov_consultation_purpose }}
+            </div>
+          {% endif %}
+
+          {# Results Link #}
+          {% if content.localgov_consultation_results['#items'] %}
+            <div class="consultation__sidebar-item consultation__results">
+              {{ content.localgov_consultation_results }}
+            </div>
+          {% endif %}
+
+          {# Result Text #}
+          {% if content.localgov_consultation_result['#items'] %}
+            <div class="consultation__sidebar-item consultation__result">
+              {{ content.localgov_consultation_result }}
+            </div>
+          {% endif %}
+
+        </div>
+
       </div>
-    </footer>
-  {% endif %}
-
-  {% if content_type in restricted_width_content_types %}
-  <div class="node__restricted-width-section">
-  {% endif %}
-
-    <div{{ content_attributes.addClass(content_type|clean_class ~ '__content', 'node__content') }}>
-      {{ content|without('field_landing_banner') }}
     </div>
-
-  {% if content_type in restricted_width_content_types %}
   </div>
+
+  {# Links (edit, delete, etc.) #}
+  {% if content.links['#links'] %}
+    <div class="consultation__links">
+      {{ content.links }}
+    </div>
   {% endif %}
 
 </article>

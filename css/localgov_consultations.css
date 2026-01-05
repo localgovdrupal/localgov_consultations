@@ -38,17 +38,6 @@
   margin-bottom: 0;
 }
 
-.consultation-content {
-  display: flex;
-}
-
-.consultation-label {
-  color: var(--color-accent);
-  font-weight: 700;
-  min-width: 90px;
-  margin-right: 2rem;
-}
-
 .consultation-card {
   height: 100%;
   display: flex;
@@ -202,73 +191,61 @@ a:hover .card-img img {
   margin-top: 3rem;
 }
 
-.page-node-type-consultation .layout {
-  gap: 2rem;
-
-}
-
-@media screen and (min-width: 768px) {
-  .page-node-type-consultation .layout .layout__region--first {
-    flex-basis: calc(67% - 2rem) !important;
-  }
-}
-
 .page-node-type-consultation {
-  .layout__region--second > .block {
-    border: 1px solid #d4d4d4;
-    padding: 0 1rem .5rem 1rem;
-    box-shadow: rgba(128, 128, 128, 0.2) 0px 4px 8px 0px, rgba(128, 128, 128, 0.19) 0px 6px 20px 0px;
-    border-radius: .25rem;
-  }
-
   .lgd-region__inner--content article time {
     font-size: 1.25rem;
   }
 }
 
-/* consultation view page */
+/* Consultation link fields styling */
 
-.consultation__content.node__content {
-  .layout__region.layout__region--second .paragraph__contact {
-    margin-top: 8px;
-  }
-
-  .paragraph__contact-column-layout {
-    display: flex;
-  }
-
-  .contact-information-svg-wrapper {
-    padding: 0;
-    flex: 0 0 20%;
-  }
-  .contact-information-svg-wrapper svg {
-    height:100%
-  }
-  .paragraph__contact-column-2-row-layout {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .paragraph__contact--content {
-    padding: 0;
-    display: flex;
-
-    .page-component__contact-container.page-component__contact-container--first,
-    .page-component__contact-container.page-component__contact-container--second {
-      margin-left: 0;
-    }
-  }
-}
-
-.block-field-blocknodeconsultationfield-webform {
+/* Main link field - special styling with right arrow */
+.consultation__link .field__item a {
+  position: relative;
+  display: block;
+  width: 100%;
   max-width: 40%;
+  padding: 2rem 1rem;
+  color: var(--color-text);
+  font-size: 18px;
+  letter-spacing: 0;
+  line-height: 21px;
+  font-weight: normal !important;
+  border-radius: 0 !important;
+  background-color: white;
+  border: 1px solid #d8d7dc;
+  box-sizing: border-box;
+  border-bottom: 2px solid var(--border-box-bottom-color);
+  box-shadow: 0px 0px 2px #00000029;
+  transition: background-color 0.3s;
+  text-decoration: none;
 }
 
-/* footer links button styling */
+.consultation__link .field__item a:hover {
+  background-color: var(--botton-bg-color, #f5f5f5);
+}
 
-.block-field-blocknodeconsultationfield-footer-links .field__items .button-link,
-.block-field-blocknodeconsultationfield-external-links .field__items .button-link{
-  width: 48%;
+/* Right-pointing triangle for main link */
+.consultation__link .field__item a::after {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 8px solid currentColor;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  float: right;
+  margin-left: 10px;
+  margin-top: 4px;
+}
+
+/* Footer, External, and Results link fields - standard styling */
+.consultation__footer-links .field__item a,
+.consultation__external-links .field__item a,
+.consultation__results .field__item a {
+  position: relative;
+  display: block;
+  width: 100%;
   padding: 1rem;
   margin-bottom: 0.5rem;
   text-align: left;
@@ -284,11 +261,73 @@ a:hover .card-img img {
   border-bottom: 2px solid var(--border-box-bottom-color);
   box-shadow: 0px 0px 2px #00000029;
   transition: background-color 0.3s;
+  text-decoration: none;
+}
 
-  &:hover {
-    background-color: var(--botton-bg-color);
-  }
+.consultation__footer-links .field__item a:hover,
+.consultation__external-links .field__item a:hover,
+.consultation__results .field__item a:hover {
+  background-color: var(--botton-bg-color, #f5f5f5);
+}
 
+/* Multiple links container styling */
+.consultation__footer-links .field__items,
+.consultation__external-links .field__items {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.consultation__footer-links .field__item,
+.consultation__external-links .field__item {
+  flex: 0 0 calc(50% - 2.5px);
+}
+
+.consultation__results .field__item {
+  width: 100%;
+}
+
+/* Icon for external/footer links */
+.consultation__footer-links .field__item a::after,
+.consultation__external-links .field__item a::after,
+.consultation__results .field__item a::after {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 25px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpolygon points='12 2 22 21 2 21 12 2' fill='black'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+  float: right;
+  margin-left: 10px;
+}
+
+/* Legacy block selectors for backwards compatibility */
+.block-field-blocknodeconsultationfield-footer-links .field__items .button-link,
+.block-field-blocknodeconsultationfield-external-links .field__items .button-link {
+  position: relative;
+  width: 48%;
+  padding: 2rem 1rem;
+  margin-bottom: 0.5rem;
+  text-align: left;
+  color: var(--color-text);
+  font-size: 18px;
+  letter-spacing: 0;
+  line-height: 21px;
+  font-weight: normal !important;
+  border-radius: 0 !important;
+  background-color: white;
+  border: 1px solid #d8d7dc;
+  box-sizing: border-box;
+  border-bottom: 2px solid var(--border-box-bottom-color);
+  box-shadow: 0px 0px 2px #00000029;
+  transition: background-color 0.3s;
+}
+
+.block-field-blocknodeconsultationfield-footer-links .field__items .button-link:hover,
+.block-field-blocknodeconsultationfield-external-links .field__items .button-link:hover {
+  background-color: var(--botton-bg-color, #f5f5f5);
 }
 
 .block-field-blocknodeconsultationfield-footer-links .field__items .button-link svg,
@@ -309,7 +348,22 @@ a:hover .card-img img {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap:5px;
+    gap: 5px;
+  }
+}
+
+/* Responsive link field styles */
+@media (max-width: 768px) {
+  /* Full width on mobile for main link */
+  .consultation__link .field__item a {
+    max-width: 100%;
+    padding: 1.5rem 1rem;
+  }
+
+  /* Full width on mobile for footer/external links */
+  .consultation__footer-links .field__item,
+  .consultation__external-links .field__item {
+    flex: 0 0 100%;
   }
 }
 
@@ -588,5 +642,173 @@ a:hover .card-img img {
   }
   .localgov-consultation--timeline-item:not(:last-child)::after {
     left: -1.95rem;
+  }
+}
+
+/* Consultation node two-column responsive grid layout */
+
+/* Grid container */
+.consultation__content {
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.consultation__grid {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* Row - flexbox container */
+.consultation__row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+/* Column base styles */
+.consultation__col {
+  position: relative;
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+  box-sizing: border-box;
+}
+
+/* Mobile first - full width on small screens */
+.consultation__col-main,
+.consultation__col-sidebar {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+/* Desktop layout - 768px and up */
+@media (min-width: 768px) {
+  /* Main content column - 66.666667% (2/3) */
+  .consultation__col-main {
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%;
+  }
+
+  /* Sidebar column - 33.333333% (1/3) */
+  .consultation__col-sidebar {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+}
+
+/* Main content styling */
+.consultation__col-main {
+  padding-right: 2rem;
+}
+
+.consultation__col-main > div {
+  margin-bottom: 2rem;
+}
+
+.consultation__body,
+.consultation__location,
+.consultation__link,
+.consultation__webform {
+  padding-bottom: 1.5rem;
+}
+
+/* Sidebar styling */
+.consultation__col-sidebar {
+  padding-left: 1rem;
+}
+
+.consultation__sidebar-item {
+  background: #fff;
+  border: 1px solid #d4d4d4;
+  border-radius: 0.25rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: rgba(128, 128, 128, 0.2) 0px 4px 8px 0px, rgba(128, 128, 128, 0.19) 0px 6px 20px 0px;
+}
+
+.consultation__sidebar-item:last-child {
+  margin-bottom: 0;
+}
+
+.consultation__sidebar-item .field__label {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--color-accent, #045a90);
+}
+
+/* Links section */
+.consultation__links {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #d4d4d4;
+}
+
+/* Tablet landscape (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .consultation__col-main {
+    padding-right: 1.5rem;
+  }
+
+  .consultation__col-sidebar {
+    padding-left: 0.75rem;
+  }
+
+  .consultation__sidebar-item {
+    padding: 1.25rem;
+  }
+}
+
+/* Tablet portrait and below (up to 768px) */
+@media (max-width: 767px) {
+  .consultation__row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .consultation__col {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .consultation__col-main {
+    padding-right: 0;
+    margin-bottom: 2rem;
+  }
+
+  .consultation__col-sidebar {
+    padding-left: 0;
+  }
+
+  .consultation__sidebar-item {
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Mobile (up to 480px) */
+@media (max-width: 480px) {
+  .consultation__content {
+    margin-top: 1rem;
+  }
+
+  .consultation__col-main > div {
+    margin-bottom: 1.5rem;
+  }
+
+  .consultation__sidebar-item {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .consultation__sidebar-item .field__label {
+    font-size: 1rem;
+  }
+
+  .consultation__links {
+    margin-top: 1.5rem;
+    padding-top: 0.75rem;
   }
 }
