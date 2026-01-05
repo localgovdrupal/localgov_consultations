@@ -13,7 +13,6 @@ dependencies:
     - field.field.node.consultation.localgov_consultation_footer
     - field.field.node.consultation.localgov_consultation_link
     - field.field.node.consultation.localgov_consultation_location
-    - field.field.node.consultation.localgov_consultation_phase
     - field.field.node.consultation.localgov_consultation_purpose
     - field.field.node.consultation.localgov_consultation_result
     - field.field.node.consultation.localgov_consultation_results
@@ -221,7 +220,6 @@ third_party_settings:
     group_status:
       children:
         - localgov_consultation_status
-        - localgov_consultation_phase
         - localgov_consultation_webform
       label: Status
       region: content
@@ -290,13 +288,6 @@ content:
     weight: 3
     region: content
     settings: {  }
-    third_party_settings: {  }
-  langcode:
-    type: language_select
-    weight: 2
-    region: content
-    settings:
-      include_locked: true
     third_party_settings: {  }
   localgov_consultation_banner:
     type: media_library_widget
@@ -405,12 +396,6 @@ content:
       collapsed: false
       revision: false
       removed_reference: optional
-    third_party_settings: {  }
-  localgov_consultation_phase:
-    type: options_select
-    weight: 7
-    region: content
-    settings: {  }
     third_party_settings: {  }
   localgov_consultation_purpose:
     type: text_textarea

@@ -24,153 +24,27 @@ settings:
       step_by_step: step_by_step
     negate: 0
     target_bundles_drag_drop:
-      banner:
-        weight: 51
-        enabled: false
-      block:
-        weight: 52
-        enabled: false
-      block_:
-        weight: 53
-        enabled: false
-      election_seat:
-        weight: 54
-        enabled: false
       from_library:
         weight: 55
-        enabled: false
-      localgov_accordion:
-        weight: 56
-        enabled: false
-      localgov_accordion_pane:
-        weight: 57
-        enabled: false
-      localgov_area_vote:
-        weight: 58
-        enabled: false
-      localgov_banner_primary:
-        weight: 59
-        enabled: false
-      localgov_banner_secondary:
-        weight: 60
-        enabled: false
-      localgov_block_view:
-        weight: 61
-        enabled: false
-      localgov_box_link:
-        weight: 62
-        enabled: false
-      localgov_box_links_listing:
-        weight: 63
-        enabled: false
-      localgov_call_out_box:
-        weight: 64
         enabled: false
       localgov_contact:
         weight: 65
         enabled: false
-      localgov_documents:
-        weight: 66
-        enabled: false
-      localgov_election_candidate:
-        weight: 67
-        enabled: false
-      localgov_fact_box:
-        weight: 68
-        enabled: false
-      localgov_featured_campaign:
-        weight: 69
-        enabled: false
-      localgov_featured_subsite:
-        weight: 70
-        enabled: false
-      localgov_featured_teaser:
-        weight: 71
-        enabled: false
-      localgov_featured_teasers:
-        weight: 72
-        enabled: false
-      localgov_ia_block:
-        weight: 73
-        enabled: false
       localgov_image:
         weight: 74
-        enabled: false
-      localgov_key_contact_item:
-        weight: 75
-        enabled: false
-      localgov_key_contacts:
-        weight: 76
-        enabled: false
-      localgov_key_fact:
-        weight: 77
-        enabled: false
-      localgov_key_facts:
-        weight: 78
-        enabled: false
-      localgov_labelled_icon:
-        weight: 79
         enabled: false
       localgov_link:
         weight: 80
         enabled: false
-      localgov_link_and_summary:
-        weight: 81
-        enabled: false
-      localgov_media_with_text:
-        weight: 82
-        enabled: false
-      localgov_newsroom_teaser:
-        weight: 83
-        enabled: false
       localgov_numbered_text:
         weight: 84
-        enabled: false
-      localgov_page_section:
-        weight: 85
-        enabled: false
-      localgov_publications_banner:
-        weight: 86
-        enabled: false
-      localgov_quote:
-        weight: 87
-        enabled: false
-      localgov_subscribe_panel:
-        weight: 88
-        enabled: false
-      localgov_tab_panel:
-        weight: 89
-        enabled: false
-      localgov_table:
-        weight: 90
-        enabled: false
-      localgov_tabs:
-        weight: 91
         enabled: false
       localgov_text:
         weight: 92
         enabled: false
-      localgov_video:
-        weight: 93
-        enabled: false
-      page_section:
-        weight: 94
-        enabled: false
-      service_links:
-        weight: 95
-        enabled: false
-      service_listing:
-        weight: 96
-        enabled: false
       step_by_step:
         weight: 97
         enabled: true
-      step_by_step_step:
-        weight: 98
-        enabled: false
-      text_ai_enabled:
-        weight: 99
-        enabled: false
       topic_list_builder:
         weight: 100
         enabled: false

@@ -14,7 +14,6 @@ dependencies:
     - field.field.node.consultation.localgov_consultation_footer
     - field.field.node.consultation.localgov_consultation_link
     - field.field.node.consultation.localgov_consultation_location
-    - field.field.node.consultation.localgov_consultation_phase
     - field.field.node.consultation.localgov_consultation_purpose
     - field.field.node.consultation.localgov_consultation_result
     - field.field.node.consultation.localgov_consultation_results
@@ -81,7 +80,6 @@ content:
     weight: 0
     region: content
 hidden:
-  langcode: true
   links: true
   localgov_consultation_banner: true
   localgov_consultation_contact: true
@@ -91,7 +89,6 @@ hidden:
   localgov_consultation_footer: true
   localgov_consultation_link: true
   localgov_consultation_location: true
-  localgov_consultation_phase: true
   localgov_consultation_purpose: true
   localgov_consultation_result: true
   localgov_consultation_results: true
