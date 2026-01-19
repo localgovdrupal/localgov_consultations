@@ -3,14 +3,13 @@ status: true
 dependencies:
   config:
     - field.field.node.consultation.body
+    - field.field.node.consultation.localgov_common_tasks
     - field.field.node.consultation.localgov_consultation_banner
     - field.field.node.consultation.localgov_consultation_categories
     - field.field.node.consultation.localgov_consultation_contact
     - field.field.node.consultation.localgov_consultation_date
     - field.field.node.consultation.localgov_consultation_dept
     - field.field.node.consultation.localgov_consultation_documents
-    - field.field.node.consultation.localgov_consultation_ext_links
-    - field.field.node.consultation.localgov_consultation_footer
     - field.field.node.consultation.localgov_consultation_link
     - field.field.node.consultation.localgov_consultation_location
     - field.field.node.consultation.localgov_consultation_purpose
@@ -26,6 +25,7 @@ dependencies:
     - field_group
     - inline_entity_form
     - link
+    - localgov_services
     - media_library
     - path
     - text
@@ -124,6 +124,7 @@ third_party_settings:
         - group_links
         - group_footer_links
         - group_external_links
+        - localgov_common_tasks
       label: Links
       region: content
       parent_name: group_tags
@@ -220,7 +221,6 @@ third_party_settings:
     group_status:
       children:
         - localgov_consultation_status
-        - localgov_consultation_webform
       label: Status
       region: content
       parent_name: group_tags
@@ -289,6 +289,14 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  localgov_common_tasks:
+    type: link_with_type
+    weight: 23
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
   localgov_consultation_banner:
     type: media_library_widget
     weight: 4
@@ -354,22 +362,6 @@ content:
     region: content
     settings:
       media_types: {  }
-    third_party_settings: {  }
-  localgov_consultation_ext_links:
-    type: link_default
-    weight: 31
-    region: content
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
-    third_party_settings: {  }
-  localgov_consultation_footer:
-    type: link_default
-    weight: 32
-    region: content
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
     third_party_settings: {  }
   localgov_consultation_link:
     type: link_default

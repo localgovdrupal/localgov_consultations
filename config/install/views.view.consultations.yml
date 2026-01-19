@@ -9,7 +9,6 @@ dependencies:
     - taxonomy.vocabulary.consultations_department
   module:
     - node
-    - options
     - taxonomy
     - text
     - user

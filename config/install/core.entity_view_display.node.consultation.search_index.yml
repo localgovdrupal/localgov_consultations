@@ -4,14 +4,13 @@ dependencies:
   config:
     - core.entity_view_mode.node.search_index
     - field.field.node.consultation.body
+    - field.field.node.consultation.localgov_common_tasks
     - field.field.node.consultation.localgov_consultation_banner
     - field.field.node.consultation.localgov_consultation_categories
     - field.field.node.consultation.localgov_consultation_contact
     - field.field.node.consultation.localgov_consultation_date
     - field.field.node.consultation.localgov_consultation_dept
     - field.field.node.consultation.localgov_consultation_documents
-    - field.field.node.consultation.localgov_consultation_ext_links
-    - field.field.node.consultation.localgov_consultation_footer
     - field.field.node.consultation.localgov_consultation_link
     - field.field.node.consultation.localgov_consultation_location
     - field.field.node.consultation.localgov_consultation_purpose
@@ -23,6 +22,7 @@ dependencies:
     - field.field.node.consultation.localgov_consultation_timeline
     - node.type.consultation
   module:
+    - link
     - text
     - user
 id: node.consultation.search_index
@@ -42,6 +42,18 @@ content:
     third_party_settings: {  }
     weight: -20
     region: content
+  localgov_common_tasks:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 12
+    region: content
   localgov_consultation_banner:
     type: entity_reference_entity_view
     label: hidden
@@ -58,8 +70,6 @@ hidden:
   localgov_consultation_date: true
   localgov_consultation_dept: true
   localgov_consultation_documents: true
-  localgov_consultation_ext_links: true
-  localgov_consultation_footer: true
   localgov_consultation_link: true
   localgov_consultation_location: true
   localgov_consultation_purpose: true
