@@ -35,7 +35,7 @@ third_party_settings:
       children:
         - group_details
         - group_teaser
-        - group_date
+        - group_date_and_status
         - group_display_options
         - group_actions
         - group_facets
@@ -85,7 +85,7 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
-    group_date:
+    group_date_and_status:
       children:
         - localgov_consultation_date
         - localgov_consultation_timeline
