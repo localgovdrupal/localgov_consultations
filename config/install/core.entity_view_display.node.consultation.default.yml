@@ -47,7 +47,7 @@ content:
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 15
+    weight: 13
     region: content
   localgov_common_tasks:
     type: link
@@ -59,7 +59,7 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    weight: 16
+    weight: 14
     region: content
   localgov_consultation_categories:
     type: entity_reference_label
@@ -131,14 +131,14 @@ content:
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 10
+    weight: 8
     region: content
   localgov_consultation_result:
     type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 13
+    weight: 11
     region: content
   localgov_consultation_results:
     type: link
@@ -150,14 +150,14 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    weight: 12
+    weight: 10
     region: content
   localgov_consultation_status:
     type: list_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 11
+    weight: 9
     region: content
   localgov_consultation_timeline:
     type: entity_reference_revisions_entity_view
@@ -166,7 +166,7 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 14
+    weight: 12
     region: content
 hidden:
   localgov_consultation_banner: true

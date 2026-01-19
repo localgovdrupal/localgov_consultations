@@ -42,6 +42,7 @@ third_party_settings:
         - group_documents
         - group_status
         - group_results
+        - group_webform
         - group_location
       label: tabs
       region: content
@@ -155,8 +156,7 @@ third_party_settings:
         description: ''
         required_fields: true
     group_footer_links:
-      children:
-        - localgov_consultation_footer
+      children: {  }
       label: 'Footer Links'
       region: content
       parent_name: group_actions
@@ -171,8 +171,7 @@ third_party_settings:
         description: ''
         required_fields: true
     group_external_links:
-      children:
-        - localgov_consultation_ext_links
+      children: {  }
       label: 'External Links'
       region: content
       parent_name: group_actions
@@ -257,6 +256,21 @@ third_party_settings:
         - localgov_consultation_location
       label: Location
       region: hidden
+      parent_name: group_tags
+      weight: 13
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_webform:
+      children: {  }
+      label: Webform
+      region: content
       parent_name: group_tags
       weight: 13
       format_type: tab
