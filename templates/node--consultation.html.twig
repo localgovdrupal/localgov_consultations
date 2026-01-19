@@ -146,17 +146,17 @@
         {# Right column: Metadata sidebar (1/3 width) #}
         <div class="consultation__col consultation__col-sidebar">
 
-          {# Consultation Date #}
-          {% if content.localgov_consultation_date['#items'] %}
-            <div class="consultation__sidebar-item consultation__date">
-              {{ content.localgov_consultation_date }}
-            </div>
-          {% endif %}
-
           {# Status #}
           {% if content.localgov_consultation_status['#items'] %}
             <div class="consultation__sidebar-item consultation__status">
               {{ content.localgov_consultation_status }}
+            </div>
+          {% endif %}
+
+          {# Consultation Date #}
+          {% if content.localgov_consultation_date['#items'] %}
+            <div class="consultation__sidebar-item consultation__date">
+              {{ content.localgov_consultation_date }}
             </div>
           {% endif %}
 
@@ -195,17 +195,10 @@
             </div>
           {% endif %}
 
-          {# Footer Links #}
-          {% if content.localgov_consultation_footer['#items'] %}
-            <div class="consultation__sidebar-item consultation__footer-links">
-              {{ content.localgov_consultation_footer }}
-            </div>
-          {% endif %}
-
-          {# External Links #}
-          {% if content.localgov_consultation_ext_links['#items'] %}
+          {# Links #}
+          {% if content.localgov_common_tasks['#items'] %}
             <div class="consultation__sidebar-item consultation__external-links">
-              {{ content.localgov_consultation_ext_links }}
+              {{ content.localgov_common_tasks }}
             </div>
           {% endif %}
 
