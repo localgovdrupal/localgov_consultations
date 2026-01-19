@@ -26,8 +26,6 @@ config_devel:
   - field.field.node.consultation.localgov_consultation_date
   - field.field.node.consultation.localgov_consultation_dept
   - field.field.node.consultation.localgov_consultation_documents
-  - field.field.node.consultation.localgov_consultation_ext_links
-  - field.field.node.consultation.localgov_consultation_footer
   - field.field.node.consultation.localgov_consultation_link
   - field.field.node.consultation.localgov_consultation_location
   - field.field.node.consultation.localgov_consultation_purpose
@@ -46,8 +44,6 @@ config_devel:
   - field.storage.node.localgov_consultation_date
   - field.storage.node.localgov_consultation_dept
   - field.storage.node.localgov_consultation_documents
-  - field.storage.node.localgov_consultation_ext_links
-  - field.storage.node.localgov_consultation_footer
   - field.storage.node.localgov_consultation_link
   - field.storage.node.localgov_consultation_location
   - field.storage.node.localgov_consultation_purpose
