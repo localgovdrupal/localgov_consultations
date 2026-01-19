@@ -6,9 +6,9 @@ dependencies:
     - field.storage.node.body
     - node.type.consultation
     - taxonomy.vocabulary.consultations
-    - taxonomy.vocabulary.consultations_department
   module:
     - node
+    - options
     - taxonomy
     - text
     - user
@@ -355,40 +355,38 @@ display:
           hierarchy: false
           limit: true
           error_message: true
-        localgov_consultation_dept_target_id:
-          id: localgov_consultation_dept_target_id
-          table: node__localgov_consultation_dept
-          field: localgov_consultation_dept_target_id
+        localgov_consultation_status_value:
+          id: localgov_consultation_status_value
+          table: node__localgov_consultation_status
+          field: localgov_consultation_status_value
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: taxonomy_index_tid
+          plugin_id: list_field
           operator: or
           value: {  }
           group: 1
           exposed: true
           expose:
-            operator_id: localgov_consultation_dept_target_id_op
-            label: Department
+            operator_id: localgov_consultation_status_value_op
+            label: Status
             description: ''
             use_operator: false
-            operator: localgov_consultation_dept_target_id_op
+            operator: localgov_consultation_status_value_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: localgov_consultation_dept_target_id
+            identifier: localgov_consultation_status_value
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
-              emergency_publisher: '0'
               anonymous: '0'
               localgov_editor: '0'
               localgov_author: '0'
               localgov_contributor: '0'
-              localgov_news_editor: '0'
               localgov_user_manager: '0'
-              senior_editor: '0'
+              localgov_admin: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -403,11 +401,6 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: false
-          vid: consultations_department
-          type: select
-          hierarchy: false
-          limit: true
-          error_message: true
       style:
         type: grid_responsive
         options:
