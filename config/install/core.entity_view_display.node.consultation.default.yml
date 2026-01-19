@@ -63,7 +63,7 @@ content:
     region: content
   localgov_consultation_categories:
     type: entity_reference_label
-    label: inline
+    label: above
     settings:
       link: false
     third_party_settings: {  }
