@@ -1,6 +1,8 @@
 <?php
 
 use Drupal\block\Entity\Block;
+use Drupal\Core\File\FileExists;
+use Drupal\Core\File\FileSystemInterface;
 
 /**
  * Implements hook_update_N();
@@ -20,6 +22,34 @@ function localgov_consultations_install() {
     ->set('closed', '')
     ->save();
 
+  /**
+   * Add Localgov Consultations banner block in 'banner' region
+   * the block layout.
+   */
+  $module_path = \Drupal::service('extension.list.module')->getPath('localgov_consultations');
+  $source = $module_path . '/images/localgov_consultations_demo_image.jpg';
+  $destination_dir = 'public://banner-images/';
+  $destination = $destination_dir . 'localgov_consultations_demo_image.jpg';
+
+  \Drupal::service('file_system')->prepareDirectory($destination_dir, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
+
+  if (file_exists($source)) {
+    $data = file_get_contents($source);
+    $file = \Drupal::service('file.repository')->writeData($data, $destination, FileExists::Replace);
+
+    if ($file) {
+      $file->setPermanent();
+      $file->save();
+
+      // Track usage so it's not deleted.
+      \Drupal::service('file.usage')->add($file, 'localgov_consultations', 'module', 1);
+
+      // Save FID and Alt text to state for the Block class to consume.
+      \Drupal::state()->set('localgov_consultations.default_image_fid', $file->id());
+      \Drupal::state()->set('localgov_consultations.default_alt_text', t('Localgov consultations demo banner image'));
+    }
+  }
+
   // Add blocks on the banner region
   $theme = \Drupal::config('system.theme')->get('default');
 
@@ -29,6 +59,8 @@ function localgov_consultations_install() {
     'plugin' => 'localgov_consultations_landing_banner',
     'settings' => [
       'label_display' => FALSE,
+      'image_fid' => \Drupal::state()->get('localgov_consultations.default_image_fid'),
+      'alt_text' => \Drupal::state()->get('localgov_consultations.default_alt_text'),
     ]
   ]);
   $landing_banner->set('theme', $theme);

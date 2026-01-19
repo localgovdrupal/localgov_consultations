@@ -9,7 +9,7 @@ dependencies:
   - drupal:geo_entity
   - drupal:geo_entity_address
   - drupal:inline_entity_form
-  - localgov_services_navigation:localgov_services_navigation
+  - localgov_services:localgov_services_navigation
 
 config_devel:
   - core.date_format.localgov_consultations_date
