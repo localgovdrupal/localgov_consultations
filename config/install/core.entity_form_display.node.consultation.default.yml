@@ -40,9 +40,8 @@ third_party_settings:
         - group_actions
         - group_facets
         - group_documents
-        - group_status
-        - group_results
         - group_webform
+        - group_results
         - group_location
       label: tabs
       region: content
@@ -90,7 +89,7 @@ third_party_settings:
       children:
         - localgov_consultation_date
         - localgov_consultation_timeline
-      label: Dates
+      label: 'Dates and Status'
       region: content
       parent_name: group_tags
       weight: 6
@@ -217,10 +216,10 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
-    group_status:
+    group_webform:
       children:
         - localgov_consultation_status
-      label: Status
+      label: Webforms
       region: content
       parent_name: group_tags
       weight: 11
@@ -256,21 +255,6 @@ third_party_settings:
         - localgov_consultation_location
       label: Location
       region: hidden
-      parent_name: group_tags
-      weight: 13
-      format_type: tab
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        formatter: closed
-        description: ''
-        required_fields: true
-    group_webform:
-      children: {  }
-      label: Webform
-      region: content
       parent_name: group_tags
       weight: 13
       format_type: tab
