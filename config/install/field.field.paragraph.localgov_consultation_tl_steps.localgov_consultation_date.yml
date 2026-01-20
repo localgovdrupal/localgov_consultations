@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.localgov_consultation_date
+    - paragraphs.paragraphs_type.localgov_consultation_tl_steps
+  module:
+    - datetime
+id: paragraph.localgov_consultation_tl_steps.localgov_consultation_date
+field_name: localgov_consultation_date
+entity_type: paragraph
+bundle: localgov_consultation_tl_steps
+label: Date
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

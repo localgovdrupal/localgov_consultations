@@ -1,0 +1,51 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.localgov_consultation_tl_steps.localgov_consultation_complete
+    - field.field.paragraph.localgov_consultation_tl_steps.localgov_consultation_date
+    - field.field.paragraph.localgov_consultation_tl_steps.localgov_consultation_summary
+    - field.field.paragraph.localgov_consultation_tl_steps.localgov_title
+    - paragraphs.paragraphs_type.localgov_consultation_tl_steps
+  module:
+    - datetime
+id: paragraph.localgov_consultation_tl_steps.default
+targetEntityType: paragraph
+bundle: localgov_consultation_tl_steps
+mode: default
+content:
+  localgov_consultation_complete:
+    type: boolean
+    label: above
+    settings:
+      format: custom
+      format_custom_false: active
+      format_custom_true: complete
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  localgov_consultation_date:
+    type: datetime_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: localgov_consultations_date
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  localgov_consultation_summary:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  localgov_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }
