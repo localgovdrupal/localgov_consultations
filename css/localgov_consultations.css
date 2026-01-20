@@ -557,14 +557,6 @@ a:hover .card-img img {
   margin-top: 3rem;
 }
 
-
-/* Timeline field wrapper - only padding */
-.localgov-consultation--timeline-field {
-  padding-left: 4rem;
-  margin: 2.5rem 0;
-  position: relative;
-}
-
 .localgov-consultation--timeline-item {
   position: relative;
   margin-bottom: 3rem;
@@ -628,9 +620,6 @@ a:hover .card-img img {
 }
 
 @media (max-width: 767px) {
-  .field--name-localgov-consultation-timeline {
-    padding-left: 3.5rem;
-  }
   .localgov-consultation--timeline-marker {
     left: -2.8rem;
   }
