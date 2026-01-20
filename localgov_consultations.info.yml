@@ -21,6 +21,7 @@ config_devel:
   - core.entity_view_display.node.consultation.teaser
   - core.entity_view_display.paragraph.step_by_step.default
   - field.field.node.consultation.body
+  - field.field.node.consultation.localgov_common_tasks
   - field.field.node.consultation.localgov_consultation_banner
   - field.field.node.consultation.localgov_consultation_categories
   - field.field.node.consultation.localgov_consultation_contact
@@ -60,6 +61,5 @@ config_devel:
   - node.type.consultation
   - pathauto.pattern.consultations
   - taxonomy.vocabulary.consultations
-  - taxonomy.vocabulary.consultations_contact_name
   - taxonomy.vocabulary.consultations_department
   - views.view.consultations
