@@ -54,6 +54,10 @@
   z-index: 5;
 }
 
+.consultation--date span {
+  font-weight: 600;
+}
+
 .consultation-card > a:not([class*='toolbar']):focus {
   background-color: #045a90;
   .card-body * {

@@ -110,18 +110,18 @@ function localgov_consultations_preprocess_node(&$variables): void {
       $now = time();
 
       $date_formatter = \Drupal::service('date.formatter');
-      $format = 'j F Y';
+      $format = 'd M';
 
       if ($now < $start_ts) {
-        $text = "Opens " . $date_formatter->format($start_ts, 'custom', $format);
+        $text = "Opens on " . $date_formatter->format($start_ts, 'custom', $format);
         $status_class = 'upcoming';
       }
       elseif ($now >= $start_ts && $now <= $end_ts) {
-        $text = "Closes " . $date_formatter->format($end_ts, 'custom', $format);
+        $text = "Closes on " . $date_formatter->format($end_ts, 'custom', $format);
         $status_class = 'open';
       }
       else {
-        $text = "Closed " . $date_formatter->format($end_ts, 'custom', $format);
+        $text = "Closed on " . $date_formatter->format($end_ts, 'custom', $format);
         $status_class = 'closed';
       }
       $variables['consultation_display_date'] = [
