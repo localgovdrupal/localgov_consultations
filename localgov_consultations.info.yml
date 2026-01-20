@@ -9,25 +9,29 @@ dependencies:
   - drupal:geo_entity
   - drupal:geo_entity_address
   - drupal:inline_entity_form
+  - drupal:layout_paragraphs
+  - localgov_services:localgov_services_navigation
+  - localgov_review_date:localgov_review_date
+  - localgov_workflows_notifications:localgov_workflows_notifications
 
 config_devel:
   - core.date_format.localgov_consultations_date
   - core.entity_form_display.node.consultation.default
-  - core.entity_form_display.paragraph.step_by_step.default
+  - core.entity_form_display.paragraph.localgov_consultation_timeline.default
+  - core.entity_form_display.paragraph.localgov_consultation_tl_steps.default
   - core.entity_view_display.node.consultation.default
   - core.entity_view_display.node.consultation.search_index
   - core.entity_view_display.node.consultation.search_result
   - core.entity_view_display.node.consultation.teaser
-  - core.entity_view_display.paragraph.step_by_step.default
+  - core.entity_view_display.paragraph.localgov_consultation_timeline.default
+  - core.entity_view_display.paragraph.localgov_consultation_tl_steps.default
   - field.field.node.consultation.body
+  - field.field.node.consultation.localgov_common_tasks
   - field.field.node.consultation.localgov_consultation_banner
   - field.field.node.consultation.localgov_consultation_categories
   - field.field.node.consultation.localgov_consultation_contact
   - field.field.node.consultation.localgov_consultation_date
-  - field.field.node.consultation.localgov_consultation_dept
   - field.field.node.consultation.localgov_consultation_documents
-  - field.field.node.consultation.localgov_consultation_ext_links
-  - field.field.node.consultation.localgov_consultation_footer
   - field.field.node.consultation.localgov_consultation_link
   - field.field.node.consultation.localgov_consultation_location
   - field.field.node.consultation.localgov_consultation_purpose
@@ -37,17 +41,17 @@ config_devel:
   - field.field.node.consultation.localgov_consultation_summary
   - field.field.node.consultation.localgov_consultation_teaser_img
   - field.field.node.consultation.localgov_consultation_timeline
-  - field.field.paragraph.step_by_step.localgov_consultation_date
-  - field.field.paragraph.step_by_step.localgov_consultation_summary
-  - field.field.paragraph.step_by_step.localgov_consultation_title
+  - field.field.paragraph.localgov_consultation_timeline.localgov_consultation_steps
+  - field.field.paragraph.localgov_consultation_tl_steps.localgov_consultation_complete
+  - field.field.paragraph.localgov_consultation_tl_steps.localgov_consultation_date
+  - field.field.paragraph.localgov_consultation_tl_steps.localgov_consultation_summary
+  - field.field.paragraph.localgov_consultation_tl_steps.localgov_title
   - field.storage.node.localgov_consultation_banner
   - field.storage.node.localgov_consultation_categories
   - field.storage.node.localgov_consultation_contact
   - field.storage.node.localgov_consultation_date
   - field.storage.node.localgov_consultation_dept
   - field.storage.node.localgov_consultation_documents
-  - field.storage.node.localgov_consultation_ext_links
-  - field.storage.node.localgov_consultation_footer
   - field.storage.node.localgov_consultation_link
   - field.storage.node.localgov_consultation_location
   - field.storage.node.localgov_consultation_purpose
@@ -57,12 +61,13 @@ config_devel:
   - field.storage.node.localgov_consultation_summary
   - field.storage.node.localgov_consultation_teaser_img
   - field.storage.node.localgov_consultation_timeline
+  - field.storage.paragraph.localgov_consultation_complete
   - field.storage.paragraph.localgov_consultation_date
+  - field.storage.paragraph.localgov_consultation_steps
   - field.storage.paragraph.localgov_consultation_summary
-  - field.storage.paragraph.localgov_consultation_title
   - node.type.consultation
+  - paragraphs.paragraphs_type.localgov_consultation_timeline
+  - paragraphs.paragraphs_type.localgov_consultation_tl_steps
   - pathauto.pattern.consultations
   - taxonomy.vocabulary.consultations
-  - taxonomy.vocabulary.consultations_contact_name
-  - taxonomy.vocabulary.consultations_department
   - views.view.consultations

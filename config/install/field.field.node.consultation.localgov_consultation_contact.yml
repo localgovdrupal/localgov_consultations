@@ -4,7 +4,6 @@ dependencies:
   config:
     - field.storage.node.localgov_consultation_contact
     - node.type.consultation
-    - taxonomy.vocabulary.consultations_contact_name
 id: node.consultation.localgov_consultation_contact
 field_name: localgov_consultation_contact
 entity_type: node
@@ -16,13 +15,11 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: 'default:taxonomy_term'
+  handler: service_contact_reference
   handler_settings:
-    target_bundles:
-      consultations_contact_name: consultations_contact_name
+    target_bundles: null
     sort:
-      field: name
-      direction: asc
-    auto_create: false
-    auto_create_bundle: ''
+      field: _none
+      direction: ASC
+    auto_create: 0
 field_type: entity_reference

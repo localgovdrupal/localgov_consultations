@@ -1,0 +1,44 @@
+name: Consultation Timeline
+status: experimental
+description: Timeline container showing consultation milestones and progress
+props:
+  type: object
+  properties:
+    title:
+      type: string
+      title: Timeline Title
+      description: Optional title for the timeline section
+      default: 'Timeline'
+    steps:
+      type: array
+      title: Timeline Steps
+      description: Array of timeline step data
+      items:
+        type: object
+        properties:
+          title:
+            type: string
+          date:
+            type: string
+          summary:
+            type: string
+          is_complete:
+            type: boolean
+    show_progress:
+      type: boolean
+      title: Show Progress
+      description: Whether to show the progress indicator
+      default: true
+    show_header:
+      type: boolean
+      title: Show Header
+      description: Whether to show the header section with title and progress
+      default: false
+slots:
+  steps_slot:
+    title: Steps Slot
+    description: Slot for rendering timeline steps (alternative to props)
+libraryOverrides:
+  css:
+    component:
+      consultation-timeline.css: {}

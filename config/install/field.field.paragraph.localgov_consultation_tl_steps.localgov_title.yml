@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.localgov_title
+    - paragraphs.paragraphs_type.localgov_consultation_tl_steps
+id: paragraph.localgov_consultation_tl_steps.localgov_title
+field_name: localgov_title
+entity_type: paragraph
+bundle: localgov_consultation_tl_steps
+label: Title
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

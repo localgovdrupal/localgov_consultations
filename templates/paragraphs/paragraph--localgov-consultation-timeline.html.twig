@@ -1,0 +1,33 @@
+{#
+/**
+ * @file
+ * Theme implementation for Consultation Timeline paragraph (parent container).
+ *
+ * Available variables:
+ * - paragraph: Full paragraph entity.
+ * - content: All paragraph items including localgov_consultation_steps field.
+ * - attributes: HTML attributes for the containing element.
+ * - view_mode: View mode; for example, "preview" or "full".
+ *
+ * @see template_preprocess_paragraph()
+ */
+#}
+{% set timeline_classes = [
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class
+] %}
+
+{% block paragraph %}
+  <div{{ attributes.addClass(timeline_classes) }}>
+    {% block content %}
+      {{
+        include('localgov_consultations:consultation-timeline', {
+          title: 'Timeline',
+          show_progress: true,
+          steps_slot: content.localgov_consultation_steps,
+        })
+      }}
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

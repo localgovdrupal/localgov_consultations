@@ -2,16 +2,14 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.localgov_consultation_timeline
-    - node.type.consultation
+    - field.storage.paragraph.localgov_consultation_steps
     - paragraphs.paragraphs_type.localgov_consultation_timeline
-  module:
-    - entity_reference_revisions
-id: node.consultation.localgov_consultation_timeline
-field_name: localgov_consultation_timeline
-entity_type: node
-bundle: consultation
-label: Timeline
+    - paragraphs.paragraphs_type.localgov_consultation_tl_steps
+id: paragraph.localgov_consultation_timeline.localgov_consultation_steps
+field_name: localgov_consultation_steps
+entity_type: paragraph
+bundle: localgov_consultation_timeline
+label: Steps
 description: ''
 required: false
 translatable: false
@@ -21,31 +19,34 @@ settings:
   handler: 'default:paragraph'
   handler_settings:
     target_bundles:
-      localgov_consultation_timeline: localgov_consultation_timeline
+      localgov_consultation_tl_steps: localgov_consultation_tl_steps
     negate: 0
     target_bundles_drag_drop:
       from_library:
-        weight: 55
+        weight: 10
         enabled: false
       localgov_consultation_timeline:
-        weight: 97
+        weight: 16
+        enabled: false
+      localgov_consultation_tl_steps:
+        weight: 17
         enabled: true
       localgov_contact:
-        weight: 65
+        weight: 11
         enabled: false
       localgov_image:
-        weight: 74
+        weight: 12
         enabled: false
       localgov_link:
-        weight: 80
+        weight: 13
         enabled: false
       localgov_numbered_text:
-        weight: 84
+        weight: 14
         enabled: false
       localgov_text:
-        weight: 92
+        weight: 15
         enabled: false
       topic_list_builder:
-        weight: 100
+        weight: 18
         enabled: false
-field_type: entity_reference_revisions
+field_type: entity_reference

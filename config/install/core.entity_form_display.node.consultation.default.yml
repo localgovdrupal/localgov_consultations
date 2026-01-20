@@ -3,14 +3,13 @@ status: true
 dependencies:
   config:
     - field.field.node.consultation.body
+    - field.field.node.consultation.localgov_common_tasks
     - field.field.node.consultation.localgov_consultation_banner
     - field.field.node.consultation.localgov_consultation_categories
     - field.field.node.consultation.localgov_consultation_contact
     - field.field.node.consultation.localgov_consultation_date
     - field.field.node.consultation.localgov_consultation_dept
     - field.field.node.consultation.localgov_consultation_documents
-    - field.field.node.consultation.localgov_consultation_ext_links
-    - field.field.node.consultation.localgov_consultation_footer
     - field.field.node.consultation.localgov_consultation_link
     - field.field.node.consultation.localgov_consultation_location
     - field.field.node.consultation.localgov_consultation_purpose
@@ -22,10 +21,13 @@ dependencies:
     - field.field.node.consultation.localgov_consultation_timeline
     - node.type.consultation
   module:
+    - content_moderation
     - datetime_range
     - field_group
     - inline_entity_form
+    - layout_paragraphs
     - link
+    - localgov_services
     - media_library
     - path
     - text
@@ -35,12 +37,12 @@ third_party_settings:
       children:
         - group_details
         - group_teaser
-        - group_date
+        - group_date_and_status
         - group_display_options
         - group_actions
         - group_facets
         - group_documents
-        - group_status
+        - group_webform
         - group_results
         - group_location
       label: tabs
@@ -85,11 +87,11 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
-    group_date:
+    group_date_and_status:
       children:
         - localgov_consultation_date
         - localgov_consultation_timeline
-      label: Dates
+      label: 'Dates and Status'
       region: content
       parent_name: group_tags
       weight: 6
@@ -121,9 +123,7 @@ third_party_settings:
         required_fields: true
     group_actions:
       children:
-        - group_links
-        - group_footer_links
-        - group_external_links
+        - localgov_common_tasks
       label: Links
       region: content
       parent_name: group_tags
@@ -142,39 +142,7 @@ third_party_settings:
         - localgov_consultation_link
       label: Links
       region: content
-      parent_name: group_actions
-      weight: 20
-      format_type: details
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        open: false
-        description: ''
-        required_fields: true
-    group_footer_links:
-      children:
-        - localgov_consultation_footer
-      label: 'Footer Links'
-      region: content
-      parent_name: group_actions
-      weight: 21
-      format_type: details
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        label_as_html: false
-        open: false
-        description: ''
-        required_fields: true
-    group_external_links:
-      children:
-        - localgov_consultation_ext_links
-      label: 'External Links'
-      region: content
-      parent_name: group_actions
+      parent_name: group_webform
       weight: 22
       format_type: details
       format_settings:
@@ -217,11 +185,11 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
-    group_status:
+    group_webform:
       children:
         - localgov_consultation_status
-        - localgov_consultation_webform
-      label: Status
+        - group_links
+      label: Webforms
       region: content
       parent_name: group_tags
       weight: 11
@@ -289,6 +257,14 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  localgov_common_tasks:
+    type: link_with_type
+    weight: 23
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
   localgov_consultation_banner:
     type: media_library_widget
     weight: 4
@@ -355,22 +331,6 @@ content:
     settings:
       media_types: {  }
     third_party_settings: {  }
-  localgov_consultation_ext_links:
-    type: link_default
-    weight: 31
-    region: content
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
-    third_party_settings: {  }
-  localgov_consultation_footer:
-    type: link_default
-    weight: 32
-    region: content
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
-    third_party_settings: {  }
   localgov_consultation_link:
     type: link_default
     weight: 20
@@ -423,7 +383,7 @@ content:
     third_party_settings: {  }
   localgov_consultation_status:
     type: options_select
-    weight: 6
+    weight: 21
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -443,22 +403,26 @@ content:
       media_types: {  }
     third_party_settings: {  }
   localgov_consultation_timeline:
-    type: inline_entity_form_complex
+    type: layout_paragraphs
     weight: 30
     region: content
     settings:
-      form_mode: default
-      override_labels: false
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
-      allow_existing: false
+      view_mode: default
+      preview_view_mode: default
+      form_display_mode: default
+      nesting_depth: 0
+      require_layouts: 0
+      empty_message: 'Add a timeline to show consultation milestones and progress.'
+    third_party_settings: {  }
+  localgov_service_contacts:
+    type: entity_reference_autocomplete
+    weight: 31
+    region: content
+    settings:
       match_operator: CONTAINS
-      allow_duplicate: false
-      collapsible: false
-      collapsed: false
-      revision: false
-      removed_reference: optional
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default

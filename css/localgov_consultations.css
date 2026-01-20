@@ -42,6 +42,20 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+.consultation--date {
+  position: absolute;
+  background-color: var(--color-accent);
+  color: var(--button-text-color);
+  padding: 0.25rem 0.5rem;
+  margin-top: 1rem;
+  z-index: 5;
+}
+
+.consultation--date span {
+  font-weight: 600;
 }
 
 .consultation-card > a:not([class*='toolbar']):focus {
@@ -215,14 +229,14 @@ a:hover .card-img img {
   background-color: white;
   border: 1px solid #d8d7dc;
   box-sizing: border-box;
-  border-bottom: 2px solid var(--border-box-bottom-color);
+  border-bottom: 2px solid var(--color-accent);
   box-shadow: 0px 0px 2px #00000029;
   transition: background-color 0.3s;
   text-decoration: none;
 }
 
 .consultation__link .field__item a:hover {
-  background-color: var(--botton-bg-color, #f5f5f5);
+  background-color: var(--button-bg-color, #f5f5f5);
 }
 
 /* Right-pointing triangle for main link */
@@ -249,16 +263,16 @@ a:hover .card-img img {
   padding: 1rem;
   margin-bottom: 0.5rem;
   text-align: left;
-  color: var(--color-text);
+  color: var(--button-text-color);
   font-size: 18px;
   letter-spacing: 0;
   line-height: 21px;
   font-weight: normal !important;
   border-radius: 0 !important;
-  background-color: white;
-  border: 1px solid #d8d7dc;
+  background-color: var(--button-bg-color);
+  border: 1px solid var(--color-accent);
   box-sizing: border-box;
-  border-bottom: 2px solid var(--border-box-bottom-color);
+  border-bottom: 2px solid var(--color-accent);
   box-shadow: 0px 0px 2px #00000029;
   transition: background-color 0.3s;
   text-decoration: none;
@@ -267,7 +281,7 @@ a:hover .card-img img {
 .consultation__footer-links .field__item a:hover,
 .consultation__external-links .field__item a:hover,
 .consultation__results .field__item a:hover {
-  background-color: var(--botton-bg-color, #f5f5f5);
+  background-color: var(--button-bg-color, #f5f5f5);
 }
 
 /* Multiple links container styling */
@@ -279,28 +293,8 @@ a:hover .card-img img {
   gap: 5px;
 }
 
-.consultation__footer-links .field__item,
-.consultation__external-links .field__item {
-  flex: 0 0 calc(50% - 2.5px);
-}
-
 .consultation__results .field__item {
   width: 100%;
-}
-
-/* Icon for external/footer links */
-.consultation__footer-links .field__item a::after,
-.consultation__external-links .field__item a::after,
-.consultation__results .field__item a::after {
-  content: "";
-  display: inline-block;
-  width: 20px;
-  height: 25px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpolygon points='12 2 22 21 2 21 12 2' fill='black'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-size: contain;
-  float: right;
-  margin-left: 10px;
 }
 
 /* Legacy block selectors for backwards compatibility */
@@ -318,16 +312,16 @@ a:hover .card-img img {
   font-weight: normal !important;
   border-radius: 0 !important;
   background-color: white;
-  border: 1px solid #d8d7dc;
+  border: 1px solid var(--color-accent);
   box-sizing: border-box;
-  border-bottom: 2px solid var(--border-box-bottom-color);
+  border-bottom: 2px solid var(--color-accent);
   box-shadow: 0px 0px 2px #00000029;
   transition: background-color 0.3s;
 }
 
 .block-field-blocknodeconsultationfield-footer-links .field__items .button-link:hover,
 .block-field-blocknodeconsultationfield-external-links .field__items .button-link:hover {
-  background-color: var(--botton-bg-color, #f5f5f5);
+  background-color: var(--button-bg-color, #f5f5f5);
 }
 
 .block-field-blocknodeconsultationfield-footer-links .field__items .button-link svg,
@@ -563,90 +557,7 @@ a:hover .card-img img {
   margin-top: 3rem;
 }
 
-
-/* Timeline field wrapper - only padding */
-.localgov-consultation--timeline-field {
-  padding-left: 4rem;
-  margin: 2.5rem 0;
-  position: relative;
-}
-
-.localgov-consultation--timeline-item {
-  position: relative;
-  margin-bottom: 3rem;
-  min-height: 2rem;
-}
-
-.localgov-consultation--timeline-marker {
-  position: absolute;
-  left: -3.2rem;
-  top: 0.4rem;
-  width: 1.75rem;
-  height: 1.75rem;
-  border-radius: 50%;
-  background-color: #FFFFFF;
-  border: 2px solid #DBDFE3;
-  text-align: center;
-  line-height: 0.958;
-  font-size: 1.4rem;
-  color: transparent;
-  z-index: 10;
-  box-sizing: border-box;
-}
-
-.localgov-consultation--timeline-item--complete .localgov-consultation--timeline-marker {
-  color: #121212;
-}
-
-.localgov-consultation--timeline-item--complete .localgov-consultation--timeline-marker::before {
-  content: "⬤";
-}
-
-.field--name-localgov-consultation-timeline .field__item:not(:last-child) .localgov-consultation--timeline-item::after {
-  content: "";
-  position: absolute;
-  left: -2.4rem;
-  top: 2.4rem;
-  width: 2px;
-  height: calc(100% + 2rem);
-  background-color: #DBDFE3;
-  z-index: 1;
-}
-
-.localgov-consultation--timeline-title {
-  margin: 0 0 0.5rem 0;
-  font-weight: bold;
-  font-size: 20px;
-  color: #121212;
-}
-
-.localgov-consultation--timeline-date {
-  display: block;
-  font-weight: bold;
-  color: #121212;
-  font-size: 20px;
-  margin-bottom: 0.5rem;
-}
-
-.localgov-consultation--timeline-summary {
-  color: #121212;
-  font-size: 17px;
-}
-
-@media (max-width: 767px) {
-  .field--name-localgov-consultation-timeline {
-    padding-left: 3.5rem;
-  }
-  .localgov-consultation--timeline-marker {
-    left: -2.8rem;
-  }
-  .localgov-consultation--timeline-item:not(:last-child)::after {
-    left: -1.95rem;
-  }
-}
-
 /* Consultation node two-column responsive grid layout */
-
 /* Grid container */
 .consultation__content {
   margin-top: 2rem;
@@ -735,7 +646,8 @@ a:hover .card-img img {
 
 .consultation__sidebar-item .field__label {
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  font-size: var(--font-size-h2);
+  margin-bottom: var(--vertical-rhythm-spacing);
   color: var(--color-accent, #045a90);
 }
 

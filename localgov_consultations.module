@@ -27,13 +27,18 @@ function localgov_consultations_theme($existing, $type, $theme, $path) {
       'template' => 'field--node--localgov-consultation-date--consultation',
       'path' => $path . '/templates/field',
     ],
-        'field__node__localgov_consultation_timeline__consultation' => [
+      'field__node__localgov_consultation_timeline__consultation' => [
       'base hook' => 'field',
       'template' => 'field--node--localgov-consultation-timeline--consultation',
       'path' => $path . '/templates/field',
     ],
-    'paragraph__step_by_step' => [
-      'template' => 'paragraph--step-by-step',
+    'paragraph__localgov_consultation_tl_steps' => [
+      'template' => 'paragraph--localgov-consultation-tl-steps',
+      'base hook' => 'paragraph',
+      'path' => $path . '/templates/paragraphs',
+    ],
+    'paragraph__localgov_consultation_timeline' => [
+      'template' => 'paragraph--localgov-consultation-timeline',
       'base hook' => 'paragraph',
       'path' => $path . '/templates/paragraphs',
     ],
@@ -95,11 +100,41 @@ function localgov_consultations_preprocess_views_view(&$vars) {
  * @param $variables
  * @return void
  */
-function localgov_consultations_preprocess_node(&$variables) {
+function localgov_consultations_preprocess_node(&$variables): void {
   $node = $variables['node'];
 
   if ($node->bundle() === 'consultation') {
     $variables['#attached']['library'][] = 'localgov_consultations/localgov_consultations';
+
+    if ($node->hasField('localgov_consultation_date') && !$node->get('localgov_consultation_date')->isEmpty()) {
+      $date_item = $node->get('localgov_consultation_date')->first();
+
+      // Convert ISO string from DB to timestamps
+      $start_ts = strtotime($date_item->value);
+      $end_ts = strtotime($date_item->end_value);
+      $now = time();
+
+      $date_formatter = \Drupal::service('date.formatter');
+      $format = 'd M';
+
+      if ($now < $start_ts) {
+        $text = "Opens on " . $date_formatter->format($start_ts, 'custom', $format);
+        $status_class = 'upcoming';
+      }
+      elseif ($now >= $start_ts && $now <= $end_ts) {
+        $text = "Closes on " . $date_formatter->format($end_ts, 'custom', $format);
+        $status_class = 'open';
+      }
+      else {
+        $text = "Closed on " . $date_formatter->format($end_ts, 'custom', $format);
+        $status_class = 'closed';
+      }
+      $variables['consultation_display_date'] = [
+        '#markup' => $text,
+        '#prefix' => '<span class="consultation-status-label ' . $status_class . '">',
+        '#suffix' => '</span>',
+      ];
+    }
   }
 }
 
@@ -109,22 +144,29 @@ function localgov_consultations_preprocess_node(&$variables) {
 function localgov_consultations_preprocess_paragraph(&$variables) {
   $paragraph = $variables['paragraph'];
 
-  if ($paragraph->bundle() === 'step_by_step') {
+  if ($paragraph->bundle() === 'localgov_consultation_tl_steps') {
     $date_is_past_or_today = FALSE;
+    $is_complete = FALSE;
 
-    if ($paragraph->hasField('localgov_consultation_date') && !$paragraph->get('localgov_consultation_date')->isEmpty()) {
+    // 1. Check the explicit complete checkbox field.
+    if ($paragraph->hasField('localgov_consultation_complete') && !$paragraph->get('localgov_consultation_complete')->isEmpty()) {
+      $is_complete = (bool) $paragraph->get('localgov_consultation_complete')->value;
+    }
+
+    // 2. Date-based logic for auto-status.
+    if (!$is_complete && $paragraph->hasField('localgov_consultation_date') && !$paragraph->get('localgov_consultation_date')->isEmpty()) {
       $date_value = $paragraph->get('localgov_consultation_date')->value;
 
       if ($date_value) {
         $today = date("Y-m-d");
-
         if ($date_value <= $today) {
           $date_is_past_or_today = TRUE;
         }
       }
     }
 
-    $variables['date_is_past_or_today'] = $date_is_past_or_today;
+    // Pass the calculated status to Twig.
+    $variables['date_is_past_or_today'] = $date_is_past_or_today || $is_complete;
+    $variables['is_complete'] = $is_complete;
   }
 }
-

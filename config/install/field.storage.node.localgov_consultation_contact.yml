@@ -2,14 +2,14 @@ langcode: en
 status: true
 dependencies:
   module:
+    - localgov_workflows_notifications
     - node
-    - taxonomy
 id: node.localgov_consultation_contact
 field_name: localgov_consultation_contact
 entity_type: node
 type: entity_reference
 settings:
-  target_type: taxonomy_term
+  target_type: localgov_service_contact
 module: core
 locked: false
 cardinality: 1

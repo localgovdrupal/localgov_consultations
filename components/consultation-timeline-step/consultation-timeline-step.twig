@@ -1,0 +1,34 @@
+{#
+/**
+ * @file
+ * Consultation Timeline Step component.
+ *
+ * A single step/milestone in the consultation timeline.
+ *
+ * Available variables:
+ * - title: The title of this timeline step
+ * - date: The formatted date for this step
+ * - summary: Brief description of this step
+ * - is_complete: Whether this step has been completed
+ * - index: The position of this step in the timeline
+ */
+#}
+{% set step_classes = [
+  'timeline-step',
+  is_complete ? 'timeline-step--complete' : 'timeline-step--incomplete',
+] %}
+
+<div {{ attributes.addClass(step_classes) }} data-step-index="{{ index }}">
+  <div class="timeline-step__marker"></div>
+  <div class="timeline-step__content">
+    {% if title %}
+      <h4 class="timeline-step__title">{{ title }}</h4>
+    {% endif %}
+    {% if date %}
+      <time class="timeline-step__date">{{ date }}</time>
+    {% endif %}
+    {% if summary %}
+      <div class="timeline-step__summary">{{ summary }}</div>
+    {% endif %}
+  </div>
+</div>

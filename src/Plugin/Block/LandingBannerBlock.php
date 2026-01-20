@@ -23,9 +23,12 @@ final class LandingBannerBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function defaultConfiguration() {
+    $default_fid = \Drupal::state()->get('localgov_consultations.default_image_fid', NULL);
+    $default_alt = \Drupal::state()->get('localgov_consultations.default_alt_text', $this->t('Localgov Consultations banner'));
+
     return [
-      'image_fid' => NULL,
-      'alt_text' => '',
+      'image_fid' => $default_fid,
+      'alt_text' => $default_alt,
     ];
   }
 
@@ -53,6 +56,7 @@ final class LandingBannerBlock extends BlockBase {
       '#description' => $this->t('Alternative text for the image (for accessibility).'),
       '#default_value' => $this->configuration['alt_text'] ?? '',
       '#maxlength' => 255,
+      '#required' => TRUE,
     ];
 
     return $form;
@@ -62,38 +66,43 @@ final class LandingBannerBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function blockSubmit($form, FormStateInterface $form_state) {
-    $image = $form_state->getValue('image');
+    // Get values from form state.
+    $image_values = $form_state->getValue('image');
+    $new_fid = !empty($image_values[0]) ? (int) $image_values[0] : NULL;
+    $old_fid = !empty($this->configuration['image_fid']) ? (int) $this->configuration['image_fid'] : NULL;
 
-    // Remove old file usage if exists.
-    if (!empty($this->configuration['image_fid'])) {
-      $old_file = File::load($this->configuration['image_fid']);
-      if ($old_file) {
-        \Drupal::service('file.usage')->delete($old_file, 'localgov_consultations', 'block', 1);
-      }
-    }
+    // Use entity type manager for storage.
+    $file_storage = \Drupal::entityTypeManager()->getStorage('file');
+    $file_usage = \Drupal::service('file.usage');
 
-    if (!empty($image[0])) {
-      $file = File::load($image[0]);
-      if ($file) {
-        // Sanitize filename to prevent security issues.
-        $filename = $file->getFilename();
-        $sanitized_filename = preg_replace('/[^a-zA-Z0-9._-]/', '_', $filename);
+    // Handle File Usage if the image has changed.
+    if ($new_fid !== $old_fid) {
 
-        if ($filename !== $sanitized_filename) {
-          $file->setFilename($sanitized_filename);
+      // 1. Remove usage from the old file.
+      if ($old_fid) {
+        $old_file = $file_storage->load($old_fid);
+        if ($old_file) {
+          // decrement usage.
+          $file_usage->delete($old_file, 'localgov_consultations', 'block', 1);
         }
+      }
 
-        // Make file permanent and track usage.
-        $file->setPermanent();
-        $file->save();
-
-        // Track file usage to prevent deletion.
-        \Drupal::service('file.usage')->add($file, 'localgov_consultations', 'block', 1);
-
-        $this->configuration['image_fid'] = $image[0];
+      // 2. Add usage to the new file.
+      if ($new_fid) {
+        /** @var \Drupal\file\FileInterface $new_file */
+        $new_file = $file_storage->load($new_fid);
+        if ($new_file) {
+          // In 10.3+, files uploaded via managed_file are temporary by default.
+          // Setting permanent and adding usage prevents auto-deletion.
+          $new_file->setPermanent();
+          $new_file->save();
+          $file_usage->add($new_file, 'localgov_consultations', 'block', 1);
+        }
       }
     }
 
+    // Save updated configuration.
+    $this->configuration['image_fid'] = $new_fid;
     $this->configuration['alt_text'] = $form_state->getValue('alt_text');
   }
 

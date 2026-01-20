@@ -2,17 +2,16 @@ langcode: en
 status: true
 dependencies:
   module:
-    - node
     - paragraphs
-id: node.localgov_consultation_dept
-field_name: localgov_consultation_dept
-entity_type: node
+id: paragraph.localgov_consultation_steps
+field_name: localgov_consultation_steps
+entity_type: paragraph
 type: entity_reference
 settings:
   target_type: paragraph
 module: core
 locked: false
-cardinality: 1
+cardinality: -1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false
