@@ -1,0 +1,83 @@
+/* Timeline Step Component */
+.timeline-step {
+  position: relative;
+  margin-bottom: 3rem;
+  min-height: 2rem;
+}
+
+.timeline-step:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-step__marker {
+  position: absolute;
+  left: -3.2rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  border: 2px solid #DBDFE3;
+  text-align: center;
+  line-height: 0.958;
+  font-size: 1.4rem;
+  color: transparent;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+.timeline-step--complete .timeline-step__marker {
+  color: #121212;
+}
+
+.timeline-step--complete .timeline-step__marker::before {
+  content: "\2B24"; /* ⬤ */
+}
+
+/* Hide the inner elements, using ::before for the dot */
+.timeline-step__marker-dot,
+.timeline-step__marker-line {
+  display: none;
+}
+
+/* Connecting line - handled by parent container */
+
+/* Content */
+.timeline-step__content {
+  padding-top: 0;
+}
+
+.timeline-step__header {
+  margin-bottom: 0.5rem;
+}
+
+.timeline-step__title {
+  margin: 0 0 0.5rem 0;
+  font-weight: bold;
+  font-size: 20px;
+  color: #121212;
+}
+
+.timeline-step__date {
+  display: block;
+  font-weight: bold;
+  color: #121212;
+  font-size: 20px;
+  margin-bottom: 0.5rem;
+}
+
+.timeline-step__summary {
+  color: #121212;
+  font-size: 17px;
+}
+
+/* Incomplete state - slightly muted */
+.timeline-step--incomplete .timeline-step__title,
+.timeline-step--incomplete .timeline-step__date {
+  color: #666;
+}
+
+@media (max-width: 767px) {
+  .timeline-step__marker {
+    left: -2.8rem;
+  }
+}

@@ -1,0 +1,32 @@
+name: Consultation Timeline Step
+status: experimental
+description: A single step/milestone in the consultation timeline
+props:
+  type: object
+  properties:
+    title:
+      type: string
+      title: Step Title
+      description: The title of this timeline step
+    date:
+      type: string
+      title: Date
+      description: The date for this step (formatted)
+    summary:
+      type: string
+      title: Summary
+      description: Brief description of this step
+    is_complete:
+      type: boolean
+      title: Is Complete
+      description: Whether this step has been completed
+      default: false
+    index:
+      type: integer
+      title: Step Index
+      description: The position of this step in the timeline
+      default: 0
+libraryOverrides:
+  css:
+    component:
+      consultation-timeline-step.css: {}

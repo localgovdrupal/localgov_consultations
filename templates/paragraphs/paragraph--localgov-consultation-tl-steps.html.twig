@@ -1,0 +1,36 @@
+{#
+/**
+ * @file
+ * Theme implementation for Consultation Timeline Step paragraph.
+ *
+ * Available variables:
+ * - paragraph: Full paragraph entity.
+ * - content: All paragraph items.
+ * - attributes: HTML attributes for the containing element.
+ * - view_mode: View mode; for example, "preview" or "full".
+ * - is_complete: Whether this step is marked as complete.
+ * - date_is_past_or_today: Whether the date is in the past or today.
+ *
+ * @see template_preprocess_paragraph()
+ */
+#}
+{% set step_complete = is_complete ?? date_is_past_or_today ?? false %}
+
+{% set step_classes = [
+  'localgov-consultation--timeline-item',
+  step_complete ? 'localgov-consultation--timeline-item--complete',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class
+] %}
+
+{% block paragraph %}
+  {{
+    include('localgov_consultations:consultation-timeline-step', {
+      title: content.localgov_title|render|striptags|trim,
+      date: content.localgov_consultation_date|render|striptags|trim,
+      summary: content.localgov_consultation_summary|render|striptags|trim,
+      is_complete: step_complete,
+      attributes: attributes.addClass(step_classes),
+    })
+  }}
+{% endblock paragraph %}

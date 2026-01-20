@@ -1,0 +1,45 @@
+{#
+/**
+ * @file
+ * Consultation Timeline container component.
+ *
+ * Displays a timeline of consultation milestones with progress tracking.
+ *
+ * Available variables:
+ * - title: Optional title for the timeline section
+ * - steps: Array of step data (title, date, summary, is_complete)
+ * - show_progress: Whether to show the progress indicator
+ * - show_header: Whether to show the header section
+ * - steps_slot: Slot for pre-rendered step components
+ */
+#}
+{% set timeline_classes = [
+  'consultation-timeline',
+] %}
+
+{% if steps_slot or steps %}
+  <div {{ attributes.addClass(timeline_classes) }} data-timeline-component>
+    <div class="consultation-timeline__steps">
+
+      {# Render from slot if provided #}
+      {% if steps_slot %}
+        {{ steps_slot }}
+
+        {# Otherwise render from steps prop #}
+      {% elseif steps %}
+        {% for step in steps %}
+          {{
+          include('localgov_consultations:consultation-timeline-step', {
+            title: step.title,
+            date: step.date,
+            summary: step.summary,
+            is_complete: step.is_complete,
+            index: loop.index0,
+          })
+          }}
+        {% endfor %}
+      {% endif %}
+
+    </div>
+  </div>
+{% endif %}

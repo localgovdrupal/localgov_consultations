@@ -27,13 +27,18 @@ function localgov_consultations_theme($existing, $type, $theme, $path) {
       'template' => 'field--node--localgov-consultation-date--consultation',
       'path' => $path . '/templates/field',
     ],
-        'field__node__localgov_consultation_timeline__consultation' => [
+      'field__node__localgov_consultation_timeline__consultation' => [
       'base hook' => 'field',
       'template' => 'field--node--localgov-consultation-timeline--consultation',
       'path' => $path . '/templates/field',
     ],
-    'paragraph__step_by_step' => [
-      'template' => 'paragraph--step-by-step',
+    'paragraph__localgov_consultation_tl_steps' => [
+      'template' => 'paragraph--localgov-consultation-tl-steps',
+      'base hook' => 'paragraph',
+      'path' => $path . '/templates/paragraphs',
+    ],
+    'paragraph__localgov_consultation_timeline' => [
+      'template' => 'paragraph--localgov-consultation-timeline',
       'base hook' => 'paragraph',
       'path' => $path . '/templates/paragraphs',
     ],
@@ -139,22 +144,29 @@ function localgov_consultations_preprocess_node(&$variables): void {
 function localgov_consultations_preprocess_paragraph(&$variables) {
   $paragraph = $variables['paragraph'];
 
-  if ($paragraph->bundle() === 'step_by_step') {
+  if ($paragraph->bundle() === 'localgov_consultation_tl_steps') {
     $date_is_past_or_today = FALSE;
+    $is_complete = FALSE;
 
-    if ($paragraph->hasField('localgov_consultation_date') && !$paragraph->get('localgov_consultation_date')->isEmpty()) {
+    // 1. Check the explicit complete checkbox field.
+    if ($paragraph->hasField('localgov_consultation_complete') && !$paragraph->get('localgov_consultation_complete')->isEmpty()) {
+      $is_complete = (bool) $paragraph->get('localgov_consultation_complete')->value;
+    }
+
+    // 2. Date-based logic for auto-status.
+    if (!$is_complete && $paragraph->hasField('localgov_consultation_date') && !$paragraph->get('localgov_consultation_date')->isEmpty()) {
       $date_value = $paragraph->get('localgov_consultation_date')->value;
 
       if ($date_value) {
         $today = date("Y-m-d");
-
         if ($date_value <= $today) {
           $date_is_past_or_today = TRUE;
         }
       }
     }
 
-    $variables['date_is_past_or_today'] = $date_is_past_or_today;
+    // Pass the calculated status to Twig.
+    $variables['date_is_past_or_today'] = $date_is_past_or_today || $is_complete;
+    $variables['is_complete'] = $is_complete;
   }
 }
-
