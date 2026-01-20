@@ -42,6 +42,16 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+.consultation--date {
+  position: absolute;
+  background-color: var(--color-accent);
+  color: var(--button-text-color);
+  padding: 0.25rem 0.5rem;
+  margin-top: 1rem;
+  z-index: 5;
 }
 
 .consultation-card > a:not([class*='toolbar']):focus {

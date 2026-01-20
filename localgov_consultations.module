@@ -95,11 +95,41 @@ function localgov_consultations_preprocess_views_view(&$vars) {
  * @param $variables
  * @return void
  */
-function localgov_consultations_preprocess_node(&$variables) {
+function localgov_consultations_preprocess_node(&$variables): void {
   $node = $variables['node'];
 
   if ($node->bundle() === 'consultation') {
     $variables['#attached']['library'][] = 'localgov_consultations/localgov_consultations';
+
+    if ($node->hasField('localgov_consultation_date') && !$node->get('localgov_consultation_date')->isEmpty()) {
+      $date_item = $node->get('localgov_consultation_date')->first();
+
+      // Convert ISO string from DB to timestamps
+      $start_ts = strtotime($date_item->value);
+      $end_ts = strtotime($date_item->end_value);
+      $now = time();
+
+      $date_formatter = \Drupal::service('date.formatter');
+      $format = 'j F Y';
+
+      if ($now < $start_ts) {
+        $text = "Opens " . $date_formatter->format($start_ts, 'custom', $format);
+        $status_class = 'upcoming';
+      }
+      elseif ($now >= $start_ts && $now <= $end_ts) {
+        $text = "Closes " . $date_formatter->format($end_ts, 'custom', $format);
+        $status_class = 'open';
+      }
+      else {
+        $text = "Closed " . $date_formatter->format($end_ts, 'custom', $format);
+        $status_class = 'closed';
+      }
+      $variables['consultation_display_date'] = [
+        '#markup' => $text,
+        '#prefix' => '<span class="consultation-status-label ' . $status_class . '">',
+        '#suffix' => '</span>',
+      ];
+    }
   }
 }
 
