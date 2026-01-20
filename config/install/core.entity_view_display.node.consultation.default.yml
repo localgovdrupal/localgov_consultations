@@ -70,9 +70,10 @@ content:
     weight: 1
     region: content
   localgov_consultation_contact:
-    type: entity_reference_label
+    type: entity_reference_entity_view
     label: above
     settings:
+      view_mode: default
       link: true
     third_party_settings: {  }
     weight: 6

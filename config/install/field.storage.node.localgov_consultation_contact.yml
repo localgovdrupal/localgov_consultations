@@ -3,13 +3,13 @@ status: true
 dependencies:
   module:
     - node
-    - taxonomy
+    - paragraphs
 id: node.localgov_consultation_contact
 field_name: localgov_consultation_contact
 entity_type: node
 type: entity_reference
 settings:
-  target_type: taxonomy_term
+  target_type: paragraph
 module: core
 locked: false
 cardinality: 1
