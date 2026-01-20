@@ -44,6 +44,15 @@ content:
     third_party_settings: {  }
     weight: -20
     region: content
+  localgov_consultation_contact:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: true
+    third_party_settings: {  }
+    weight: 15
+    region: content
   links:
     settings: {  }
     third_party_settings: {  }
@@ -68,15 +77,6 @@ content:
       link: false
     third_party_settings: {  }
     weight: 1
-    region: content
-  localgov_consultation_contact:
-    type: entity_reference_entity_view
-    label: above
-    settings:
-      view_mode: default
-      link: true
-    third_party_settings: {  }
-    weight: 6
     region: content
   localgov_consultation_date:
     type: daterange_default

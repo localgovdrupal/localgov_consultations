@@ -4,7 +4,7 @@ dependencies:
   config:
     - field.storage.node.localgov_consultation_dept
     - node.type.consultation
-    - taxonomy.vocabulary.consultations_department
+    - paragraphs.paragraphs_type.localgov_contact
 id: node.consultation.localgov_consultation_dept
 field_name: localgov_consultation_dept
 entity_type: node
@@ -16,13 +16,34 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: 'default:taxonomy_term'
+  handler: 'default:paragraph'
   handler_settings:
     target_bundles:
-      consultations_department: consultations_department
-    sort:
-      field: name
-      direction: asc
-    auto_create: false
-    auto_create_bundle: ''
+      localgov_contact: localgov_contact
+    negate: 0
+    target_bundles_drag_drop:
+      from_library:
+        weight: 9
+        enabled: false
+      localgov_contact:
+        weight: 10
+        enabled: true
+      localgov_image:
+        weight: 11
+        enabled: false
+      localgov_link:
+        weight: 12
+        enabled: false
+      localgov_numbered_text:
+        weight: 13
+        enabled: false
+      localgov_text:
+        weight: 14
+        enabled: false
+      step_by_step:
+        weight: 15
+        enabled: false
+      topic_list_builder:
+        weight: 16
+        enabled: false
 field_type: entity_reference

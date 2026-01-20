@@ -21,6 +21,7 @@ dependencies:
     - field.field.node.consultation.localgov_consultation_timeline
     - node.type.consultation
   module:
+    - content_moderation
     - datetime_range
     - field_group
     - inline_entity_form
@@ -255,6 +256,24 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  localgov_consultation_contact:
+    type: inline_entity_form_complex
+    weight: 10
+    region: content
+    settings:
+      form_mode: default
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: false
+      match_operator: CONTAINS
+      allow_duplicate: false
+      collapsible: false
+      collapsed: false
+      revision: false
+      removed_reference: optional
+    third_party_settings: {  }
   localgov_common_tasks:
     type: link_with_type
     weight: 23
@@ -279,24 +298,6 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
-    third_party_settings: {  }
-  localgov_consultation_contact:
-    type: inline_entity_form_complex
-    weight: 10
-    region: content
-    settings:
-      form_mode: default
-      override_labels: false
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
-      allow_existing: false
-      match_operator: CONTAINS
-      allow_duplicate: false
-      collapsible: false
-      collapsed: false
-      revision: false
-      removed_reference: optional
     third_party_settings: {  }
   localgov_consultation_date:
     type: daterange_default
@@ -417,6 +418,16 @@ content:
       collapsed: false
       revision: false
       removed_reference: optional
+    third_party_settings: {  }
+  localgov_service_contacts:
+    type: entity_reference_autocomplete
+    weight: 31
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default

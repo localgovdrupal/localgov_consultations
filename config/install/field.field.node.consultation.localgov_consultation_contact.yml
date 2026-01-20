@@ -4,7 +4,6 @@ dependencies:
   config:
     - field.storage.node.localgov_consultation_contact
     - node.type.consultation
-    - paragraphs.paragraphs_type.localgov_contact
 id: node.consultation.localgov_consultation_contact
 field_name: localgov_consultation_contact
 entity_type: node
@@ -16,34 +15,11 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: 'default:paragraph'
+  handler: service_contact_reference
   handler_settings:
-    target_bundles:
-      localgov_contact: localgov_contact
-    negate: 0
-    target_bundles_drag_drop:
-      from_library:
-        weight: 9
-        enabled: false
-      localgov_contact:
-        weight: 10
-        enabled: true
-      localgov_image:
-        weight: 11
-        enabled: false
-      localgov_link:
-        weight: 12
-        enabled: false
-      localgov_numbered_text:
-        weight: 13
-        enabled: false
-      localgov_text:
-        weight: 14
-        enabled: false
-      step_by_step:
-        weight: 15
-        enabled: false
-      topic_list_builder:
-        weight: 16
-        enabled: false
+    target_bundles: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: 0
 field_type: entity_reference
