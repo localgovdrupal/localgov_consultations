@@ -4,12 +4,12 @@ description: Custom functionality for Consultations Emails
 package: Custom
 core_version_requirement: ^9 || ^10
 dependencies:
-  - drupal:datetime_range
-  - drupal:paragraphs
-  - drupal:geo_entity
-  - drupal:geo_entity_address
-  - drupal:inline_entity_form
-  - drupal:layout_paragraphs
+  - datetime_range:datetime_range
+  - paragraphs:paragraphs
+  - geo_entity:geo_entity
+  - geo_entity_address:geo_entity_address
+  - inline_entity_form:inline_entity_form
+  - layout_paragraphs:layout_paragraphs
   - localgov_services:localgov_services_navigation
   - localgov_review_date:localgov_review_date
   - localgov_workflows_notifications:localgov_workflows_notifications
