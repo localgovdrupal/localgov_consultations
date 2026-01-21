@@ -1,5 +1,5 @@
 (function ($, Drupal, once) {
-  Drupal.behaviors.statusToggler = {
+  Drupal.behaviors.localgovConsultationToggle = {
     attach: function (context, settings) {
       const elements = once('toggle-consultation', '#btn-toggle-consultation', context);
 
