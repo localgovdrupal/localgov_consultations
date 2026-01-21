@@ -9,16 +9,13 @@ function localgov_consultations_webform_install() {
   $form_display = $storage->load('node.consultation.default');
 
   if ($form_display) {
-    // Add the field widget to the form.
     $form_display->setComponent('localgov_consultation_webform', [
       'type' => 'webform_entity_reference_select',
       'weight' => 20,
     ]);
 
-    // Load existing field group settings.
     $field_groups = $form_display->getThirdPartySettings('field_group');
 
-    // Add your field to the 'group_webform' children if the group exists.
     if (isset($field_groups['group_webform'])) {
       if (!in_array('localgov_consultation_webform', $field_groups['group_webform']['children'])) {
         $field_groups['group_webform']['children'][] = 'localgov_consultation_webform';
