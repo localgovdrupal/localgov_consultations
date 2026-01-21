@@ -12,9 +12,8 @@ dependencies:
     - field.field.node.consultation.localgov_consultation_documents
     - field.field.node.consultation.localgov_consultation_link
     - field.field.node.consultation.localgov_consultation_location
-    - field.field.node.consultation.localgov_consultation_purpose
-    - field.field.node.consultation.localgov_consultation_result
-    - field.field.node.consultation.localgov_consultation_results
+    - field.field.node.consultation.localgov_consultation_rs_summary
+    - field.field.node.consultation.localgov_consultation_rs_link
     - field.field.node.consultation.localgov_consultation_status
     - field.field.node.consultation.localgov_consultation_summary
     - field.field.node.consultation.localgov_consultation_teaser_img
@@ -204,9 +203,7 @@ third_party_settings:
         required_fields: true
     group_results:
       children:
-        - localgov_consultation_results
-        - localgov_consultation_result
-        - localgov_consultation_purpose
+        - group_you_said_we_did
       label: Results
       region: content
       parent_name: group_tags
@@ -227,6 +224,23 @@ third_party_settings:
       region: hidden
       parent_name: group_tags
       weight: 13
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_you_said_we_did:
+      children:
+        - localgov_consultation_rs_link
+        - localgov_consultation_rs_summary
+      label: 'You said, We did'
+      region: content
+      parent_name: group_results
+      weight: 20
       format_type: tab
       format_settings:
         classes: ''
@@ -357,25 +371,17 @@ content:
       revision: false
       removed_reference: optional
     third_party_settings: {  }
-  localgov_consultation_purpose:
+  localgov_consultation_rs_summary:
     type: text_textarea
-    weight: 28
+    weight: 22
     region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-  localgov_consultation_result:
-    type: text_textarea
-    weight: 27
-    region: content
-    settings:
-      rows: 5
-      placeholder: ''
-    third_party_settings: {  }
-  localgov_consultation_results:
+  localgov_consultation_rs_link:
     type: link_default
-    weight: 26
+    weight: 21
     region: content
     settings:
       placeholder_url: ''

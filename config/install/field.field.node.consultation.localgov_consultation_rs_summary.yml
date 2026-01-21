@@ -2,20 +2,22 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.localgov_consultation_purpose
+    - field.storage.node.localgov_consultation_rs_summary
+    - filter.format.wysiwyg
     - node.type.consultation
   module:
     - text
-id: node.consultation.localgov_consultation_purpose
-field_name: localgov_consultation_purpose
+id: node.consultation.localgov_consultation_rs_summary
+field_name: localgov_consultation_rs_summary
 entity_type: node
 bundle: consultation
-label: Consultation
+label: 'Consultation Results Summary'
 description: ''
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  allowed_formats: {  }
+  allowed_formats:
+    - wysiwyg
 field_type: text_long
