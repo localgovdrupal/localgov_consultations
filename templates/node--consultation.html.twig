@@ -146,17 +146,17 @@
         {# Left column: Main content (2/3 width) #}
         <div class="consultation__col consultation__col-main">
 
-          {# Body content #}
-          {% if content.body['#items'] %}
-            <div class="consultation__body">
-              {{ content.body }}
-            </div>
-          {% endif %}
-
           {# Location #}
           {% if content.localgov_consultation_location['#items'] %}
             <div class="consultation__location">
               {{ content.localgov_consultation_location }}
+            </div>
+          {% endif %}
+
+          {# Body content #}
+          {% if content.body['#items'] %}
+            <div class="consultation__body">
+              {{ content.body }}
             </div>
           {% endif %}
 
