@@ -1,66 +1,36 @@
 <?php
 
 use Drupal\block\Entity\Block;
-use Drupal\Core\File\FileExists;
-use Drupal\Core\File\FileSystemInterface;
 
 /**
- * Implements hook_update_N();
+ * Implements hook_install().
  *
- * Initialise state for consultations notifications.
+ * Initialise state for consultations notifications and set up default blocks.
  */
 function localgov_consultations_install() {
-  // Initialise last run state.
+  // 1. Initialise last run state for notifications.
   $now = new Drupal\Core\Datetime\DrupalDateTime('now');
   \Drupal::state()->set('localgov_consultations_process_opens_last_run', $now->getTimestamp());
   \Drupal::state()->set('localgov_consultations_process_closes_last_run', $now->getTimestamp());
 
-  // Set some default empty configs so things don't get too unhappy.
+  // 2. Set some default empty configs.
   $consultations_config = \Drupal::configFactory()->getEditable('localgov_consultations.templates');
   $consultations_config->set('date_changed', '')
     ->set('opened', '')
     ->set('closed', '')
     ->save();
 
-  /**
-   * Add Localgov Consultations banner block in 'banner' region
-   * the block layout.
-   */
-  $module_path = \Drupal::service('extension.list.module')->getPath('localgov_consultations');
-  $source = $module_path . '/images/localgov_consultations_demo_image.jpg';
-  $destination_dir = 'public://banner-images/';
-  $destination = $destination_dir . 'localgov_consultations_demo_image.jpg';
-
-  \Drupal::service('file_system')->prepareDirectory($destination_dir, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
-
-  if (file_exists($source)) {
-    $data = file_get_contents($source);
-    $file = \Drupal::service('file.repository')->writeData($data, $destination, FileExists::Replace);
-
-    if ($file) {
-      $file->setPermanent();
-      $file->save();
-
-      // Track usage so it's not deleted.
-      \Drupal::service('file.usage')->add($file, 'localgov_consultations', 'module', 1);
-
-      // Save FID and Alt text to state for the Block class to consume.
-      \Drupal::state()->set('localgov_consultations.default_image_fid', $file->id());
-      \Drupal::state()->set('localgov_consultations.default_alt_text', t('Localgov consultations demo banner image'));
-    }
-  }
-
-  // Add blocks on the banner region
+  // 3. Define the theme to place blocks in.
   $theme = \Drupal::config('system.theme')->get('default');
 
-  // Landing Banner: only on '/consultations'
+  /**
+   * Add Localgov Consultations Landing Banner block.
+   */
   $landing_banner = Block::load('localgov_consultations_landing_banner') ?: Block::create([
     'id' => 'localgov_consultations_landing_banner',
     'plugin' => 'localgov_consultations_landing_banner',
     'settings' => [
       'label_display' => FALSE,
-      'image_fid' => \Drupal::state()->get('localgov_consultations.default_image_fid'),
-      'alt_text' => \Drupal::state()->get('localgov_consultations.default_alt_text'),
     ]
   ]);
   $landing_banner->set('theme', $theme);
@@ -73,7 +43,9 @@ function localgov_consultations_install() {
   ]);
   $landing_banner->save();
 
-  // Page Banner: on '/consultations/*'
+  /**
+   * Add Localgov Consultations Page Banner.
+   */
   $page_banner = Block::load('localgov_consultations_page_banner') ?: Block::create([
     'id' => 'localgov_consultations_page_banner',
     'plugin' => 'localgov_consultations_page_banner',
