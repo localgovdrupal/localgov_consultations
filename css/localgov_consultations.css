@@ -212,8 +212,6 @@ a:hover .card-img img {
 }
 
 /* Consultation link fields styling */
-
-/* Main link field - special styling with right arrow */
 .consultation__link .field__item a {
   position: relative;
   display: block;
@@ -237,6 +235,7 @@ a:hover .card-img img {
 
 .consultation__link .field__item a:hover {
   background-color: var(--button-bg-color, #f5f5f5);
+  color: var(--button-text-color, #ffffff);
 }
 
 /* Right-pointing triangle for main link */
@@ -253,10 +252,8 @@ a:hover .card-img img {
   margin-top: 4px;
 }
 
-/* Footer, External, and Results link fields - standard styling */
-.consultation__footer-links .field__item a,
-.consultation__external-links .field__item a,
-.consultation__results .field__item a {
+.consultation__top_tasks .field__item a,
+.consultation__results_link .field__item a {
   position: relative;
   display: block;
   width: 100%;
@@ -278,89 +275,33 @@ a:hover .card-img img {
   text-decoration: none;
 }
 
-.consultation__footer-links .field__item a:hover,
-.consultation__external-links .field__item a:hover,
-.consultation__results .field__item a:hover {
+.consultation__results_link .field--name-localgov-consultation-rs-link {
+  display: flex;
+}
+
+.consultation__top_tasks .field__item a:hover,
+.consultation__results_link .field__item a:hover {
   background-color: var(--button-bg-color, #f5f5f5);
 }
 
-/* Multiple links container styling */
-.consultation__footer-links .field__items,
-.consultation__external-links .field__items {
+.consultation__top_tasks .field__items {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 5px;
 }
 
-.consultation__results .field__item {
-  width: 100%;
-}
-
-/* Legacy block selectors for backwards compatibility */
-.block-field-blocknodeconsultationfield-footer-links .field__items .button-link,
-.block-field-blocknodeconsultationfield-external-links .field__items .button-link {
-  position: relative;
-  width: 48%;
-  padding: 2rem 1rem;
-  margin-bottom: 0.5rem;
-  text-align: left;
-  color: var(--color-text);
-  font-size: 18px;
-  letter-spacing: 0;
-  line-height: 21px;
-  font-weight: normal !important;
-  border-radius: 0 !important;
-  background-color: white;
-  border: 1px solid var(--color-accent);
-  box-sizing: border-box;
-  border-bottom: 2px solid var(--color-accent);
-  box-shadow: 0px 0px 2px #00000029;
-  transition: background-color 0.3s;
-}
-
-.block-field-blocknodeconsultationfield-footer-links .field__items .button-link:hover,
-.block-field-blocknodeconsultationfield-external-links .field__items .button-link:hover {
-  background-color: var(--button-bg-color, #f5f5f5);
-}
-
-.block-field-blocknodeconsultationfield-footer-links .field__items .button-link svg,
-.block-field-blocknodeconsultationfield-external-links .field__items .button-link svg {
-  display: inline-block;
-  width: 20px;
-  height: 25px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpolygon points='12 2 22 21 2 21 12 2' fill='black'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-size: contain;
-  color: black;
-  float: right;
-}
-
-.block-field-blocknodeconsultationfield-footer-links,
-.block-field-blocknodeconsultationfield-external-links {
-  .field__items {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 5px;
-  }
-}
-
 /* Responsive link field styles */
 @media (max-width: 768px) {
-  /* Full width on mobile for main link */
   .consultation__link .field__item a {
     max-width: 100%;
     padding: 1.5rem 1rem;
   }
 
-  /* Full width on mobile for footer/external links */
-  .consultation__footer-links .field__item,
-  .consultation__external-links .field__item {
+  .consultation__top_tasks .field__item {
     flex: 0 0 100%;
   }
 }
-
 
 /** Consultation Page **/
 .consultation.node--type-consultation.node--promoted.node--view-mode-full {
@@ -515,42 +456,6 @@ a:hover .card-img img {
   }
 }
 
-/* Mobile styles */
-@media (max-width: 480px) {
-  .localgov-consultations--banner-block-wrapper {
-    height: 220px;
-    min-height: 220px;
-    margin-bottom: 22rem;
-  }
-
-  .localgov-consultations--banner-image img {
-    max-height: 220px;
-  }
-
-  .banner-placeholder__image {
-    min-height: 220px;
-  }
-
-  .localgov-consultations--filter-block {
-    width: 95%;
-    bottom: -20rem;
-  }
-
-  .localgov-consultations--filter-block form {
-    flex-direction: column;
-    gap: 0.75rem;
-    padding: 1rem;
-  }
-
-  .localgov-consultations--filter-block button {
-    width: 100%;
-  }
-
-  .localgov-consultations--filter-block form .js-form-item input,
-  .localgov-consultations--filter-block form .js-form-item select {
-    font-size: 16px;
-  }
-}
 
 .view-consultations .view-content,
 .view-consultations .view-empty {
@@ -631,6 +536,7 @@ a:hover .card-img img {
   padding-left: 1rem;
 }
 
+.consultation__col-results,
 .consultation__sidebar-item {
   background: #fff;
   border: 1px solid #d4d4d4;
@@ -640,8 +546,8 @@ a:hover .card-img img {
   box-shadow: rgba(128, 128, 128, 0.2) 0px 4px 8px 0px, rgba(128, 128, 128, 0.19) 0px 6px 20px 0px;
 }
 
-.consultation__sidebar-item:last-child {
-  margin-bottom: 0;
+.consultation--is-complete {
+  display: none;
 }
 
 .consultation__sidebar-item .field__label {
@@ -649,13 +555,6 @@ a:hover .card-img img {
   font-size: var(--font-size-h2);
   margin-bottom: var(--vertical-rhythm-spacing);
   color: var(--color-accent, #045a90);
-}
-
-/* Links section */
-.consultation__links {
-  margin-top: 2rem;
-  padding-top: 1rem;
-  border-top: 1px solid #d4d4d4;
 }
 
 /* Tablet landscape (769px - 1024px) */
@@ -722,5 +621,42 @@ a:hover .card-img img {
   .consultation__links {
     margin-top: 1.5rem;
     padding-top: 0.75rem;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 480px) {
+  .localgov-consultations--banner-block-wrapper {
+    height: 220px;
+    min-height: 220px;
+    margin-bottom: 22rem;
+  }
+
+  .localgov-consultations--banner-image img {
+    max-height: 220px;
+  }
+
+  .banner-placeholder__image {
+    min-height: 220px;
+  }
+
+  .localgov-consultations--filter-block {
+    width: 95%;
+    bottom: -20rem;
+  }
+
+  .localgov-consultations--filter-block form {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+
+  .localgov-consultations--filter-block button {
+    width: 100%;
+  }
+
+  .localgov-consultations--filter-block form .js-form-item input,
+  .localgov-consultations--filter-block form .js-form-item select {
+    font-size: 16px;
   }
 }
