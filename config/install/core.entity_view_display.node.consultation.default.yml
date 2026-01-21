@@ -12,8 +12,8 @@ dependencies:
     - field.field.node.consultation.localgov_consultation_documents
     - field.field.node.consultation.localgov_consultation_link
     - field.field.node.consultation.localgov_consultation_location
-    - field.field.node.consultation.localgov_consultation_rs_summary
     - field.field.node.consultation.localgov_consultation_rs_link
+    - field.field.node.consultation.localgov_consultation_rs_summary
     - field.field.node.consultation.localgov_consultation_status
     - field.field.node.consultation.localgov_consultation_summary
     - field.field.node.consultation.localgov_consultation_teaser_img
@@ -126,13 +126,6 @@ content:
     third_party_settings: {  }
     weight: 3
     region: content
-  localgov_consultation_rs_summary:
-    type: text_default
-    label: visually_hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: 11
-    region: content
   localgov_consultation_rs_link:
     type: link
     label: visually_hidden
@@ -144,6 +137,13 @@ content:
       target: ''
     third_party_settings: {  }
     weight: 10
+    region: content
+  localgov_consultation_rs_summary:
+    type: text_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 11
     region: content
   localgov_consultation_status:
     type: list_default

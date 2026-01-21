@@ -11,8 +11,8 @@ type: list_string
 settings:
   allowed_values:
     -
-      value: preview
-      label: Preview
+      value: upcoming
+      label: Upcoming
     -
       value: open
       label: Open

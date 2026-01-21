@@ -44,7 +44,7 @@
   font-size: 17px;
 }
 
-.consultation-timeline .field--name-localgov-consultation-steps .field__items .field__item {
+.consultation-timeline__steps .field--name-localgov-consultation-steps.field__items .field__item {
   margin-bottom: 2rem;
 }
 
