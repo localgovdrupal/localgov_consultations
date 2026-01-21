@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Drupal\localgov_consultations\Plugin\Block;
 
-use Drupal\Core\Block\Annotation\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Entity\File;
@@ -13,22 +12,20 @@ use Drupal\file\Entity\File;
  * Provides a consultations banner image block.
  *
  * @Block(
- *   id = "localgov_consultations_landing_banner",
- *   admin_label = @Translation("LocalGov Consultations Landing Banner"),
- *   category = @Translation("LocalGov Consultations"),
+ * id = "localgov_consultations_landing_banner",
+ * admin_label = @Translation("LocalGov Consultations Landing Banner"),
+ * category = @Translation("LocalGov Consultations"),
  * )
  */
 final class LandingBannerBlock extends BlockBase {
+
   /**
    * {@inheritdoc}
    */
   public function defaultConfiguration() {
-    $default_fid = \Drupal::state()->get('localgov_consultations.default_image_fid', NULL);
-    $default_alt = \Drupal::state()->get('localgov_consultations.default_alt_text', $this->t('Localgov Consultations banner'));
-
     return [
-      'image_fid' => $default_fid,
-      'alt_text' => $default_alt,
+      'image_fid' => NULL,
+      'alt_text' => $this->t('LocalGov Consultations banner'),
     ];
   }
 
@@ -39,21 +36,21 @@ final class LandingBannerBlock extends BlockBase {
     $form['image'] = [
       '#type' => 'managed_file',
       '#title' => $this->t('Banner image'),
-      '#description' => $this->t('Upload an image file. Maximum size: 2MB. Allowed types: PNG, JPG, JPEG, GIF, WebP.'),
+      '#description' => $this->t('Upload an image file. If empty, the module default will be used. Allowed types: PNG, JPG, JPEG, GIF, WebP.'),
       '#upload_location' => 'public://banner-images/',
       '#default_value' => !empty($this->configuration['image_fid']) ? [$this->configuration['image_fid']] : NULL,
       '#upload_validators' => [
         'file_validate_extensions' => ['png jpg jpeg gif webp'],
-        'file_validate_size' => [2097152], // 2MB in bytes
+        'file_validate_size' => [2097152], // 2MB
         'file_validate_is_image' => [],
       ],
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $form['alt_text'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Alternative text'),
-      '#description' => $this->t('Alternative text for the image (for accessibility).'),
+      '#description' => $this->t('Alternative text for accessibility.'),
       '#default_value' => $this->configuration['alt_text'] ?? '',
       '#maxlength' => 255,
       '#required' => TRUE,
@@ -66,34 +63,24 @@ final class LandingBannerBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function blockSubmit($form, FormStateInterface $form_state) {
-    // Get values from form state.
     $image_values = $form_state->getValue('image');
     $new_fid = !empty($image_values[0]) ? (int) $image_values[0] : NULL;
     $old_fid = !empty($this->configuration['image_fid']) ? (int) $this->configuration['image_fid'] : NULL;
 
-    // Use entity type manager for storage.
     $file_storage = \Drupal::entityTypeManager()->getStorage('file');
     $file_usage = \Drupal::service('file.usage');
 
-    // Handle File Usage if the image has changed.
     if ($new_fid !== $old_fid) {
-
-      // 1. Remove usage from the old file.
       if ($old_fid) {
         $old_file = $file_storage->load($old_fid);
         if ($old_file) {
-          // decrement usage.
           $file_usage->delete($old_file, 'localgov_consultations', 'block', 1);
         }
       }
 
-      // 2. Add usage to the new file.
       if ($new_fid) {
-        /** @var \Drupal\file\FileInterface $new_file */
         $new_file = $file_storage->load($new_fid);
         if ($new_file) {
-          // In 10.3+, files uploaded via managed_file are temporary by default.
-          // Setting permanent and adding usage prevents auto-deletion.
           $new_file->setPermanent();
           $new_file->save();
           $file_usage->add($new_file, 'localgov_consultations', 'block', 1);
@@ -101,7 +88,6 @@ final class LandingBannerBlock extends BlockBase {
       }
     }
 
-    // Save updated configuration.
     $this->configuration['image_fid'] = $new_fid;
     $this->configuration['alt_text'] = $form_state->getValue('alt_text');
   }
@@ -110,54 +96,50 @@ final class LandingBannerBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build(): array {
-    $build = [];
+    $file = !empty($this->configuration['image_fid']) ? File::load($this->configuration['image_fid']) : NULL;
 
-    if (empty($this->configuration['image_fid'])) {
-      return [];
+    if ($file) {
+      $image_uri = $file->getFileUri();
+      $cache_tags = $file->getCacheTags();
+    }
+    else {
+      // Fallback to module's internal image.
+      $module_path = \Drupal::service('extension.list.module')->getPath('localgov_consultations');
+      $image_uri = $module_path . '/images/localgov_consultations_demo_image.jpg';
+      $cache_tags = [];
     }
 
-    $file = File::load($this->configuration['image_fid']);
-    if (!$file) {
-      return [];
-    }
+    $alt_text = !empty($this->configuration['alt_text'])
+      ? $this->configuration['alt_text']
+      : $this->t('LocalGov Consultations banner');
 
-    // Create wrapper container for banner and filter.
-    $build['#type'] = 'container';
-    $build['#attributes'] = [
-      'class' => ['localgov-consultations--banner-block-wrapper'],
+    $build = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['localgov-consultations--banner-block-wrapper']],
     ];
 
-    // Banner image.
     $build['banner_wrapper'] = [
       '#type' => 'container',
-      '#attributes' => [
-        'class' => ['localgov-consultations--banner-image'],
-      ],
+      '#attributes' => ['class' => ['localgov-consultations--banner-image']],
       'banner_image' => [
         '#theme' => 'image',
-        '#uri' => $file->getFileUri(),
-        '#alt' => $this->configuration['alt_text'] ?? '',
-        '#cache' => [
-          'tags' => $file->getCacheTags(),
-        ],
+        '#uri' => $image_uri,
+        '#alt' => $alt_text,
+        '#cache' => ['tags' => $cache_tags],
       ],
     ];
 
-    // Add exposed filter block below the image.
     $block_manager = \Drupal::service('plugin.manager.block');
     $plugin_block = $block_manager->createInstance('views_exposed_filter_block:consultations-open_consultations', []);
 
-    if ($plugin_block) {
-      $access_result = $plugin_block->access(\Drupal::currentUser(), TRUE);
-      if ($access_result->isAllowed()) {
-        $build['filter_wrapper'] = [
-          '#type' => 'container',
-          '#attributes' => [
-            'class' => ['localgov-consultations--filter-block', 'lgd-container', 'padding-horizontal'],
-          ],
-          'exposed_filter' => $plugin_block->build(),
-        ];
-      }
+    if ($plugin_block && $plugin_block->access(\Drupal::currentUser())) {
+      $build['filter_wrapper'] = [
+        '#type' => 'container',
+        '#attributes' => [
+          'class' => ['localgov-consultations--filter-block', 'lgd-container', 'padding-horizontal'],
+        ],
+        'exposed_filter' => $plugin_block->build(),
+      ];
     }
 
     return $build;
