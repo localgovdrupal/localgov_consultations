@@ -34,9 +34,8 @@ config_devel:
   - field.field.node.consultation.localgov_consultation_documents
   - field.field.node.consultation.localgov_consultation_link
   - field.field.node.consultation.localgov_consultation_location
-  - field.field.node.consultation.localgov_consultation_purpose
-  - field.field.node.consultation.localgov_consultation_result
-  - field.field.node.consultation.localgov_consultation_results
+  - field.field.node.consultation.localgov_consultation_rs_summary
+  - field.field.node.consultation.localgov_consultation_rs_link
   - field.field.node.consultation.localgov_consultation_status
   - field.field.node.consultation.localgov_consultation_summary
   - field.field.node.consultation.localgov_consultation_teaser_img
@@ -54,9 +53,8 @@ config_devel:
   - field.storage.node.localgov_consultation_documents
   - field.storage.node.localgov_consultation_link
   - field.storage.node.localgov_consultation_location
-  - field.storage.node.localgov_consultation_purpose
-  - field.storage.node.localgov_consultation_result
-  - field.storage.node.localgov_consultation_results
+  - field.storage.node.localgov_consultation_rs_summary
+  - field.storage.node.localgov_consultation_rs_link
   - field.storage.node.localgov_consultation_status
   - field.storage.node.localgov_consultation_summary
   - field.storage.node.localgov_consultation_teaser_img
