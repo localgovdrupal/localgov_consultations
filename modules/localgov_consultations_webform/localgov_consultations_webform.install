@@ -1,0 +1,28 @@
+<?php
+
+/**
+* Implements hook_install().
+*/
+function localgov_consultations_webform_install() {
+  $storage = \Drupal::entityTypeManager()->getStorage('entity_form_display');
+  /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface $form_display */
+  $form_display = $storage->load('node.consultation.default');
+
+  if ($form_display) {
+    $form_display->setComponent('localgov_consultation_webform', [
+      'type' => 'webform_entity_reference_select',
+      'weight' => 20,
+    ]);
+
+    $field_groups = $form_display->getThirdPartySettings('field_group');
+
+    if (isset($field_groups['group_webform'])) {
+      if (!in_array('localgov_consultation_webform', $field_groups['group_webform']['children'])) {
+        $field_groups['group_webform']['children'][] = 'localgov_consultation_webform';
+        $form_display->setThirdPartySetting('field_group', 'group_webform', $field_groups['group_webform']);
+      }
+    }
+
+    $form_display->save();
+  }
+}

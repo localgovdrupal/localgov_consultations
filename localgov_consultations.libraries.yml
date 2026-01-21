@@ -3,3 +3,9 @@ localgov_consultations:
   css:
     component:
       css/localgov_consultations.css: {}
+  js:
+    js/toggle-consultation.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/once

@@ -115,7 +115,7 @@ function localgov_consultations_preprocess_node(&$variables): void {
       $now = time();
 
       $date_formatter = \Drupal::service('date.formatter');
-      $format = 'd M';
+      $format = 'd M Y';
 
       if ($now < $start_ts) {
         $text = "Opens on " . $date_formatter->format($start_ts, 'custom', $format);

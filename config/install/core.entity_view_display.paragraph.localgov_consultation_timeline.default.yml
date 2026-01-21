@@ -4,17 +4,19 @@ dependencies:
   config:
     - field.field.paragraph.localgov_consultation_timeline.localgov_consultation_steps
     - paragraphs.paragraphs_type.localgov_consultation_timeline
+  module:
+    - entity_reference_revisions
 id: paragraph.localgov_consultation_timeline.default
 targetEntityType: paragraph
 bundle: localgov_consultation_timeline
 mode: default
 content:
   localgov_consultation_steps:
-    type: entity_reference_entity_view
-    label: visually_hidden
+    type: entity_reference_revisions_entity_view
+    label: hidden
     settings:
       view_mode: default
-      link: true
+      link: ''
     third_party_settings: {  }
     weight: 0
     region: content

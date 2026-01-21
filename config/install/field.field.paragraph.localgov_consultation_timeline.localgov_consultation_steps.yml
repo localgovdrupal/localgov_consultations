@@ -5,6 +5,8 @@ dependencies:
     - field.storage.paragraph.localgov_consultation_steps
     - paragraphs.paragraphs_type.localgov_consultation_timeline
     - paragraphs.paragraphs_type.localgov_consultation_tl_steps
+  module:
+    - entity_reference_revisions
 id: paragraph.localgov_consultation_timeline.localgov_consultation_steps
 field_name: localgov_consultation_steps
 entity_type: paragraph
@@ -26,27 +28,27 @@ settings:
         weight: 10
         enabled: false
       localgov_consultation_timeline:
-        weight: 16
-        enabled: false
-      localgov_consultation_tl_steps:
-        weight: 17
-        enabled: true
-      localgov_contact:
         weight: 11
         enabled: false
-      localgov_image:
+      localgov_consultation_tl_steps:
         weight: 12
-        enabled: false
-      localgov_link:
+        enabled: true
+      localgov_contact:
         weight: 13
         enabled: false
-      localgov_numbered_text:
+      localgov_image:
         weight: 14
         enabled: false
-      localgov_text:
+      localgov_link:
         weight: 15
+        enabled: false
+      localgov_numbered_text:
+        weight: 16
+        enabled: false
+      localgov_text:
+        weight: 17
         enabled: false
       topic_list_builder:
         weight: 18
         enabled: false
-field_type: entity_reference
+field_type: entity_reference_revisions

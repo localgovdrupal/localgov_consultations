@@ -92,6 +92,10 @@
 ]
 %}
 
+{#  #}
+{% set status_value = content.localgov_consultation_status['#items'].0.value %}
+{% set status_class = (status_value == 'complete') ? 'consultation--is-complete' : '' %}
+
 <article{{ attributes.addClass(classes).removeAttribute('role') }}>
 
   {{ title_prefix }}
@@ -108,7 +112,36 @@
   {# Two-column responsive layout #}
   <div class="consultation__content">
     <div class="consultation__grid">
-      <div class="consultation__row">
+
+      {% if status_value == 'complete' %}
+        <div id="localgov-consultation-results" class="consultation__row">
+          <div class="consultation__col">
+            <div class="consultation__col-results">
+              <div class="consultation__you-said-we-did">
+                <h2>You said, We did</h2>
+              </div>
+              {# Results Link #}
+              {% if content.localgov_consultation_rs_link['#items'] %}
+                <div class="consultation__results_link">
+                  {{ content.localgov_consultation_rs_link }}
+                </div>
+              {% endif %}
+
+              {# Result Text #}
+              {% if content.localgov_consultation_rs_summary['#items'] %}
+                <div class="consultation__results_summary">
+                  {{ content.localgov_consultation_rs_summary }}
+                </div>
+              {% endif %}
+              <button type="button" id="btn-toggle-consultation" class="button consultation__button">
+                Show Consultation
+              </button>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+      <div id="localgov-consultation-body" class="consultation__row {{ status_class }}">
 
         {# Left column: Main content (2/3 width) #}
         <div class="consultation__col consultation__col-main">
@@ -190,7 +223,7 @@
 
           {# Links #}
           {% if content.localgov_common_tasks['#items'] %}
-            <div class="consultation__sidebar-item consultation__external-links">
+            <div class="consultation__sidebar-item consultation__top_tasks">
               {{ content.localgov_common_tasks }}
             </div>
           {% endif %}
@@ -202,31 +235,10 @@
             </div>
           {% endif %}
 
-          {# Results Link #}
-          {% if content.localgov_consultation_results['#items'] %}
-            <div class="consultation__sidebar-item consultation__results">
-              {{ content.localgov_consultation_results }}
-            </div>
-          {% endif %}
-
-          {# Result Text #}
-          {% if content.localgov_consultation_result['#items'] %}
-            <div class="consultation__sidebar-item consultation__result">
-              {{ content.localgov_consultation_result }}
-            </div>
-          {% endif %}
 
         </div>
 
       </div>
     </div>
   </div>
-
-  {# Links (edit, delete, etc.) #}
-  {% if content.links['#links'] %}
-    <div class="consultation__links">
-      {{ content.links }}
-    </div>
-  {% endif %}
-
 </article>

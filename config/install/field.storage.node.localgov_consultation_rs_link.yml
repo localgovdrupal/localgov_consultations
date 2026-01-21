@@ -2,15 +2,14 @@ langcode: en
 status: true
 dependencies:
   module:
+    - link
     - node
-    - webform
-id: node.localgov_consultation_webform
-field_name: localgov_consultation_webform
+id: node.localgov_consultation_rs_link
+field_name: localgov_consultation_rs_link
 entity_type: node
-type: webform
-settings:
-  target_type: webform
-module: webform
+type: link
+settings: {  }
+module: link
 locked: false
 cardinality: 1
 translatable: true

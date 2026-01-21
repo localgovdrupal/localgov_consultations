@@ -4,8 +4,8 @@ dependencies:
   module:
     - node
     - text
-id: node.localgov_consultation_purpose
-field_name: localgov_consultation_purpose
+id: node.localgov_consultation_rs_summary
+field_name: localgov_consultation_rs_summary
 entity_type: node
 type: text_long
 settings: {  }
