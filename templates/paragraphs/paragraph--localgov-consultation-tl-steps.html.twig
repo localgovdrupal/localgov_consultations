@@ -30,7 +30,6 @@
       date: content.localgov_consultation_date|render|striptags|trim,
       summary: content.localgov_consultation_summary|render|striptags|trim,
       is_complete: step_complete,
-      attributes: attributes.addClass(step_classes),
-    })
+    }, with_context = false)
   }}
 {% endblock paragraph %}

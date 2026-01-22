@@ -24,20 +24,6 @@
       {# Render from slot if provided #}
       {% if steps_slot %}
         {{ steps_slot }}
-
-        {# Otherwise render from steps prop #}
-      {% elseif steps %}
-        {% for step in steps %}
-          {{
-          include('localgov_consultations:consultation-timeline-step', {
-            title: step.title,
-            date: step.date,
-            summary: step.summary,
-            is_complete: step.is_complete,
-            index: loop.index0,
-          }, with_context = false)
-          }}
-        {% endfor %}
       {% endif %}
 
     </div>
