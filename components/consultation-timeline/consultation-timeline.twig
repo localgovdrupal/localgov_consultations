@@ -35,7 +35,7 @@
             summary: step.summary,
             is_complete: step.is_complete,
             index: loop.index0,
-          })
+          }, with_context = false)
           }}
         {% endfor %}
       {% endif %}
