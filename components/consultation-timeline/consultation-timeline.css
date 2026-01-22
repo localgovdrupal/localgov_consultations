@@ -1,87 +1,78 @@
-/* Consultation Timeline Container */
-.consultation-timeline {
-  padding-left: 4rem;
-  margin: 2.5rem 0;
-  position: relative;
-}
-
-.field--name-localgov-consultation-timeline .field__item:not(:last-child) .localgov-consultation--timeline-item::after {
-  content: "";
-  position: absolute;
-  left: -2.4rem;
-  top: 1rem;
-  width: 2px;
-  height: calc(100% + 2rem);
-  background-color: #DBDFE3;
-  z-index: 1;
-}
-
-.localgov-consultation--timeline-item--complete .localgov-consultation--timeline-marker {
-  color: #121212;
-}
-
-.localgov-consultation--timeline-item--complete .localgov-consultation--timeline-marker::before {
-  content: "⬤";
-}
-
-.localgov-consultation--timeline-title {
-  margin: 0 0 0.5rem 0;
-  font-weight: bold;
-  font-size: 20px;
-  color: #121212;
-}
-
-.localgov-consultation--timeline-date {
-  display: block;
-  font-weight: bold;
-  color: #121212;
-  font-size: 20px;
-  margin-bottom: 0.5rem;
-}
-
-.localgov-consultation--timeline-summary {
-  color: #121212;
-  font-size: 17px;
-}
-
-.consultation-timeline__steps .field--name-localgov-consultation-steps.field__items .field__item {
-  margin-bottom: 2rem;
-}
-
-@media (max-width: 767px) {
-  .localgov-consultation--timeline-marker {
-    left: -2.8rem;
-  }
-  .localgov-consultation--timeline-item:not(:last-child)::after {
-    left: -1.95rem;
-  }
-  .field--name-localgov-consultation-timeline .field__item:not(:last-child) .localgov-consultation--timeline-item::after {
-    left: -2rem;
-  }
-}
-
-.consultation-timeline__steps {
-  position: relative;
-}
-
-.consultation-timeline__steps .timeline-step:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  left: -2.4rem;
-  top: 2.4rem;
-  width: 2px;
-  height: calc(100% + 2rem);
-  background-color: #DBDFE3;
-  z-index: 1;
-}
-
-/* Responsive */
-@media (max-width: 767px) {
-  .consultation-timeline {
-    padding-left: 3.5rem;
+[data-component-id="localgov_consultations:consultation-timeline"] {
+  /* Consultation Timeline Container */
+  &.consultation-timeline {
+    padding-left: 4rem;
+    margin: 2.5rem 0;
+    position: relative;
   }
 
-  .consultation-timeline__steps .timeline-step:not(:last-child)::after {
-    left: -1.95rem;
+  .timeline-step--complete::after {
+    content: "";
+    position: absolute;
+    left: -2.4rem;
+    top: 1rem;
+    width: 2px;
+    height: calc(100% + 2rem);
+    background-color: #dbdfe3;
+    z-index: 1;
+  }
+
+  .localgov-consultation--timeline-item--complete .localgov-consultation--timeline-marker {
+    color: #121212;
+  }
+
+  .localgov-consultation--timeline-item--complete .localgov-consultation--timeline-marker::before {
+    content: "⬤";
+  }
+
+  .localgov-consultation--timeline-title {
+    margin: 0 0 0.5rem 0;
+    font-weight: bold;
+    font-size: 20px;
+    color: #121212;
+  }
+
+  .localgov-consultation--timeline-date {
+    display: block;
+    font-weight: bold;
+    color: #121212;
+    font-size: 20px;
+    margin-bottom: 0.5rem;
+  }
+
+  .localgov-consultation--timeline-summary {
+    color: #121212;
+    font-size: 17px;
+  }
+
+  .consultation-timeline__steps .field--name-localgov-consultation-steps.field__items .field__item {
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 767px) {
+    .localgov-consultation--timeline-marker {
+      left: -2.8rem;
+    }
+    .localgov-consultation--timeline-item:not(:last-child)::after {
+      left: -1.95rem;
+    }
+    .field__item:not(:last-child) .localgov-consultation--timeline-item::after {
+      left: -2rem;
+    }
+  }
+
+  .consultation-timeline__steps {
+    position: relative;
+  }
+
+  /* Responsive */
+  @media (max-width: 767px) {
+    .consultation-timeline {
+      padding-left: 3.5rem;
+    }
+
+    .consultation-timeline__steps .timeline-step:not(:last-child)::after {
+      left: -1.95rem;
+    }
   }
 }

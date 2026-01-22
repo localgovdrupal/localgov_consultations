@@ -18,7 +18,7 @@
   is_complete ? 'timeline-step--complete' : 'timeline-step--incomplete',
 ] %}
 
-<div {{ attributes.addClass(step_classes) }} data-step-index="{{ index }}">
+<div {{ attributes.addClass(step_classes) }}>
   <div class="timeline-step__marker"></div>
   <div class="timeline-step__content">
     {% if title %}
