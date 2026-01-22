@@ -9,7 +9,7 @@ id: node.consultation.localgov_consultation_teaser_img
 field_name: localgov_consultation_teaser_img
 entity_type: node
 bundle: consultation
-label: 'Teaser image'
+label: 'Teaser Override'
 description: ''
 required: false
 translatable: false

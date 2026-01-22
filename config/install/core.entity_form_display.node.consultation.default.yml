@@ -35,7 +35,7 @@ third_party_settings:
     group_tags:
       children:
         - group_details
-        - group_teaser
+        - group_image
         - group_date_and_status
         - group_display_options
         - group_actions
@@ -69,11 +69,11 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
-    group_teaser:
+    group_image:
       children:
         - localgov_consultation_banner
         - localgov_consultation_teaser_img
-      label: 'Header '
+      label: Image
       region: content
       parent_name: group_tags
       weight: 5
