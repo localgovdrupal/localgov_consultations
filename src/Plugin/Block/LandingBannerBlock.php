@@ -7,6 +7,7 @@ namespace Drupal\localgov_consultations\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Entity\File;
+use Drupal\views\Views;
 
 /**
  * Provides a consultations banner image block.
@@ -129,17 +130,22 @@ final class LandingBannerBlock extends BlockBase {
       ],
     ];
 
-    $block_manager = \Drupal::service('plugin.manager.block');
-    $plugin_block = $block_manager->createInstance('views_exposed_filter_block:consultations-open_consultations', []);
+    $view = Views::getView('consultations');
+    if ($view) {
+      $view->setDisplay('open_consultations');
+      $view->initHandlers();
+      $exposed_form = $view->display_handler->viewExposedFormBlocks();
 
-    if ($plugin_block && $plugin_block->access(\Drupal::currentUser())) {
-      $build['filter_wrapper'] = [
-        '#type' => 'container',
-        '#attributes' => [
-          'class' => ['localgov-consultations--filter-block', 'lgd-container', 'padding-horizontal'],
-        ],
-        'exposed_filter' => $plugin_block->build(),
-      ];
+      if (!empty($exposed_form)) {
+        $build['exposed_wrapper'] =[
+          '#type' => 'container',
+          '#attributes' => [
+            'class' => ['localgov-consultations--filter-block', 'lgd-container', 'padding-horizontal'],
+          ],
+          'exposed_filter' => $exposed_form,
+        ];
+      }
+      $build['#cache']['contexts'][] = 'url.query_args';
     }
 
     return $build;
