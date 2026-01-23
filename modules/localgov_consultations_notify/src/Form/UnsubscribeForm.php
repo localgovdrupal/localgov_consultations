@@ -33,7 +33,7 @@ class UnsubscribeForm extends ConfirmFormBase {
         break;
 
       case 'all_consultations':
-      // FIXME: council name hardcoded.
+        // FIXME: council name hardcoded.
         $label = 'updates on all Localgov consultations';
         break;
     }

@@ -2,13 +2,7 @@
 
 namespace Drupal\localgov_consultations_notify\Commands;
 
-use Drupal;
 use Drush\Commands\DrushCommands;
-use Drupal\node\Entity\Node;
-use Drupal\Component\Utility\Html;
-use Drupal\Component\Utility\SafeMarkup;
-use Drupal\Core\Mail\MailManagerInterface;
-use Drupal\Core\Entity\RevisionLogInterface;
 
 /**
  * A drush command file.
@@ -27,6 +21,7 @@ class consultationEmail extends DrushCommands {
     localgov_consultations_notify_process_opens();
 
     // Disabled due to bugs
-    //localgov_consultations_notify_process_closes();
+    // localgov_consultations_notify_process_closes();
   }
+
 }

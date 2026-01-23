@@ -2,7 +2,6 @@
 
 namespace Drupal\localgov_consultations_notify\Plugin\EmailBuilder;
 
-use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\node\NodeInterface;
 use Drupal\symfony_mailer\EmailInterface;
 use Drupal\symfony_mailer\Processor\EmailBuilderBase;
@@ -23,8 +22,7 @@ use Drupal\symfony_mailer\Processor\TokenProcessorTrait;
  *   common_adjusters = {},
  * )
  */
-class ConsultationsEmailBuilder extends EmailBuilderBase
-{
+class ConsultationsEmailBuilder extends EmailBuilderBase {
 
   use TokenProcessorTrait;
 
@@ -36,8 +34,7 @@ class ConsultationsEmailBuilder extends EmailBuilderBase
    * @param \Drupal\Core\Entity\ContentEntityInterface[] $entities
    *   Entities to notify about.
    */
-  public function createParams(EmailInterface $email, string $email_address = NULL, NodeInterface $consultation = NULL, string $unsubscribe_url = NULL): void
-  {
+  public function createParams(EmailInterface $email, ?string $email_address = NULL, ?NodeInterface $consultation = NULL, ?string $unsubscribe_url = NULL): void {
     $email->setParam('email_address', $email_address);
     $email->setParam('consultation', $consultation);
     $email->setParam('unsubscribe_url', $unsubscribe_url);
@@ -46,13 +43,12 @@ class ConsultationsEmailBuilder extends EmailBuilderBase
   /**
    * {@inheritdoc}
    */
-  public function build(EmailInterface $email): void
-  {
+  public function build(EmailInterface $email): void {
 
-    /** @var NodeInterface $consultation */
+    /** @var \Drupal\node\NodeInterface $consultation */
     $consultation = $email->getParam('consultation');
 
-    /** @var DateFormatterInterface $date_formatter */
+    /** @var \Drupal\Core\Datetime\DateFormatterInterface $date_formatter */
     $date_formatter = \Drupal::service('date.formatter');
 
     $consultation_open_date = NULL;
@@ -67,7 +63,6 @@ class ConsultationsEmailBuilder extends EmailBuilderBase
         ? $date_formatter->format($consultation->get('localgov_consultation_end_date')->date->getTimestamp())
         : "TBD";
     }
-
 
     $email->setTo($email->getParam('email_address'))
       ->setVariable('consultation', $consultation)

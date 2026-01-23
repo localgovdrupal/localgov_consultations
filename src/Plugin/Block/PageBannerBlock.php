@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Drupal\localgov_consultations\Plugin\Block;
 
-use Drupal\Core\Block\Annotation\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -55,7 +54,7 @@ final class PageBannerBlock extends BlockBase implements ContainerFactoryPluginI
     string $plugin_id,
     $plugin_definition,
     EntityTypeManagerInterface $entity_type_manager,
-    RouteMatchInterface $route_match
+    RouteMatchInterface $route_match,
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->entityTypeManager = $entity_type_manager;
@@ -147,4 +146,5 @@ final class PageBannerBlock extends BlockBase implements ContainerFactoryPluginI
 
     return $tags;
   }
+
 }

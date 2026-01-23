@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\localgov_consultations\Plugin\QueueWorker\EmailQueue.
- */
-
 namespace Drupal\localgov_consultations_notify\Plugin\QueueWorker;
 
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
@@ -26,17 +21,19 @@ class EmailQueue extends QueueWorkerBase implements ContainerFactoryPluginInterf
 
   const QUEUE_NAME = 'localgov_consultations_email_queue';
 
-
-  public function __construct(array $configuration,
-                                    $plugin_id,
-                                    $plugin_definition,
-                              private readonly EmailFactoryInterface $emailFactory)
-  {
+  public function __construct(
+    array $configuration,
+    $plugin_id,
+    $plugin_definition,
+    private readonly EmailFactoryInterface $emailFactory,
+  ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
   }
 
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition)
-  {
+  /**
+   *
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     return new self(
       $configuration,
       $plugin_id,
@@ -59,7 +56,7 @@ class EmailQueue extends QueueWorkerBase implements ContainerFactoryPluginInterf
     $params = [
       'consultation' => $consultation,
       'email_address' => $data['email'],
-      'unsubscribe_url' => $data['unsubscribe_url']
+      'unsubscribe_url' => $data['unsubscribe_url'],
     ];
 
     $this->emailFactory->sendTypedEmail('localgov_consultations_notify', $data['email_id'], ...$params);

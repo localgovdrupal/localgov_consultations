@@ -7,15 +7,14 @@ namespace Drupal\localgov_consultations_notify;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Queue\QueueFactory;
-use Drupal\Core\Url;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\localgov_consultations_notify\Plugin\QueueWorker\EmailQueue;
-use Drupal\mailing_list\Entity\Subscription;
 use Drupal\node\Entity\Node;
 
-
-enum NotificationReason
-{
+/**
+ *
+ */
+enum NotificationReason {
   case ConsultationClosing;
   case ConsulationClosed;
   case ConsultationDatesChanged;
@@ -35,16 +34,16 @@ final class Notifier {
     private readonly QueueFactory $queue,
   ) {}
 
-
   /**
-   * Find all consultations that have opened/closed since last run. Called from e.g. cron
+   * Find all consultations that have opened/closed since last run. Called from e.g. cron.
    *
    * @return void
+   *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    * @throws \Drupal\Core\Entity\EntityMalformedException
    */
-  public function processStateChanges() : void{
+  public function processStateChanges() : void {
     $this->process_opens();
     $this->process_closes();
   }
@@ -81,7 +80,6 @@ final class Notifier {
     \Drupal::state()->set('localgov_consultations_process_opens_last_run', $now->getTimestamp());
   }
 
-
   /**
    * Queue notification emails for consultations that have closed.
    *
@@ -92,7 +90,6 @@ final class Notifier {
   private function process_closes() {
 
     // This seems to be buggy - last run state var never gets updated, so keeps e-mailing people. Disabled for now.
-
     $now = new DrupalDateTime('now', \Drupal::config('system.date')->get('timezone')['default']);
     $last_run_timestamp = \Drupal::state()->get('localgov_consultations_process_closes_last_run');
     $last_run = date_timestamp_set(new \DateTime(), $last_run_timestamp)->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT);
@@ -116,12 +113,13 @@ final class Notifier {
     \Drupal::state()->set('localgov_consultations_process_closes_last_run', $now->getTimestamp());
   }
 
-
   /**
-   * Helper function to get subscriptions to this consultation / all consultations
+   * Helper function to get subscriptions to this consultation / all consultations.
    *
    * @param $consultation
+   *
    * @return array
+   *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
@@ -145,16 +143,15 @@ final class Notifier {
     return \Drupal::entityTypeManager()->getStorage('mailing_list_subscription')->loadMultiple($subscribed_to_this_consultation);
   }
 
-
   /**
    * Send to those who subscribed to this consultation.
    */
-  function notifySubscribers(ContentEntityInterface $consultation, NotificationReason $reason) : void {
+  public function notifySubscribers(ContentEntityInterface $consultation, NotificationReason $reason) : void {
     $queue = $this->queue->get(EmailQueue::QUEUE_NAME);
 
     $subscriptions = $this->getSubscribers($consultation);
 
-    /** @var Subscription $subscription */
+    /** @var \Drupal\mailing_list\Entity\Subscription $subscription */
     foreach ($subscriptions as $subscription) {
       $email['email'] = $subscription->email->value;
 
@@ -180,11 +177,12 @@ final class Notifier {
   /**
    * Send to person responsible for this consultation.
    *
-   * @param ContentEntityInterface $consultation
+   * @param \Drupal\Core\Entity\ContentEntityInterface $consultation
    * @param NotificationReason $reason
+   *
    * @return void
    */
-  function notifyConsultationContact(ContentEntityInterface $consultation, NotificationReason $reason) : void {
+  public function notifyConsultationContact(ContentEntityInterface $consultation, NotificationReason $reason) : void {
     if ($reason != NotificationReason::ConsulationClosed) {
       return;
     }

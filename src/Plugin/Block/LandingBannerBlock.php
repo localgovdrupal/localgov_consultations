@@ -42,7 +42,8 @@ final class LandingBannerBlock extends BlockBase {
       '#default_value' => !empty($this->configuration['image_fid']) ? [$this->configuration['image_fid']] : NULL,
       '#upload_validators' => [
         'file_validate_extensions' => ['png jpg jpeg gif webp'],
-        'file_validate_size' => [2097152], // 2MB
+    // 2MB
+        'file_validate_size' => [2097152],
         'file_validate_is_image' => [],
       ],
       '#required' => FALSE,
@@ -137,7 +138,7 @@ final class LandingBannerBlock extends BlockBase {
       $exposed_form = $view->display_handler->viewExposedFormBlocks();
 
       if (!empty($exposed_form)) {
-        $build['exposed_wrapper'] =[
+        $build['exposed_wrapper'] = [
           '#type' => 'container',
           '#attributes' => [
             'class' => ['localgov-consultations--filter-block', 'lgd-container', 'padding-horizontal'],
@@ -150,4 +151,5 @@ final class LandingBannerBlock extends BlockBase {
 
     return $build;
   }
+
 }

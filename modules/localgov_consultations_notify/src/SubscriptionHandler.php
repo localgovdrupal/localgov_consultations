@@ -5,15 +5,19 @@ namespace Drupal\localgov_consultations_notify;
 use Drupal\mailing_list\SubscriptionInterface;
 use Drupal\symfony_mailer\EmailFactoryInterface;
 
-class SubscriptionHandler
-{
+/**
+ *
+ */
+class SubscriptionHandler {
 
-  function __construct(
-    private readonly EmailFactoryInterface $emailFactory
-  ) { }
+  public function __construct(
+    private readonly EmailFactoryInterface $emailFactory,
+  ) {}
 
-
-  function onSubscribe(SubscriptionInterface $subscription) {
+  /**
+   *
+   */
+  public function onSubscribe(SubscriptionInterface $subscription) {
 
     $unsubscribe = \Drupal::urlGenerator()->generateFromRoute('localgov_consultations_notify.unsubscribe', [
       'mailing_list_subscription' => $subscription->id(),
@@ -30,4 +34,5 @@ class SubscriptionHandler
 
     $this->emailFactory->sendTypedEmail('localgov_consultations_notify', 'subscribe_confirm', ...$params);
   }
+
 }
