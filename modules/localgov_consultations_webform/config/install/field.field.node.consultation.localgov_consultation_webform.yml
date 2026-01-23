@@ -20,6 +20,6 @@ settings:
   target_type: webform
   handler: 'default:webform'
   handler_settings:
-    target_bundles: { }
+    target_bundles: null
     auto_create: false
 field_type: webform
