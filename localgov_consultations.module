@@ -47,40 +47,6 @@ function localgov_consultations_theme($existing, $type, $theme, $path) {
 
 
 /**
- * Implements hook_form_FORM_ID_alter().
- *
- * FIXME: Infer based on consultations in the system, facets-style?
- */
-function localgov_consultations_form_views_exposed_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  if (isset($form['#id']) && $form['#id'] == 'views-exposed-form-consultations-page-2') {
-    $options = [
-      'all' => '- Any -',
-      '2014' => '2014',
-      '2015' => '2015',
-      '2016' => '2016',
-      '2017' => '2017',
-      '2018' => '2018',
-      '2019' => '2019',
-      '2020' => '2020',
-      '2021' => '2021',
-      '2022' => '2022',
-      '2023' => '2023',
-      '2024' => '2024',
-      '2025' => '2025',
-      '2026' => '2026',
-    ];
-
-    $form['year'] = [
-      '#title' => new TranslatableMarkup('By year'),
-      '#type' => 'select',
-      '#options' => $options,
-      '#size' => NULL,
-      '#default_value' => 'all',
-    ];
-  }
-}
-
-/**
  * Implements hook_preprocess_views_view().
  * @param $vars
  * @return void
