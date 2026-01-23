@@ -548,6 +548,7 @@ a:hover .card-img img {
   display: none;
 }
 
+.consultation__webform .field__label,
 .consultation__sidebar-item .field__label {
   font-weight: 700;
   font-size: var(--font-size-h2);
