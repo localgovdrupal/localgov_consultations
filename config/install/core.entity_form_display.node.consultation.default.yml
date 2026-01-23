@@ -65,8 +65,10 @@ third_party_settings:
       format_type: tab
       format_settings:
         classes: ''
+        show_empty_fields: false
         id: ''
-        formatter: closed
+        label_as_html: false
+        formatter: open
         description: ''
         required_fields: true
     group_image:
@@ -134,7 +136,7 @@ third_party_settings:
         show_empty_fields: false
         id: ''
         label_as_html: false
-        formatter: open
+        formatter: closed
         description: ''
         required_fields: true
     group_links:
