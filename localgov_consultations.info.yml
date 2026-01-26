@@ -4,7 +4,7 @@ description: Custom functionality for Consultations Emails
 package: Custom
 core_version_requirement: ^9 || ^10
 dependencies:
-  - datetime_range:datetime_range
+  - drupal:datetime_range
   - paragraphs:paragraphs
   - geo_entity:geo_entity
   - geo_entity_address:geo_entity_address
