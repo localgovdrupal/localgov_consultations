@@ -207,6 +207,19 @@
             </div>
           {% endif %}
 
+          {# Contact #}
+          {% if consultation_contacts %}
+            <div class="consultation__sidebar-item consultation__contacts">
+              <h3 class="field__label">Contact name</h3>
+              {% for contact in consultation_contacts %}
+                <div class="field__item">
+                  <p>{{ contact.name }}</p>
+                  <p><a class="consultation__contact-email" href="mailto:{{ contact.email }}"> {{ contact.email}} </a> </p>
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+
           {# Timeline #}
           {% if content.localgov_consultation_timeline['#items'] %}
             <div class="consultation__sidebar-item consultation__timeline">
@@ -234,7 +247,6 @@
               {{ content.localgov_consultation_purpose }}
             </div>
           {% endif %}
-
 
         </div>
 

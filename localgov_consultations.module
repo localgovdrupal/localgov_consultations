@@ -101,6 +101,22 @@ function localgov_consultations_preprocess_node(&$variables): void {
         '#suffix' => '</span>',
       ];
     }
+
+    if ($node->hasField('localgov_consultation_contact') && !$node->get('localgov_consultation_contact')->isEmpty()) {
+      $contacts = $node->get('localgov_consultation_contact');
+      $service_contacts = [];
+
+      foreach($contacts as $contact) {
+        if ($entity = $contact->entity) {
+          $service_contacts[] = [
+            'name' => $entity->get('name')->value,
+            'email' => $entity->get('email')->value,
+          ];
+        }
+      }
+
+      $variables['consultation_contacts'] = $service_contacts;
+    }
   }
 }
 
