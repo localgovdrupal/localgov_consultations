@@ -309,14 +309,16 @@ content:
       label_singular: ''
       label_plural: ''
       allow_new: true
-      allow_existing: false
+      allow_existing: true
       match_operator: CONTAINS
       allow_duplicate: false
       collapsible: false
       collapsed: false
       revision: false
       removed_reference: optional
-    third_party_settings: {  }
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
   localgov_consultation_date:
     type: daterange_default
     weight: 22
