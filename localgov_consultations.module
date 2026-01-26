@@ -117,6 +117,32 @@ function localgov_consultations_preprocess_node(&$variables): void {
 
       $variables['consultation_contacts'] = $service_contacts;
     }
+
+
+    if ($variables['view_mode'] == "teaser") {
+
+      $teaser_media_field = !$node->get('localgov_consultation_teaser_img')->isEmpty()
+        ? $node->get("localgov_consultation_teaser_img")
+        : $node->get("localgov_consultation_banner");
+
+      if ($teaser_media_field->isEmpty()) {
+        // Neither field is populated...
+        return;
+      }
+
+      $teaser_media = $teaser_media_field->entity;
+
+      if ($teaser_media && $teaser_media->hasField('field_media_image')) {
+        $variables['localgov_consultation_teaser_img'] = $teaser_media->field_media_image->view([
+          'type' => 'image',
+          'label' => 'hidden',
+          'settings' => array(
+            //'image_link' => 'content',
+            'image_style' => 'large_3_2_768x512',
+          ),
+        ]);
+      }
+    }
   }
 }
 
