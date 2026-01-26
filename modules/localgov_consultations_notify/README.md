@@ -1,30 +1,20 @@
-## INTRODUCTION
+# Localgov Consultations Notify
 
-The localgov_consultations_notify module is a DESCRIBE_THE_MODULE_HERE.
+This submodule provides email notifications for consultations.
 
-The primary use case for this module is:
+## How Emails are Triggered
 
-- Use case #1
-- Use case #2
-- Use case #3
+Emails are sent to subscribers of consultations in the following scenarios:
 
-## REQUIREMENTS
+1.  **Subscription Confirmation**: When a user subscribes to a consultation or all consultations, a confirmation email is sent to them. This is handled by the `SubscriptionHandler` service when a new subscription entity is created.
 
-DESCRIBE_MODULE_DEPENDENCIES_HERE
+2.  **Consultation Dates Changed**: When the start or end date of a consultation is changed, an email is sent to all subscribers of that consultation. This is triggered by a `hook_node_update()` implementation in the `.module` file, which calls the `Notifier` service.
 
-## INSTALLATION
+3.  **Consultation Opened**: The module checks for consultations that have recently opened and sends an email to subscribers. This is performed during cron runs (`hook_cron()`) via the `Notifier` service. This can also be triggered manually by using the `drush localgov_consultations:process-email` command.
 
-Install as you would normally install a contributed Drupal module.
-See: https://www.drupal.org/node/895232 for further information.
+4.  **Consultation Closed**: The module checks for consultations that have recently closed and sends an email to subscribers. This is also performed during cron runs. In addition to notifying subscribers, an email is sent to the contact person for the consultation, prompting them to provide the results. 
 
-## CONFIGURATION
-- Configuration step #1
-- Configuration step #2
-- Configuration step #3
 
-## MAINTAINERS
+## Email Queuing
 
-Current maintainers for Drupal 10:
-
-- FIRST_NAME LAST_NAME (NICKNAME) - https://www.drupal.org/u/NICKNAME
-
+Instead of being sent immediately, emails are added to a queue. The queue is processed during cron runs, or when the queue is processed manually. This ensures that a large number of emails does not slow down the site. The queue worker `EmailQueue` is responsible for sending the emails from the queue.
