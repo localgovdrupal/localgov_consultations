@@ -187,17 +187,25 @@ final class Notifier {
       return;
     }
 
-    // Send to the person responsible for updating this consultation.
+    // Send to the service contacts associated with this consultation.
     $queue = $this->queue->get(EmailQueue::QUEUE_NAME);
 
-    // Quick check that there IS a responsible person.
-    $email['email'] = !$consultation->get('field_email')->isEmpty()
-      ? $consultation->get('field_email')->value
-      : \Drupal::config('system.site')->get('mail');
-    $email['consultation_id'] = $consultation->id();
+    // Get service contacts from the consultation.
+    $service_contacts = $consultation->get('localgov_service_contacts')->referencedEntities();
 
-    $email['email_id'] = "consultation_closed_please_provide_result";
-    $queue->createItem($email);
+    if (!empty($service_contacts)) {
+      foreach ($service_contacts as $contact) {
+        // Skip disabled service contacts.
+        if (!$contact->isEnabled()) {
+          continue;
+        }
+
+        $email['email'] = $contact->getEmail();
+        $email['consultation_id'] = $consultation->id();
+        $email['email_id'] = "consultation_closed_please_provide_result";
+        $queue->createItem($email);
+      }
+    }
   }
 
 }
