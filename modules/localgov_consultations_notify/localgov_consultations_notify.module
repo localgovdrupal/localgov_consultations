@@ -102,40 +102,50 @@ function localgov_consultations_notify_mailing_list_subscription_insert(Drupal\C
  */
 function localgov_consultations_notify_node_update(\Drupal\node\NodeInterface $entity) : void {
   if ($entity->bundle() == 'consultation') {
-    // If the dates haven't changed, then we don't need to do anything.
-    // These properties should have been set in our presave hook above.
+    /** @var \Drupal\localgov_consultations_notify\Notifier $notifier */
+    $notifier = \Drupal::service('localgov_consultations_notify.notifier');
+
+    // Check for status changes.
+    $current_status = $entity->get('localgov_consultation_status')->value;
+    $original_status = $entity->original->get('localgov_consultation_status')->value;
+
+    if ($current_status !== $original_status) {
+      // Consultation has been opened.
+      if ($original_status === 'upcoming' && $current_status === 'open') {
+        $notifier->notifySubscribers($entity, NotificationReason::ConsultationOpened);
+        \Drupal::messenger()
+          ->addMessage('An email has been scheduled to inform subscribers that the consultation has opened');
+      }
+
+      // Consultation has been closed.
+      if ($original_status === 'open' && $current_status === 'closed') {
+        $notifier->notifySubscribers($entity, NotificationReason::ConsulationClosed);
+        $notifier->notifyConsultationContact($entity, NotificationReason::ConsulationClosed);
+        \Drupal::messenger()
+          ->addMessage('An email has been scheduled to inform subscribers that the consultation has closed');
+      }
+    }
+
+    // Check if dates have changed.
     $current_field = $entity->get('localgov_consultation_date');
     $original_field = $entity->original->get('localgov_consultation_date');
 
-    if ($current_field->isEmpty() || $original_field->isEmpty()) {
-      return;
-    }
+    if (!$current_field->isEmpty() && !$original_field->isEmpty()) {
+      $current_values = $current_field->getValue();
+      $original_values = $original_field->getValue();
 
-    $current_values = $current_field->getValue();
-    $original_values = $original_field->getValue();
+      $current_start = $current_values[0]['value'] ?? NULL;
+      $current_end = $current_values[0]['end_value'] ?? NULL;
+      $original_start = $original_values[0]['value'] ?? NULL;
+      $original_end = $original_values[0]['end_value'] ?? NULL;
 
-    $current_start = $current_values[0]['value'] ?? NULL;
-    $current_end = $current_values[0]['end_value'] ?? NULL;
-    $original_start = $original_values[0]['value'] ?? NULL;
-    $original_end = $original_values[0]['end_value'] ?? NULL;
-
-    /** @var \Drupal\localgov_consultations_notify\Notifier $notifier */
-
-    if ($current_start !== $original_start || $current_end !== $original_end) {
-      $notifier = \Drupal::service('localgov_consultations_notify.notifier');
-      $notifier->notifySubscribers($entity, NotificationReason::ConsultationDatesChanged);
-
-      \Drupal::messenger()
-        ->addMessage('An email has been scheduled to inform subscribers about the date change');
+      if ($current_start !== $original_start || $current_end !== $original_end) {
+        $notifier->notifySubscribers($entity, NotificationReason::ConsultationDatesChanged);
+        \Drupal::messenger()
+          ->addMessage('An email has been scheduled to inform subscribers about the date change');
+      }
     }
   }
-}
-
-/**
- * Implements hook_cron().
- */
-function localgov_consultations_notify_cron() {
-  \Drupal::service('localgov_consultations_notify.notifier')->processStateChanges();
 }
 
 /**

@@ -16,3 +16,14 @@ function localgov_consultations_notify_install() {
   $role_object->grantPermission('subscribe to consultations mailing list');
   $role_object->save();
 }
+
+/**
+ * Clean up state variables from date-based notification system.
+ *
+ * Notifications are now triggered by status field changes instead of
+ * date-based querying, so these state variables are no longer needed.
+ */
+function localgov_consultations_notify_update_9001() {
+  \Drupal::state()->delete('localgov_consultations_process_opens_last_run');
+  \Drupal::state()->delete('localgov_consultations_process_closes_last_run');
+}

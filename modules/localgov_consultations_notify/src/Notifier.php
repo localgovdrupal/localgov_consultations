@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace Drupal\localgov_consultations_notify;
 
-use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Queue\QueueFactory;
-use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\localgov_consultations_notify\Plugin\QueueWorker\EmailQueue;
-use Drupal\node\Entity\Node;
 
 /**
  *
@@ -33,85 +30,6 @@ final class Notifier {
   public function __construct(
     private readonly QueueFactory $queue,
   ) {}
-
-  /**
-   * Find all consultations that have opened/closed since last run. Called from e.g. cron.
-   *
-   * @return void
-   *
-   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
-   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
-   * @throws \Drupal\Core\Entity\EntityMalformedException
-   */
-  public function processStateChanges() : void {
-    $this->process_opens();
-    $this->process_closes();
-  }
-
-  /**
-   * Queue notification emails for consultations that have opened.
-   *
-   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
-   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
-   * @throws \Drupal\Core\Entity\EntityMalformedException
-   */
-  private function process_opens() {
-    $now = new DrupalDateTime('now', \Drupal::config('system.date')->get('timezone')['default']);
-    $last_run_timestamp = \Drupal::state()->get('localgov_consultations_process_opens_last_run');
-    $last_run = date_timestamp_set(new \DateTime(), $last_run_timestamp)->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT);
-
-    // Find consultations that have opened since our last run.
-    $open_query = \Drupal::entityQuery('node');
-    $open_query
-      ->accessCheck(TRUE)
-      ->condition('type', 'consultation')
-      ->condition('localgov_consultation_date.value', $now->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT), '<=')
-      ->condition('localgov_consultation_date.value', $last_run, '>=')
-      ->condition('status', 1);
-
-    $opened_consultations = $open_query->execute();
-    $opened_consultation_nodes = Node::loadMultiple($opened_consultations);
-
-    foreach ($opened_consultation_nodes as $consultation_node) {
-
-      $this->notifySubscribers($consultation_node, NotificationReason::ConsultationOpened);
-    }
-
-    \Drupal::state()->set('localgov_consultations_process_opens_last_run', $now->getTimestamp());
-  }
-
-  /**
-   * Queue notification emails for consultations that have closed.
-   *
-   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
-   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
-   * @throws \Drupal\Core\Entity\EntityMalformedException
-   */
-  private function process_closes() {
-
-    // This seems to be buggy - last run state var never gets updated, so keeps e-mailing people. Disabled for now.
-    $now = new DrupalDateTime('now', \Drupal::config('system.date')->get('timezone')['default']);
-    $last_run_timestamp = \Drupal::state()->get('localgov_consultations_process_closes_last_run');
-    $last_run = date_timestamp_set(new \DateTime(), $last_run_timestamp)->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT);
-
-    // Find queries that have opened since our last run.
-    $closed_query = \Drupal::entityQuery('node');
-    $closed_query
-      ->accessCheck(TRUE)
-      ->condition('type', 'consultation')
-      ->condition('localgov_consultation_date.end_value', $now->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT), '<=')
-      ->condition('localgov_consultation_date.end_value', $last_run, '>=')
-      ->condition('status', 1);
-    $closed_consultations = $closed_query->execute();
-    $closed_consultation_nodes = Node::loadMultiple($closed_consultations);
-
-    foreach ($closed_consultation_nodes as $consultation_node) {
-      $this->notifySubscribers($consultation_node, NotificationReason::ConsulationClosed);
-      $this->notifyConsultationContact($consultation_node, NotificationReason::ConsulationClosed);
-    }
-
-    \Drupal::state()->set('localgov_consultations_process_closes_last_run', $now->getTimestamp());
-  }
 
   /**
    * Helper function to get subscriptions to this consultation / all consultations.
