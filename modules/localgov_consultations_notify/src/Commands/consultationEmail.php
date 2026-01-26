@@ -7,7 +7,7 @@ use Drush\Commands\DrushCommands;
 /**
  * A drush command file.
  *
- * @package Drupal\localgov_consultations\Commands
+ * @package Drupal\localgov_consultations_notify\Commands
  */
 class consultationEmail extends DrushCommands {
 
@@ -18,10 +18,7 @@ class consultationEmail extends DrushCommands {
    * @usage localgov_consultations:process-email
    */
   public function localgov_consultation_email() {
-    localgov_consultations_notify_process_opens();
-
-    // Disabled due to bugs
-    // localgov_consultations_notify_process_closes();
+    \Drupal::service('localgov_consultations_notify.notifier')->processStateChanges();
   }
 
 }
