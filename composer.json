@@ -1,6 +1,10 @@
 {
-    "name": "webcurl/localgov_consultations",
+    "name": "drupal/localgov_consultations",
+    "description": "Provides content types and configuration for consultations in LocalGov Drupal.",
     "type": "drupal-module",
+    "homepage": "https://drupal.org/project/localgov_consultations",
+    "license": "GPL-2.0-or-later",
+    "minimum-stability": "dev",
     "suggest": {
         "drupal/mailing_list": "^1.3"
     }
