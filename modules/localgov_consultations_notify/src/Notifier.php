@@ -13,7 +13,7 @@ use Drupal\localgov_consultations_notify\Plugin\QueueWorker\EmailQueue;
  */
 enum NotificationReason {
   case ConsultationClosing;
-  case ConsulationClosed;
+  case ConsultationClosed;
   case ConsultationDatesChanged;
   case ConsultationOpened;
 }
@@ -83,7 +83,7 @@ final class Notifier {
         NotificationReason::ConsultationOpened => "consultation_opened",
         NotificationReason::ConsultationDatesChanged => "consultation_dates_changed",
         NotificationReason::ConsultationClosing => NULL,
-        NotificationReason::ConsulationClosed => NULL
+        NotificationReason::ConsultationClosed => NULL
       };
 
       if ($email['email_id'] != NULL) {
@@ -101,7 +101,7 @@ final class Notifier {
    * @return void
    */
   public function notifyConsultationContact(ContentEntityInterface $consultation, NotificationReason $reason) : void {
-    if ($reason != NotificationReason::ConsulationClosed) {
+    if ($reason != NotificationReason::ConsultationClosed) {
       return;
     }
 

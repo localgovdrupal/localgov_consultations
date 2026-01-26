@@ -119,8 +119,8 @@ function localgov_consultations_notify_node_update(\Drupal\node\NodeInterface $e
 
       // Consultation has been closed.
       if ($original_status === 'open' && $current_status === 'closed') {
-        $notifier->notifySubscribers($entity, NotificationReason::ConsulationClosed);
-        $notifier->notifyConsultationContact($entity, NotificationReason::ConsulationClosed);
+        $notifier->notifySubscribers($entity, NotificationReason::ConsultationClosed);
+        $notifier->notifyConsultationContact($entity, NotificationReason::ConsultationClosed);
         \Drupal::messenger()
           ->addMessage('An email has been scheduled to inform subscribers that the consultation has closed');
       }
