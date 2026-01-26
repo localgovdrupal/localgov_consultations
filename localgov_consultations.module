@@ -136,3 +136,12 @@ function localgov_consultations_preprocess_paragraph(&$variables) {
     $variables['is_complete'] = $is_complete;
   }
 }
+
+/**
+ * Implements hook_cron().
+ *
+ * Automatically update consultation statuses based on their dates.
+ */
+function localgov_consultations_cron() {
+  \Drupal::service('localgov_consultations.status_manager')->updateConsultationStatuses();
+}

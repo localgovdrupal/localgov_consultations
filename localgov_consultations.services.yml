@@ -1,0 +1,4 @@
+services:
+  localgov_consultations.status_manager:
+    class: Drupal\localgov_consultations\StatusManager
+    arguments: ['@entity_type.manager', '@datetime.time', '@logger.factory']

@@ -1,0 +1,6 @@
+services:
+  localgov_consultations.commands:
+    class: Drupal\localgov_consultations\Commands\ConsultationCommands
+    arguments: ['@localgov_consultations.status_manager']
+    tags:
+      - { name: drush.command }
