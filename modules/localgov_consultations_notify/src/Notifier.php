@@ -65,8 +65,8 @@ final class Notifier {
     $open_query
       ->accessCheck(TRUE)
       ->condition('type', 'consultation')
-      ->condition('localgov_consultation_start_date', $now->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT), '<=')
-      ->condition('localgov_consultation_start_date', $last_run, '>=')
+      ->condition('localgov_consultation_date.value', $now->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT), '<=')
+      ->condition('localgov_consultation_date.value', $last_run, '>=')
       ->condition('status', 1);
 
     $opened_consultations = $open_query->execute();
@@ -99,8 +99,8 @@ final class Notifier {
     $closed_query
       ->accessCheck(TRUE)
       ->condition('type', 'consultation')
-      ->condition('localgov_consultation_end_date', $now->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT), '<=')
-      ->condition('localgov_consultation_end_date', $last_run, '>=')
+      ->condition('localgov_consultation_date.end_value', $now->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT), '<=')
+      ->condition('localgov_consultation_date.end_value', $last_run, '>=')
       ->condition('status', 1);
     $closed_consultations = $closed_query->execute();
     $closed_consultation_nodes = Node::loadMultiple($closed_consultations);

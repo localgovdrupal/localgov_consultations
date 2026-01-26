@@ -55,12 +55,12 @@ class ConsultationsEmailBuilder extends EmailBuilderBase {
     $consultation_close_date = NULL;
 
     if ($consultation) {
-      $consultation_open_date = !$consultation->get('localgov_consultation_start_date')->isEmpty()
-        ? $date_formatter->format($consultation->get('localgov_consultation_start_date')->date->getTimestamp())
+      $consultation_open_date = !$consultation->get('localgov_consultation_date')->isEmpty()
+        ? $date_formatter->format($consultation->get('localgov_consultation_date')->start_date->getTimestamp())
         : "TBD";
 
-      $consultation_close_date = !$consultation->get('localgov_consultation_end_date')->isEmpty()
-        ? $date_formatter->format($consultation->get('localgov_consultation_end_date')->date->getTimestamp())
+      $consultation_close_date = !$consultation->get('localgov_consultation_date')->isEmpty()
+        ? $date_formatter->format($consultation->get('localgov_consultation_date')->end_date->getTimestamp())
         : "TBD";
     }
 
