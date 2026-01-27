@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\localgov_consultations;
 
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
@@ -17,11 +18,21 @@ final class StatusManager {
 
   /**
    * Constructs a StatusManager object.
+   *
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   * The entity type manager.
+   * @param \Drupal\Component\Datetime\TimeInterface $time
+   * The time service.
+   * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $loggerFactory
+   * The logger factory.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
+   * The config factory.
    */
   public function __construct(
     private readonly EntityTypeManagerInterface $entityTypeManager,
     private readonly TimeInterface $time,
     private readonly LoggerChannelFactoryInterface $loggerFactory,
+    private readonly ConfigFactoryInterface $configFactory,
   ) {}
 
   /**
@@ -32,17 +43,22 @@ final class StatusManager {
    * - 'open' -> 'closed' if the end date has passed
    *
    * @return array
-   *   An array containing counts of opened and closed consultations.
+   * An array containing counts of opened and closed consultations.
    *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function updateConsultationStatuses(): array {
     $opened_count = 0;
     $closed_count = 0;
     $logger = $this->loggerFactory->get('localgov_consultations');
 
-    $now = new DrupalDateTime('now', \Drupal::config('system.date')->get('timezone')['default']);
+    // Use injected config factory to avoid \Drupal::config static calls.
+    $system_date = $this->configFactory->get('system.date');
+    $timezone = $system_date->get('timezone')['default'] ?? 'UTC';
+
+    $now = new DrupalDateTime('now', $timezone);
     $now_formatted = $now->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT);
 
     // Find consultations that should be opened (status=upcoming and start date has passed).
