@@ -11,7 +11,6 @@ dependencies:
   - inline_entity_form:inline_entity_form
   - layout_paragraphs:layout_paragraphs
   - localgov_services:localgov_services_navigation
-  - localgov_review_date:localgov_review_date
   - localgov_workflows_notifications:localgov_workflows_notifications
 
 config_devel:
