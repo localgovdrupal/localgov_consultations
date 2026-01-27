@@ -5,9 +5,13 @@ declare(strict_types=1);
 namespace Drupal\localgov_consultations\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Extension\ModuleExtensionList;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\file\Entity\File;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\file\FileUsage\FileUsageInterface;
 use Drupal\views\Views;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides a consultations banner image block.
@@ -18,7 +22,72 @@ use Drupal\views\Views;
  * category = @Translation("LocalGov Consultations"),
  * )
  */
-final class LandingBannerBlock extends BlockBase {
+final class LandingBannerBlock extends BlockBase implements ContainerFactoryPluginInterface {
+
+  /**
+   * The entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected EntityTypeManagerInterface $entityTypeManager;
+
+  /**
+   * The file usage service.
+   *
+   * @var \Drupal\file\FileUsage\FileUsageInterface
+   */
+  protected FileUsageInterface $fileUsage;
+
+  /**
+   * The module extension list.
+   *
+   * @var \Drupal\Core\Extension\ModuleExtensionList
+   */
+  protected ModuleExtensionList $moduleExtensionList;
+
+  /**
+   * Constructs a LandingBannerBlock object.
+   *
+   * @param array $configuration
+   *   A configuration array containing information about the plugin instance.
+   * @param string $plugin_id
+   *   The plugin_id for the plugin instance.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager.
+   * @param \Drupal\file\FileUsage\FileUsageInterface $file_usage
+   *   The file usage service.
+   * @param \Drupal\Core\Extension\ModuleExtensionList $module_extension_list
+   *   The module extension list.
+   */
+  public function __construct(
+    array $configuration,
+    $plugin_id,
+    $plugin_definition,
+    EntityTypeManagerInterface $entity_type_manager,
+    FileUsageInterface $file_usage,
+    ModuleExtensionList $module_extension_list,
+  ) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+    $this->entityTypeManager = $entity_type_manager;
+    $this->fileUsage = $file_usage;
+    $this->moduleExtensionList = $module_extension_list;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('entity_type.manager'),
+      $container->get('file.usage'),
+      $container->get('extension.list.module'),
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -69,8 +138,8 @@ final class LandingBannerBlock extends BlockBase {
     $new_fid = !empty($image_values[0]) ? (int) $image_values[0] : NULL;
     $old_fid = !empty($this->configuration['image_fid']) ? (int) $this->configuration['image_fid'] : NULL;
 
-    $file_storage = \Drupal::entityTypeManager()->getStorage('file');
-    $file_usage = \Drupal::service('file.usage');
+    $file_storage = $this->entityTypeManager->getStorage('file');
+    $file_usage = $this->fileUsage;
 
     if ($new_fid !== $old_fid) {
       if ($old_fid) {
@@ -98,7 +167,7 @@ final class LandingBannerBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build(): array {
-    $file = !empty($this->configuration['image_fid']) ? File::load($this->configuration['image_fid']) : NULL;
+    $file = !empty($this->configuration['image_fid']) ? $this->entityTypeManager->getStorage('file')->load($this->configuration['image_fid']) : NULL;
 
     if ($file) {
       $image_uri = $file->getFileUri();
@@ -106,7 +175,7 @@ final class LandingBannerBlock extends BlockBase {
     }
     else {
       // Fallback to module's internal image.
-      $module_path = \Drupal::service('extension.list.module')->getPath('localgov_consultations');
+      $module_path = $this->moduleExtensionList->getPath('localgov_consultations');
       $image_uri = $module_path . '/images/localgov_consultations_demo_image.jpg';
       $cache_tags = [];
     }

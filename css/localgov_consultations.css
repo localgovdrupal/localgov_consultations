@@ -4,14 +4,14 @@
 
 .localgov-consultations-view .view-header .views-display-link {
   margin: 0;
-  cursor: pointer;
-  color: var(--tabs-text-color);
+  padding: 1rem 0.5rem;
   border: var(--tabs-border);
   border-color: var(--tabs-border-color);
   background: var(--tabs-button-bg-color);
+  color: var(--tabs-text-color);
   font-family: var(--tabs-button-font-family);
   font-size: var(--tabs-button-font-size);
-  padding: 1rem .5rem;
+  cursor: pointer;
 }
 
 .localgov-consultations-view .view-header .views-display-link.is-active {
@@ -39,26 +39,26 @@
 }
 
 .consultation-card {
-  height: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
-  position: relative;
+  height: 100%;
 }
 
 .consultation--date {
   position: absolute;
+  z-index: 5;
+  margin-top: 1rem;
+  padding: 0.25rem 0.5rem;
   background-color: var(--color-accent);
   color: var(--button-text-color);
-  padding: 0.25rem 0.5rem;
-  margin-top: 1rem;
-  z-index: 5;
 }
 
 .consultation--date span {
   font-weight: 600;
 }
 
-.consultation-card > a:not([class*='toolbar']):focus {
+.consultation-card > a:not([class*="toolbar"]):focus {
   background-color: #045a90;
   .card-body * {
     color: var(--color-white);
@@ -66,14 +66,18 @@
 }
 
 .consultation-card > a {
-  box-shadow: 0 4px 8px 0 rgba(128, 128, 128, 0.2), 0 6px 20px 0 rgba(128, 128, 128, 0.19);
   height: 100%;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   background-color: #fff;
+  box-shadow:
+    0 4px 8px 0 rgb(128 128 128 / 0.2),
+    0 6px 20px 0 rgb(128 128 128 / 0.19);
 }
 
 .consultation-card > a:hover {
-  box-shadow: 0 4px 8px 0 rgba(128, 128, 128, 0.6), 0 6px 20px 0 rgba(128, 128, 128, 0.8);
+  box-shadow:
+    0 4px 8px 0 rgb(128 128 128 / 0.6),
+    0 6px 20px 0 rgb(128 128 128 / 0.8);
 }
 
 .consultation-card > a:hover .card-title {
@@ -81,17 +85,17 @@
 }
 
 .card-img {
-  border-top-left-radius: .25rem;
-  border-top-right-radius: .25rem;
   overflow: hidden;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
 }
 
 .card-img img {
+  width: 100%;
   height: 12rem;
   object-fit: cover;
   object-position: 50% 50%;
   transition: transform 0.25s ease-in-out;
-  width: 100%;
 }
 
 a:hover .card-img img {
@@ -99,8 +103,8 @@ a:hover .card-img img {
 }
 
 .card-body {
-  padding: 1.5rem;
   flex-grow: 1;
+  padding: 1.5rem;
 }
 
 .views-view-responsive-grid__item-inner {
@@ -171,10 +175,10 @@ a:hover .card-img img {
           display: flex;
 
           button {
-            margin-left: 5px;
             height: 45px;
-            border-radius: 5px;
+            margin-left: 5px;
             padding-top: 0.75rem;
+            border-radius: 5px;
           }
         }
       }
@@ -194,14 +198,17 @@ a:hover .card-img img {
   }
 
   @media screen and (min-width: 1280px) {
-    .path-consultations, .page-node-type-consultation {
+    .path-consultations,
+    .page-node-type-consultation {
       .branding__logo img {
         height: 60px;
       }
     }
   }
 }
-.view-consultations .view-content, .view-consultations .view-empty {
+
+.view-consultations .view-content,
+.view-consultations .view-empty {
   margin-top: 3rem;
 }
 
@@ -215,64 +222,65 @@ a:hover .card-img img {
 .consultation__link .field__item a {
   position: relative;
   display: block;
+  box-sizing: border-box;
   width: 100%;
   max-width: 40%;
+  margin-bottom: 0;
   padding: 2rem 1rem;
-  color: var(--color-text);
-  font-size: 18px;
-  letter-spacing: 0;
-  line-height: 21px;
-  font-weight: normal !important;
+  border: 1px solid #d8d7dc;
+  border-bottom: 2px solid var(--color-accent);
   border-radius: 0 !important;
   background-color: white;
-  border: 1px solid #d8d7dc;
-  box-sizing: border-box;
-  border-bottom: 2px solid var(--color-accent);
-  box-shadow: 0px 0px 2px #00000029;
-  transition: background-color 0.3s;
+  box-shadow: 0 0 2px #00000029;
+  color: var(--color-text);
+  font-size: 18px;
+  font-weight: normal !important;
+  letter-spacing: 0;
+  line-height: 21px;
   text-decoration: none;
+  transition: background-color 0.3s;
 }
 
 .consultation__link .field__item a:hover {
   background-color: var(--button-bg-color, #f5f5f5);
-  color: var(--button-text-color, #ffffff);
+  color: var(--button-text-color, #fff);
 }
 
 /* Right-pointing triangle for main link */
 .consultation__link .field__item a::after {
   content: "";
   display: inline-block;
+  float: right;
   width: 0;
   height: 0;
-  border-left: 8px solid currentColor;
+  margin-top: 4px;
+  margin-left: 10px;
   border-top: 6px solid transparent;
   border-bottom: 6px solid transparent;
-  float: right;
-  margin-left: 10px;
-  margin-top: 4px;
+  border-left: 8px solid currentColor;
 }
 
 .consultation__top_tasks .field__item a,
 .consultation__results_link .field__item a {
   position: relative;
   display: block;
+  box-sizing: border-box;
   width: 100%;
-  padding: 1rem;
   margin-bottom: 0.5rem;
-  text-align: left;
-  color: var(--button-text-color);
-  font-size: 18px;
-  letter-spacing: 0;
-  line-height: 21px;
-  font-weight: normal !important;
+  padding: 1rem;
+  border: 1px solid var(--color-accent);
+  border-bottom: 2px solid var(--color-accent);
   border-radius: 0 !important;
   background-color: var(--button-bg-color);
-  border: 1px solid var(--color-accent);
-  box-sizing: border-box;
-  border-bottom: 2px solid var(--color-accent);
-  box-shadow: 0px 0px 2px #00000029;
-  transition: background-color 0.3s;
+  box-shadow: 0 0 2px #00000029;
+  color: var(--button-text-color);
+  font-size: 18px;
+  font-weight: normal !important;
+  letter-spacing: 0;
+  line-height: 21px;
+  text-align: left;
   text-decoration: none;
+  transition: background-color 0.3s;
 }
 
 .consultation__results_link .field--name-localgov-consultation-rs-link {
@@ -309,25 +317,25 @@ a:hover .card-img img {
 }
 
 .localgov-consultations--banner-block-wrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 50vh;
   min-height: 400px;
-  position: relative;
 }
 
 .localgov-consultations--banner-image {
   position: absolute;
   top: 0;
-  left: 0;
   right: 0;
   bottom: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .localgov-consultations--banner-image img {
@@ -339,8 +347,8 @@ a:hover .card-img img {
 
 .banner-placeholder__image {
   overflow: hidden;
-  max-height: 50vh;
   min-height: 400px;
+  max-height: 50vh;
 }
 
 .banner-placeholder__image img {
@@ -354,13 +362,13 @@ a:hover .card-img img {
   position: absolute;
   bottom: 0;
   left: 50%;
-  transform: translateX(-50%);
   z-index: 10;
   width: 90%;
   max-width: 1200px;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   background: var(--color-accent);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.3);
+  transform: translateX(-50%);
 }
 
 .localgov-consultations--filter-block label {
@@ -385,9 +393,9 @@ a:hover .card-img img {
 
 .localgov-consultations--filter-block form .js-form-item input,
 .localgov-consultations--filter-block form .js-form-item select {
-  border-radius: 0.25rem;
   width: 100%;
   padding: 0.5rem;
+  border-radius: 0.25rem;
 }
 
 .localgov-consultations--filter-block form .js-form-item input:focus,
@@ -413,8 +421,8 @@ a:hover .card-img img {
   }
 
   .localgov-consultations--filter-block {
-    width: 92%;
     bottom: -4rem;
+    width: 92%;
   }
 
   .localgov-consultations--filter-block form {
@@ -439,8 +447,8 @@ a:hover .card-img img {
   }
 
   .localgov-consultations--filter-block {
-    width: 94%;
     bottom: -18rem;
+    width: 94%;
   }
 
   .localgov-consultations--filter-block form {
@@ -454,7 +462,6 @@ a:hover .card-img img {
   }
 }
 
-
 .view-consultations .view-content,
 .view-consultations .view-empty {
   margin-top: 3rem;
@@ -463,8 +470,8 @@ a:hover .card-img img {
 /* Consultation node two-column responsive grid layout */
 /* Grid container */
 .consultation__content {
-  margin-top: 2rem;
   width: 100%;
+  margin-top: 2rem;
 }
 
 .consultation__grid {
@@ -478,17 +485,17 @@ a:hover .card-img img {
 .consultation__row {
   display: flex;
   flex-wrap: wrap;
-  margin-left: -15px;
   margin-right: -15px;
+  margin-left: -15px;
 }
 
 /* Column base styles */
 .consultation__col {
   position: relative;
-  width: 100%;
-  padding-left: 15px;
-  padding-right: 15px;
   box-sizing: border-box;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
 }
 
 /* Mobile first - full width on small screens */
@@ -500,16 +507,16 @@ a:hover .card-img img {
 
 /* Desktop layout - 768px and up */
 @media (min-width: 768px) {
-  /* Main content column - 66.666667% (2/3) */
+  /* Main content column - 66.66667% (2/3) */
   .consultation__col-main {
-    flex: 0 0 66.666667%;
-    max-width: 66.666667%;
+    flex: 0 0 66.66667%;
+    max-width: 66.66667%;
   }
 
-  /* Sidebar column - 33.333333% (1/3) */
+  /* Sidebar column - 33.33333% (1/3) */
   .consultation__col-sidebar {
-    flex: 0 0 33.333333%;
-    max-width: 33.333333%;
+    flex: 0 0 33.33333%;
+    max-width: 33.33333%;
   }
 }
 
@@ -536,12 +543,14 @@ a:hover .card-img img {
 
 .consultation__col-results,
 .consultation__sidebar-item {
-  background: #fff;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
   border: 1px solid #d4d4d4;
   border-radius: 0.25rem;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  box-shadow: rgba(128, 128, 128, 0.2) 0px 4px 8px 0px, rgba(128, 128, 128, 0.19) 0px 6px 20px 0px;
+  background: #fff;
+  box-shadow:
+    rgb(128 128 128 / 0.2) 0 4px 8px 0,
+    rgb(128 128 128 / 0.19) 0 6px 20px 0;
 }
 
 .consultation--is-complete {
@@ -550,10 +559,10 @@ a:hover .card-img img {
 
 .consultation__webform .field__label,
 .consultation__sidebar-item .field__label {
-  font-weight: 700;
-  font-size: var(--font-size-h2);
   margin-bottom: var(--vertical-rhythm-spacing);
   color: var(--color-accent, #045a90);
+  font-size: var(--font-size-h2);
+  font-weight: 700;
 }
 
 /* Tablet landscape (769px - 1024px) */
@@ -574,18 +583,18 @@ a:hover .card-img img {
 /* Tablet portrait and below (up to 768px) */
 @media (max-width: 767px) {
   .consultation__row {
-    margin-left: 0;
     margin-right: 0;
+    margin-left: 0;
   }
 
   .consultation__col {
-    padding-left: 0;
     padding-right: 0;
+    padding-left: 0;
   }
 
   .consultation__col-main {
-    padding-right: 0;
     margin-bottom: 2rem;
+    padding-right: 0;
   }
 
   .consultation__col-sidebar {
@@ -593,8 +602,8 @@ a:hover .card-img img {
   }
 
   .consultation__sidebar-item {
-    padding: 1.25rem;
     margin-bottom: 1rem;
+    padding: 1.25rem;
   }
 }
 
@@ -609,8 +618,8 @@ a:hover .card-img img {
   }
 
   .consultation__sidebar-item {
-    padding: 1rem;
     margin-bottom: 1rem;
+    padding: 1rem;
   }
 
   .consultation__sidebar-item .field__label {
