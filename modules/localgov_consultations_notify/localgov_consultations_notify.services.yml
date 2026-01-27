@@ -5,7 +5,7 @@ services:
       - { name: drush.command }
   localgov_consultations_notify.notifier:
     class: Drupal\localgov_consultations_notify\Notifier
-    arguments: ['@queue']
+    arguments: ['@queue', '@config.factory', '@state', '@entity_type.manager', '@url_generator']
   localgov_consultations_notify.subscription_handler:
     class: Drupal\localgov_consultations_notify\SubscriptionHandler
-    arguments: ['@email_factory']
+    arguments: ['@email_factory', '@url_generator']
