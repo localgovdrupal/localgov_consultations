@@ -10,7 +10,8 @@ use Drupal\node\Entity\Node;
 /**
  * Removes a user's mailing_list_subscription.
  * Via special URL access.
- * So they don't have to go via the dodgy mailing_list interface.
+ * So they don't have to go via the dodgy
+ * mailing_list interface.
  */
 class UnsubscribeForm extends ConfirmFormBase {
 
@@ -66,7 +67,10 @@ class UnsubscribeForm extends ConfirmFormBase {
   }
 
   /**
+   * Returns a unique string identifying the form.
    *
+   * @return string
+   *  The form ID
    */
   public function getFormId() {
     return 'localgov_consultations_unsubscribe';

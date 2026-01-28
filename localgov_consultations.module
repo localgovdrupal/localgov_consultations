@@ -1,8 +1,12 @@
 <?php
 
+/**
+ * @file
+ * Primary module hook for localgov_consultations module.
+ */
+
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
-
 
 /**
  * Implements hook_theme().
@@ -27,7 +31,7 @@ function localgov_consultations_theme($existing, $type, $theme, $path) {
       'template' => 'field--node--localgov-consultation-date--consultation',
       'path' => $path . '/templates/field',
     ],
-      'field__node__localgov_consultation_timeline__consultation' => [
+    'field__node__localgov_consultation_timeline__consultation' => [
       'base hook' => 'field',
       'template' => 'field--node--localgov-consultation-timeline--consultation',
       'path' => $path . '/templates/field',
@@ -45,13 +49,13 @@ function localgov_consultations_theme($existing, $type, $theme, $path) {
   ];
 }
 
-
 /**
  * Implements hook_preprocess_views_view().
- * @param $vars
- * @return void
+ *
+ * @param array $vars
+ *   Variables array for the views view template.
  */
-function localgov_consultations_preprocess_views_view(&$vars) {
+function localgov_consultations_preprocess_views_view(array &$vars): void {
 
   if ($vars['view']->id() == "consultations") {
     $vars['#attached']['library'][] = 'localgov_consultations/localgov_consultations';
@@ -63,10 +67,11 @@ function localgov_consultations_preprocess_views_view(&$vars) {
 
 /**
  * Implements hook_preprocess_node().
- * @param $variables
- * @return void
+ *
+ * @param array $variables
+ *   Variables array for the node template.
  */
-function localgov_consultations_preprocess_node(&$variables): void {
+function localgov_consultations_preprocess_node(array &$variables): void {
   $node = $variables['node'];
 
   if ($node->bundle() === 'consultation') {
@@ -75,7 +80,7 @@ function localgov_consultations_preprocess_node(&$variables): void {
     if ($node->hasField('localgov_consultation_date') && !$node->get('localgov_consultation_date')->isEmpty()) {
       $date_item = $node->get('localgov_consultation_date')->first();
 
-      // Convert ISO string from DB to timestamps
+      // Convert ISO string from DB to timestamps.
       $start_ts = strtotime($date_item->value);
       $end_ts = strtotime($date_item->end_value);
       $now = time();
@@ -106,7 +111,7 @@ function localgov_consultations_preprocess_node(&$variables): void {
       $contacts = $node->get('localgov_consultation_contact');
       $service_contacts = [];
 
-      foreach($contacts as $contact) {
+      foreach ($contacts as $contact) {
         if ($entity = $contact->entity) {
           $service_contacts[] = [
             'name' => $entity->get('name')->value,

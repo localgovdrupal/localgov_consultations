@@ -1,6 +1,12 @@
 <?php
 
+/**
+ * @file
+ * Install, update and uninstall functions for the localgov_consultations module.
+ */
+
 use Drupal\block\Entity\Block;
+use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
  * Implements hook_install().
@@ -9,7 +15,7 @@ use Drupal\block\Entity\Block;
  */
 function localgov_consultations_install() {
   // 1. Initialise last run state for notifications.
-  $now = new Drupal\Core\Datetime\DrupalDateTime('now');
+  $now = new DrupalDateTime('now');
   \Drupal::state()->set('localgov_consultations_process_opens_last_run', $now->getTimestamp());
   \Drupal::state()->set('localgov_consultations_process_closes_last_run', $now->getTimestamp());
 
@@ -23,15 +29,13 @@ function localgov_consultations_install() {
   // 3. Define the theme to place blocks in.
   $theme = \Drupal::config('system.theme')->get('default');
 
-  /**
-   * Add Localgov Consultations Landing Banner block.
-   */
+  // Add Localgov Consultations Landing Banner block.
   $landing_banner = Block::load('localgov_consultations_landing_banner') ?: Block::create([
     'id' => 'localgov_consultations_landing_banner',
     'plugin' => 'localgov_consultations_landing_banner',
     'settings' => [
       'label_display' => FALSE,
-    ]
+    ],
   ]);
   $landing_banner->set('theme', $theme);
   $landing_banner->set('region', 'banner');
@@ -43,15 +47,13 @@ function localgov_consultations_install() {
   ]);
   $landing_banner->save();
 
-  /**
-   * Add Localgov Consultations Page Banner.
-   */
+  // Add Localgov Consultations Page Banner.
   $page_banner = Block::load('localgov_consultations_page_banner') ?: Block::create([
     'id' => 'localgov_consultations_page_banner',
     'plugin' => 'localgov_consultations_page_banner',
     'settings' => [
       'label_display' => FALSE,
-    ]
+    ],
   ]);
   $page_banner->set('theme', $theme);
   $page_banner->set('region', 'banner');

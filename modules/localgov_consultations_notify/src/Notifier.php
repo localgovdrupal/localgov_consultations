@@ -4,20 +4,15 @@ declare(strict_types=1);
 
 namespace Drupal\localgov_consultations_notify;
 
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Queue\QueueFactory;
+use Drupal\Core\Routing\UrlGeneratorInterface;
+use Drupal\Core\State\StateInterface;
+use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\localgov_consultations_notify\Plugin\QueueWorker\EmailQueue;
-
-/**
- *
- */
-enum NotificationReason {
-  case ConsultationClosing;
-  case ConsultationClosed;
-  case ConsultationDatesChanged;
-  case ConsultationOpened;
-}
-
 
 /**
  * Queue notifications based on consultations events.
@@ -26,23 +21,42 @@ final class Notifier {
 
   /**
    * Constructs a Notifier object.
+   *
+   * @param \Drupal\Core\Queue\QueueFactory $queue
+   *   The queue factory.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
+   *   The config factory.
+   * @param \Drupal\Core\State\StateInterface $state
+   *   The state service.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   *   The entity type manager.
+   * @param \Drupal\Core\Routing\UrlGeneratorInterface $urlGenerator
+   *   The URL generator.
    */
   public function __construct(
     private readonly QueueFactory $queue,
+    private readonly ConfigFactoryInterface $configFactory,
+    private readonly StateInterface $state,
+    private readonly EntityTypeManagerInterface $entityTypeManager,
+    private readonly UrlGeneratorInterface $urlGenerator,
   ) {}
 
+
   /**
-   * Helper function to get subscriptions to this consultation / all consultations.
+   * Helper function to get subscriptions to this consultation.
    *
-   * @param $consultation
+   * @param \Drupal\Core\Entity\ContentEntityInterface $consultation
+   *   The consultation node.
    *
    * @return array
+   *   An array of subscription entities.
    *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  private function getSubscribers($consultation) : array {
-    $subscriber_entity_query = \Drupal::entityQuery('mailing_list_subscription');
+  private function getSubscribers(ContentEntityInterface $consultation): array {
+    $subscription_storage = $this->entityTypeManager->getStorage('mailing_list_subscription');
+    $subscriber_entity_query = $subscription_storage->getQuery();
 
     $single_consultation = $subscriber_entity_query->andConditionGroup()
       ->condition('field_node', $consultation->id())
@@ -58,22 +72,26 @@ final class Notifier {
       ->condition('status', 1);
     $subscribed_to_this_consultation = $subscriber_entity_query->execute();
 
-    return \Drupal::entityTypeManager()->getStorage('mailing_list_subscription')->loadMultiple($subscribed_to_this_consultation);
+    return $subscription_storage->loadMultiple($subscribed_to_this_consultation);
   }
 
   /**
    * Send to those who subscribed to this consultation.
+   *
+   * @param \Drupal\Core\Entity\ContentEntityInterface $consultation
+   *   The consultation node.
+   * @param \Drupal\localgov_consultations_notify\NotificationReason $reason
+   *   The notification reason.
    */
-  public function notifySubscribers(ContentEntityInterface $consultation, NotificationReason $reason) : void {
+  public function notifySubscribers(ContentEntityInterface $consultation, NotificationReason $reason): void {
     $queue = $this->queue->get(EmailQueue::QUEUE_NAME);
 
     $subscriptions = $this->getSubscribers($consultation);
 
-    /** @var \Drupal\mailing_list\Entity\Subscription $subscription */
     foreach ($subscriptions as $subscription) {
       $email['email'] = $subscription->email->value;
 
-      $email['unsubscribe_url'] = \Drupal::urlGenerator()->generateFromRoute('localgov_consultations_notify.unsubscribe', [
+      $email['unsubscribe_url'] = $this->urlGenerator->generateFromRoute('localgov_consultations_notify.unsubscribe', [
         'mailing_list_subscription' => $subscription->id(),
         'token' => $subscription->getAccessHash(),
       ], ['absolute' => TRUE]);
@@ -96,11 +114,11 @@ final class Notifier {
    * Send to person responsible for this consultation.
    *
    * @param \Drupal\Core\Entity\ContentEntityInterface $consultation
-   * @param NotificationReason $reason
-   *
-   * @return void
+   *   The consultation node.
+   * @param \Drupal\localgov_consultations_notify\NotificationReason $reason
+   *   The notification reason.
    */
-  public function notifyConsultationContact(ContentEntityInterface $consultation, NotificationReason $reason) : void {
+  public function notifyConsultationContact(ContentEntityInterface $consultation, NotificationReason $reason): void {
     if ($reason != NotificationReason::ConsultationClosed) {
       return;
     }

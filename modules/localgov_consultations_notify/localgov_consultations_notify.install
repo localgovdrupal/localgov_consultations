@@ -1,20 +1,24 @@
 <?php
 
+/**
+ * @file
+ * Install functions for the LocalGov Consultations Notify
+ */
+
 use Drupal\user\Entity\Role;
 
 /**
  * Implements hook_install().
  *
  * Grant permission to subscribe to consultation mailing lists.
- *
- * @return void
- * @throws \Drupal\Core\Entity\EntityStorageException
  */
 function localgov_consultations_notify_install() {
   $role_object = Role::load('anonymous');
-  $role_object->grantPermission('subscribe to all_consultations mailing list');
-  $role_object->grantPermission('subscribe to consultations mailing list');
-  $role_object->save();
+  if ($role_object) {
+    $role_object->grantPermission('subscribe to all_consultations mailing list');
+    $role_object->grantPermission('subscribe to consultations mailing list');
+    $role_object->save();
+  }
 }
 
 /**

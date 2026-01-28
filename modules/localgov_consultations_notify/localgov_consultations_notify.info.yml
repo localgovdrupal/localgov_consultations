@@ -21,4 +21,3 @@ config_devel:
   - symfony_mailer.mailer_policy.localgov_consultations_notify.consultation_dates_changed
   - symfony_mailer.mailer_policy.localgov_consultations_notify.consultation_opened
   - symfony_mailer.mailer_policy.localgov_consultations_notify.subscribe_confirm
-

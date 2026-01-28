@@ -1,6 +1,12 @@
 <?php
 
 /**
+ * @file
+ * Adds Localgov Consultation Webform field as a child of group_webform
+ * and enables it in manage display settings.
+ */
+
+/**
  * Implements hook_install().
  */
 function localgov_consultations_webform_install() {
