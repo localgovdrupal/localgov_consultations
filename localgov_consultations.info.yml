@@ -2,7 +2,7 @@ name: Localgov Consultations
 type: module
 description: Custom functionality for Consultations Emails
 package: Custom
-core_version_requirement: ^9 || ^10
+core_version_requirement: ^10 || ^11
 dependencies:
   - drupal:datetime_range
   - paragraphs:paragraphs
