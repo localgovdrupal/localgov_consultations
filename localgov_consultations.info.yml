@@ -7,7 +7,7 @@ dependencies:
   - drupal:datetime_range
   - paragraphs:paragraphs
   - geo_entity:geo_entity
-  - geo_entity_address:geo_entity_address
+  - geo_entity:geo_entity_address
   - inline_entity_form:inline_entity_form
   - layout_paragraphs:layout_paragraphs
   - localgov_services:localgov_services_navigation
