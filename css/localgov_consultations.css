@@ -558,7 +558,8 @@ a:hover .card-img img {
 }
 
 .consultation__webform .field__label,
-.consultation__sidebar-item .field__label {
+.consultation__sidebar-item > .field__label,
+.consultation__sidebar-item > div > .field__label {
   margin-bottom: var(--vertical-rhythm-spacing);
   color: var(--color-accent, #045a90);
   font-size: var(--font-size-h2);
